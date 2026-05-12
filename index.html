@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>收款人帳戶安全守護站</title>
+
+<!-- Open Graph / 社群媒體分享預覽 -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pcit-tw.pages.dev">
+<meta property="og:title" content="給收款人一個選擇的權利——推動台灣 PCIT 機制">
+<meta property="og:description" content="台灣近15萬警示帳戶，收款人毫無選擇權。加拿大已有類似機制在運作。60天內需要5,000人附議，金管會就必須正式回應。">
+<meta property="og:image" content="https://pcit-tw.pages.dev/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="PCIT Taiwan">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="給收款人一個選擇的權利——推動台灣 PCIT 機制">
+<meta name="twitter:description" content="台灣近15萬警示帳戶，收款人毫無選擇權。加拿大已有類似機制。請附議支持。">
+<meta name="twitter:image" content="https://pcit-tw.pages.dev/og-image.png">
+
+<!-- 一般 SEO -->
+<meta name="description" content="推動台灣建立收款人入帳同意機制（PCIT），保障無辜警示戶的基本權益。加拿大已有類似機制在運作，技術完全可行。">
+<!-- GoatCounter 訪客統計 -->
+<script data-goatcounter="https://pcit-tw.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3T35GVGVVT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3T35GVGVVT');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-soft: #3a3a5c;
+    --paper: #f7f4ef;
+    --paper-warm: #ede9e0;
+    --red: #c0392b;
+    --red-soft: #e74c3c;
+    --gold: #b8860b;
+    --gold-light: #d4a017;
+    --teal: #1a6b6b;
+    --teal-light: #2d9b9b;
+    --border: #c8c0b0;
+    --shadow: rgba(26,26,46,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.02) 40px,
+      rgba(255,255,255,0.02) 41px
+    );
+  }
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid rgba(184,134,11,0.6);
+    color: var(--gold-light);
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 6px 16px;
+    margin-bottom: 28px;
+    font-weight: 500;
+    text-transform: uppercase;
+    animation: fadeDown 0.6s ease both;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(28px, 7vw, 52px);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    animation: fadeDown 0.6s 0.1s ease both;
+  }
+  .hero h1 span { color: var(--gold-light); }
+  .hero-sub {
+    font-size: clamp(14px, 3vw, 18px);
+    color: rgba(247,244,239,0.7);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+    animation: fadeDown 0.6s 0.2s ease both;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeDown 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--paper);
+    border: none;
+    padding: 14px 28px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--paper);
+    border: 1px solid rgba(247,244,239,0.4);
+    padding: 14px 28px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+  .btn-outline:hover { border-color: var(--paper); background: rgba(247,244,239,0.08); }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--red);
+    color: white;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    padding: 20px 32px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.2);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 28px;
+    font-weight: 900;
+    display: block;
+  }
+  .stat-label {
+    font-size: 12px;
+    opacity: 0.85;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 64px 24px;
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .section-body {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 2;
+    margin-bottom: 32px;
+  }
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ── QUIZ ── */
+  .quiz-wrap {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 40px 32px;
+    margin-top: 8px;
+    box-shadow: 0 4px 24px var(--shadow);
+  }
+  .quiz-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .quiz-desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.8;
+  }
+  .scenario-box {
+    background: var(--paper-warm);
+    border-left: 4px solid var(--teal);
+    padding: 20px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 2;
+    color: var(--ink);
+  }
+  .scenario-box strong { color: var(--teal); }
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice-btn {
+    background: white;
+    border: 1.5px solid var(--border);
+    padding: 14px 20px;
+    text-align: left;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1.6;
+  }
+  .choice-btn:hover { border-color: var(--teal); background: rgba(26,107,107,0.04); }
+  .choice-btn.correct { border-color: var(--teal); background: rgba(26,107,107,0.08); color: var(--teal); }
+  .choice-btn.wrong { border-color: var(--red); background: rgba(192,57,43,0.06); color: var(--red); }
+  .choice-btn:disabled { cursor: default; }
+
+  .result-box {
+    margin-top: 20px;
+    padding: 20px;
+    border-left: 4px solid var(--teal);
+    background: rgba(26,107,107,0.05);
+    font-size: 14px;
+    line-height: 1.9;
+    display: none;
+    color: var(--ink);
+  }
+  .result-box.show { display: block; animation: fadeDown 0.4s ease; }
+  .result-box.wrong-result { border-left-color: var(--red); background: rgba(192,57,43,0.05); }
+  .result-box h4 { font-family: 'Noto Serif TC', serif; margin-bottom: 8px; font-size: 15px; }
+  .result-box .correct-tag { color: var(--teal); font-weight: 600; }
+  .result-box .wrong-tag { color: var(--red); font-weight: 600; }
+
+  .quiz-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .quiz-progress {
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 1px;
+  }
+  .btn-next {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 12px 24px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: none;
+    letter-spacing: 1px;
+  }
+  .btn-next.show { display: block; }
+  .btn-next:hover { background: var(--teal); }
+
+  /* score final */
+  .score-final {
+    text-align: center;
+    padding: 20px 0;
+    display: none;
+  }
+  .score-final.show { display: block; animation: fadeDown 0.5s ease; }
+  .score-circle {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: white;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-family: 'Noto Serif TC', serif;
+  }
+  .score-circle .num { font-size: 36px; font-weight: 900; line-height: 1; }
+  .score-circle .denom { font-size: 13px; opacity: 0.8; }
+  .score-msg { font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+  .score-sub { font-size: 14px; color: var(--ink-soft); line-height: 1.9; max-width: 400px; margin: 0 auto 24px; }
+
+  /* ── STEPS ── */
+  .steps-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .step-item {
+    display: flex;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease;
+  }
+  .step-item.visible { opacity: 1; transform: translateX(0); }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--border);
+    min-width: 50px;
+    line-height: 1;
+    padding-top: 4px;
+  }
+  .step-content h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .step-content p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 2;
+  }
+
+  /* ── ALERT CHECK ── */
+  .check-wrap {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 40px 32px;
+    box-shadow: 0 4px 24px var(--shadow);
+    position: relative;
+    z-index: 1;
+  }
+  .check-input {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    padding: 14px 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    background: var(--paper);
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 12px;
+  }
+  .check-input:focus { border-color: var(--teal); }
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .checkbox-row input[type="checkbox"] {
+    margin-top: 3px;
+    accent-color: var(--teal);
+    width: 16px; height: 16px;
+    flex-shrink: 0;
+  }
+  .btn-check {
+    background: var(--teal);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 16px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 16px;
+    letter-spacing: 1px;
+  }
+  .btn-check:hover { background: var(--teal-light); }
+  .risk-result {
+    margin-top: 20px;
+    padding: 20px;
+    display: none;
+    animation: fadeDown 0.4s ease;
+  }
+  .risk-result.show { display: block; }
+  .risk-high { background: rgba(192,57,43,0.07); border-left: 4px solid var(--red); }
+  .risk-medium { background: rgba(184,134,11,0.07); border-left: 4px solid var(--gold); }
+  .risk-low { background: rgba(26,107,107,0.07); border-left: 4px solid var(--teal); }
+  .risk-level {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .risk-high .risk-level { color: var(--red); }
+  .risk-medium .risk-level { color: var(--gold); }
+  .risk-low .risk-level { color: var(--teal); }
+  .risk-list {
+    list-style: none;
+    padding: 0;
+  }
+  .risk-list li {
+    font-size: 13px;
+    color: var(--ink-soft);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    line-height: 1.7;
+  }
+  .risk-list li:last-child { border-bottom: none; }
+  .risk-list li::before { content: '→ '; font-weight: 600; }
+
+  /* ── POLICY ── */
+  .policy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .policy-card {
+    background: var(--paper-warm);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--gold);
+    padding: 28px 24px;
+  }
+  .policy-num {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--paper-warm);
+    margin-bottom: 8px;
+    line-height: 1;
+    -webkit-text-stroke: 1.5px var(--gold);
+  }
+  .policy-card h4 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .policy-card p {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.9;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(247,244,239,0.6);
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 12px;
+    line-height: 2;
+  }
+  footer a { color: var(--gold-light); text-decoration: none; }
+  .footer-logo {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 12px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(26,26,46,0.97);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 52px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-logo {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--paper);
+    letter-spacing: 1px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(247,244,239,0.65);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ── LIGHT SECTION (steps & policy) ── */
+  .section-light {
+    background: #ffffff;
+  }
+  .section-light .section-title { color: var(--ink); }
+
+  /* ── STEPS light bg ── */
+  .step-tag {
+    display: inline-block;
+    background: var(--teal);
+    color: white;
+    font-size: 11px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+
+  /* ── POLICY light ── */
+  .policy-statement {
+    margin-top: 40px;
+    background: var(--paper-warm);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--gold);
+    padding: 32px;
+    text-align: center;
+  }
+  .policy-statement-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .policy-statement p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 2;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .policy-statement strong { color: var(--teal); }
+
+  /* bg section alt */
+  .section-alt { background: var(--paper-warm); }
+  .section-alt .section { padding: 64px 24px; }
+
+  @media (max-width: 600px) {
+    .stat-item { padding: 16px 20px; }
+    .quiz-wrap, .check-wrap { padding: 28px 20px; }
+    .nav-links { display: none; }
+    .step-num { font-size: 28px; min-width: 38px; }
+  }
+  /* ── CTA SECTION ── */
+  .cta-section {
+    background: var(--ink);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .cta-inner { max-width: 860px; margin: 0 auto; }
+  .cta-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .cta-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 900;
+    color: var(--paper);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .cta-sub {
+    font-size: 15px;
+    color: rgba(247,244,239,0.65);
+    max-width: 540px;
+    margin: 0 auto 52px;
+    line-height: 1.9;
+  }
+  .cta-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+    text-align: left;
+  }
+  .cta-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 28px 24px;
+    transition: all 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .cta-card.card-sign::before { background: var(--gold); }
+  .cta-card.card-share::before { background: var(--teal-light); }
+  .cta-card.card-ai::before { background: #7c5cbf; }
+  .cta-card.card-partner::before { background: var(--red-soft); }
+  .cta-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-3px); border-color: rgba(255,255,255,0.22); }
+  .cta-card-icon { font-size: 28px; margin-bottom: 14px; }
+  .cta-card h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .cta-card p {
+    font-size: 13px;
+    color: rgba(247,244,239,0.6);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .cta-card-btn {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+    transition: all 0.2s;
+  }
+  .card-sign .cta-card-btn { background: var(--gold); color: var(--ink); }
+  .card-share .cta-card-btn { background: var(--teal); color: white; }
+  .card-ai .cta-card-btn { background: #7c5cbf; color: white; }
+  .card-partner .cta-card-btn { background: var(--red); color: white; }
+  .cta-card-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .cta-roadmap {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 40px;
+    margin-top: 8px;
+  }
+  .cta-roadmap-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(247,244,239,0.5);
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .roadmap-track {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .roadmap-step {
+    flex: 1;
+    min-width: 160px;
+    max-width: 220px;
+    padding: 0 16px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+  }
+  .roadmap-step:last-child { border-right: none; }
+  .roadmap-phase {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .roadmap-step h4 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .roadmap-step p {
+    font-size: 11px;
+    color: rgba(247,244,239,0.45);
+    line-height: 1.7;
+  }
+  .roadmap-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+  }
+  .dot-done { background: var(--gold); }
+  .dot-now { background: var(--teal-light); box-shadow: 0 0 0 3px rgba(45,155,155,0.3); }
+  .dot-future { background: rgba(255,255,255,0.2); }
+
+  @media (max-width: 600px) {
+    .cta-cards { grid-template-columns: 1fr; }
+    .roadmap-track { flex-direction: column; align-items: center; gap: 16px; }
+    .roadmap-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">守護帳戶</span>
+  <ul class="nav-links">
+    <li><a href="#quiz">自我測試</a></li>
+    <li><a href="#steps">遭遇應對</a></li>
+    <li><a href="#check">風險評估</a></li>
+    <li><a href="#policy">制度改革白皮書</a></li>
+    <li><a href="#faq">常見問題</a></li>
+    <li><a href="#cta">加入行動</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">收款人帳戶安全守護站</div>
+  <h1>你的帳戶<span>被人匯款</span><br>你有選擇的權利嗎？</h1>
+  <p class="hero-sub">台灣現存近 15 萬個警示帳戶，許多當事人因無辜收到詐騙款項而遭凍結帳戶，警示解除程序時間視司法進度而定，數月至數年不等，卻完全無法事先防範。台灣雖已有匯款端的戶名顯示功能，但收款人對於是否接受匯款毫無選擇權——這正是這個工具希望推動改變的制度缺口。</p>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">立即自我測試</button>
+    <button class="btn-outline" onclick="document.getElementById('steps').scrollIntoView({behavior:'smooth'})">遭遇應對指南</button>
+    <button class="btn-outline" onclick="document.getElementById('check').scrollIntoView({behavior:'smooth'})">帳戶風險評估</button>
+    <button class="btn-outline" onclick="document.getElementById('policy').scrollIntoView({behavior:'smooth'})">制度改革白皮書</button>
+  </div>
+
+  <!-- 安全提示 -->
+  <div style="margin-top: 20px; font-size: 12px; color: rgba(247,244,239,0.45); letter-spacing: 1px;">
+    🔒 pcit-tw.pages.dev ｜ 不收費 · 不要求密碼 · 連署使用 Google Forms
+  </div>
+  <div style="
+    margin-top: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  ">
+    <div style="
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 12px 24px;
+    ">
+      <div style="
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: #2d9b9b;
+        box-shadow: 0 0 0 3px rgba(45,155,155,0.3);
+        animation: pulse 2s infinite;
+      "></div>
+      <span style="font-size: 13px; color: rgba(247,244,239,0.6); letter-spacing: 1px;">累積瀏覽人次</span>
+      <span style="
+        font-family: 'Noto Serif TC', serif;
+        font-size: 22px;
+        font-weight: 900;
+        color: var(--gold-light);
+        min-width: 60px;
+      " id="visitorCount">—</span>
+    </div>
+  </div>
+
+  <style>
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(45,155,155,0.3); }
+      50% { box-shadow: 0 0 0 6px rgba(45,155,155,0.1); }
+    }
+  </style>
+
+<!-- 置頂連署橫幅 -->
+<div style="background: #b8860b; padding: 16px 24px; position: relative; z-index: 50;">
+  <div style="max-width: 860px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <div style="font-family: 'Noto Serif TC', serif; font-size: 16px; font-weight: 900; color: white;">
+        🏛️ join.gov.tw 正式提案通過！60天內需要 5,000 人附議
+      </div>
+    </div>
+    <a href="https://join.gov.tw/idea/detail/ba071237-01f4-40c4-a322-b1c0b16111dd" target="_blank" onclick="onSignClick()" style="
+      background: white;
+      color: #b8860b;
+      padding: 10px 24px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 51;
+      cursor: pointer;
+      pointer-events: auto;
+    ">立即附議 →</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num">15萬戶</span>
+    <span class="stat-label">現存警示帳戶數（2024年金管會統計）</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">數月至數年</span>
+    <span class="stat-label">警示解除等待時間，視司法程序進度而定，部分長達兩年以上</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">0</span>
+    <span class="stat-label">法規賦予收款人的入帳拒絕權利</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">🇨🇦 加拿大</span>
+    <span class="stat-label">Interac e-Transfer 已實現收款人入帳選擇權，證明 PCIT 技術完全可行</span>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" style="background: var(--paper-warm);">
+<div class="section">
+  <div class="section-label">互動測試</div>
+  <div class="section-title">你了解自己的帳戶安全嗎？</div>
+  <p class="section-body">透過三個真實情境，了解警示戶制度的盲點，以及你可以如何保護自己。</p>
+
+  <div class="quiz-wrap">
+    <!-- Q1 -->
+    <div id="q1" class="quiz-q">
+      <div class="quiz-title">情境一：陌生人突然匯款</div>
+      <p class="quiz-desc">你的帳戶收到一筆陌生的 5,000 元匯款，對方備註「還款」。你完全不認識這個人，也沒有借款給任何人。</p>
+      <div class="scenario-box">
+        <strong>情境：</strong>明天早上你查帳，看到這筆入帳。你什麼都不做，款項就留在你帳戶裡。<br>
+        幾天後，你突然發現 ATM 提款被拒，網銀也無法使用。
+      </div>
+      <div class="choices">
+        <button class="choice-btn" onclick="answer(1, this, false)">A. 這很正常，可能是對方轉錯帳，等對方來找我就好</button>
+        <button class="choice-btn" onclick="answer(1, this, true)">B. 這是高風險情境！我的帳戶可能已經成為詐騙的中繼站</button>
+        <button class="choice-btn" onclick="answer(1, this, false)">C. 不用擔心，我又沒做壞事，不會有問題的</button>
+      </div>
+      <div id="result1" class="result-box">
+        <h4><span class="correct-tag">✓ 正確認識</span></h4>
+        詐騙集團會故意將資金轉入無辜第三方帳戶，再誘導受害者轉帳到這裡，製造「資金中繼」效果。<strong>一旦警示通報啟動，你的帳戶會被凍結，即使你完全不知情。</strong>目前法規沒有任何機制讓你事先拒絕這筆入帳。
+      </div>
+      <div id="result1w" class="result-box wrong-result">
+        <h4><span class="wrong-tag">✗ 這個認知需要修正</span></h4>
+        「沒做壞事就沒事」是最危險的誤解。詐騙集團正是利用這種心理。你的帳戶可能在毫無預警的情況下被列為警示戶，導致帳戶全面凍結，自動扣款失敗，薪資無法入帳。<strong>等發現問題時，損害已經發生。</strong>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div id="q2" class="quiz-q" style="display:none">
+      <div class="quiz-title">情境二：求職廣告裡的陷阱</div>
+      <p class="quiz-desc">你在求職平台看到一份「協助代收款項、抽取佣金」的工作，對方要求你提供帳號讓他們匯款，你再轉出去。</p>
+      <div class="scenario-box">
+        <strong>情境：</strong>你覺得只是幫忙收款轉帳，又不是詐騙，<br>而且還有佣金可以拿，應該沒問題吧？
+      </div>
+      <div class="choices">
+        <button class="choice-btn" onclick="answer(2, this, false)">A. 只要是合法匯款，協助轉帳就沒有問題</button>
+        <button class="choice-btn" onclick="answer(2, this, false)">B. 看對方是否有合法公司登記，有的話就可以做</button>
+        <button class="choice-btn" onclick="answer(2, this, true)">C. 這是「車手」或「人頭帳戶」招募！絕對不能參與</button>
+      </div>
+      <div id="result2" class="result-box">
+        <h4><span class="correct-tag">✓ 正確認識</span></h4>
+        這是詐騙集團招募「車手」的經典話術。<strong>即使你真的不知情，只要帳戶被用於詐騙金流，你就會被列為警示戶，甚至可能面臨刑事責任。</strong>任何「代收轉帳」的工作機會，都是詐騙。
+      </div>
+      <div id="result2w" class="result-box wrong-result">
+        <h4><span class="wrong-tag">✗ 這個認知需要修正</span></h4>
+        沒有任何方法可以驗證這類「工作」的合法性，因為詐騙集團會偽造所有文件。<strong>「代收轉帳」就等於提供人頭帳戶，無一例外。</strong>一旦涉及，帳戶立刻被警示，甚至面臨洗錢相關罪責。
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div id="q3" class="quiz-q" style="display:none">
+      <div class="quiz-title">情境三：帳戶被警示了，怎麼辦？</div>
+      <p class="quiz-desc">你的帳戶剛剛被銀行通知列為警示戶，所有提款與轉帳功能已被停止。下列哪個做法最正確？</p>
+      <div class="scenario-box">
+        <strong>情境：</strong>房貸下個禮拜要自動扣款，薪水也要入帳，<br>但現在所有功能都停用了。你最應該先做什麼？
+      </div>
+      <div class="choices">
+        <button class="choice-btn" onclick="answer(3, this, false)">A. 等警察通知，他們會主動來處理的</button>
+        <button class="choice-btn" onclick="answer(3, this, true)">B. 立即聯繫銀行了解原因，同時準備配合相關程序並通知雇主更換薪資帳戶</button>
+        <button class="choice-btn" onclick="answer(3, this, false)">C. 去警察局自首，說明自己不知情</button>
+      </div>
+      <div id="result3" class="result-box">
+        <h4><span class="correct-tag">✓ 正確認識</span></h4>
+        <strong>主動出擊是關鍵。</strong>你應該：① 立即打電話給銀行，詢問警示原因與警示解除程序；② 通知公司人資，將薪資改匯至其他帳戶；③ 處理即將到期的自動扣款（如房貸、保費）；④ 若有明確被害情形，可向警察局報案取得受理編號，有助配合程序。
+      </div>
+      <div id="result3w" class="result-box wrong-result">
+        <h4><span class="wrong-tag">✗ 這個認知需要修正</span></h4>
+        <strong>等待是最糟的選擇。</strong>被動等待會讓你的房貸扣款失敗、薪水無法入帳、信用受損。你需要主動聯繫銀行了解情況、配合程序，並緊急處理所有相關財務安排。每一天的延誤都是損失。
+      </div>
+    </div>
+
+    <!-- Score -->
+    <div id="scorePanel" class="score-final">
+      <div class="score-circle">
+        <span class="num" id="scoreNum">0</span>
+        <span class="denom">/ 3</span>
+      </div>
+      <div class="score-msg" id="scoreMsg"></div>
+      <div class="score-sub" id="scoreSub"></div>
+      <button class="btn-primary" onclick="restartQuiz()">重新測試</button>
+    </div>
+
+    <div class="quiz-nav">
+      <span class="quiz-progress" id="qProgress">第 1 題，共 3 題</span>
+      <button class="btn-next" id="btnNext" onclick="nextQ()">下一題 →</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- STEPS -->
+<div id="steps" style="background: #ffffff;">
+<div class="section">
+  <div class="section-label">帳戶遭警示後的應對步驟</div>
+  <div class="section-title">帳戶被警示時，<br>你應該這樣做</div>
+  <p class="section-body">以下流程來自真實當事人的親身經歷，比一般網路資訊更貼近實況。帳戶遭警示的每一天都是損失，請冷靜、依序行動。</p>
+
+  <div class="steps-grid">
+    <div class="step-item">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-tag">立即（0–2 小時）</div>
+        <h3>聯繫銀行，釐清警示原因</h3>
+        <p>帳戶遭警示，可能是銀行主動來電通知，也可能是你發現無法提款或轉帳後自行察覺。無論哪種情況，第一步都是致電開戶銀行客服，確認並記錄下列關鍵資訊：</p>
+        <p style="margin-top:10px;">
+        • 涉及的可疑交易金額與入帳時間<br>
+        • <strong>匯款方的銀行帳號</strong>——後續你可請該銀行協助代為轉達，但匯款人是否主動聯繫你，仍取決於對方意願<br>
+        • <strong>165 案號</strong>——165 反詐騙平台的通報編號，是警方查詢案件的重要依據<br>
+        • 客服人員的員工編號與通話時間，作為日後追蹤的紀錄
+        </p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-tag">同一天</div>
+        <h3>立即處理財務，避免連鎖損害</h3>
+        <p>帳戶遭警示後，提款、轉帳、網路銀行等所有交易功能將全面停止。若不即時處理，後續可能引發房貸違約、薪資入帳失敗等連鎖問題。請當天完成以下事項：</p>
+        <p style="margin-top:10px;">
+        • 通知公司人資，將薪資轉匯至備用帳戶（可暫用親友帳號）<br>
+        • 逐一清查所有自動扣款項目，包括房貸、車貸、保費、水電費，逐項辦理帳號變更或暫停，避免因扣款失敗留下違約紀錄<br>
+        • 備妥一個可正常使用的帳戶，支應日常生活開銷
+        </p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-tag">第 1–3 天</div>
+        <h3>前往警察局報案，取得受理證明</h3>
+        <p>前往住家附近的警察局，向承辦員警說明你是「被動收款的無辜第三方」，主動要求報案。</p>
+        <p style="margin-top:10px;">
+        ⚠️ <strong>常見誤解：</strong>警方通常提供的是「<strong>受理案件證明單影本</strong>」，而非坊間常說的「三聯單」。各地警局格式略有不同，但兩者在後續程序中具備同等效力，請勿因格式不同而困惑。
+        </p>
+        <p style="margin-top:10px;">這份文件貫穿後續所有行政與司法程序，請妥善保管，並多備幾份影本。</p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <div class="step-tag">第 3–14 天</div>
+        <h3>主動追蹤分案，備妥筆錄資料</h3>
+        <p>報案後，案件通常不會留在原報案警局，而是依程序「分案」至你的<strong>戶籍地偵查隊</strong>處理。這個步驟需要你主動出擊，而不是被動等待：</p>
+        <p style="margin-top:10px;">
+        • 致電原報案警局，取得「<strong>分案文號</strong>」<br>
+        • 持分案文號聯繫戶籍地偵查隊，詢問承辦人姓名與目前進度<br>
+        • 給警方約兩週的作業時間，致電時主動說明自己是「警示帳戶嫌疑人」，表達配合調查的意願<br>
+        • 同時整理能說明情況的資料，例如與匯款方的通訊紀錄、交易說明等，等候通知製作嫌疑人筆錄
+        </p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <div class="step-tag">筆錄後 1–2 週</div>
+        <h3>等候案件移送地檢署</h3>
+        <p>嫌疑人筆錄製作完成後，偵查隊需約<strong>一至兩週</strong>時間完成相關公文，將案件正式移送至<strong>臺灣○○地方檢察署</strong>（依你的戶籍地而定），由檢察官接手審理。</p>
+        <p style="margin-top:10px;">移送後你將進入等待地檢署傳票的階段。<strong>這段期間通常是整個流程中最漫長的部分</strong>，從數個月到半年以上都有可能，請調整好心理預期，持續關注案件動態。</p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-num">06</div>
+      <div class="step-content">
+        <div class="step-tag">全程建議</div>
+        <h3>隨時可尋求法律諮詢或委任律師</h3>
+        <p>面對陌生的司法程序，不需要獨自摸索。以下資源在整個流程的任何階段都可以使用：</p>
+        <p style="margin-top:10px;">
+        • <strong>法律扶助基金會</strong>：提供免費法律諮詢，適合剛接觸案件、想先了解自身權利與程序的人<br>
+        • <strong>委任律師</strong>：律師可協助撰寫書狀、陪同偵訊、向檢察官表達立場，對於爭取不起訴處分、加速案件結束有實質幫助<br>
+        • <strong>金管會申訴專線</strong>：02-8968-0899，可反映金融機構的處理問題
+        </p>
+        <p style="margin-top:10px;">⚠️ <strong>提醒：</strong>本指南依據當事人親身經歷整理，各地警局與案件情況不同，實際流程可能略有差異，建議同時諮詢專業律師以確認個案適用做法。</p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-num">07</div>
+      <div class="step-content">
+        <div class="step-tag">地檢署審理期間</div>
+        <h3>出庭應訊，等候不起訴處分書</h3>
+        <p>案件進入地檢署後，請做好以下準備：</p>
+        <p style="margin-top:10px;">
+        • 確認戶籍地址有人能收信，或委任律師代收訴訟文書，以免傳票送達失敗<br>
+        • 收到「<strong>刑事被告傳票</strong>」後，務必準時出庭應訊，切勿缺席——無故不到庭可能導致法官核發拘票，對案件不利<br>
+        • 出庭前建議事先與律師討論，確認陳述方向與應準備的資料<br>
+        • 若檢察官審查後認定你屬無辜收款，將核發「<strong>不起訴處分書</strong>」。這份文件是解除警示的唯一通行證，收到後請立即妥善保存正本
+        </p>
+      </div>
+    </div>
+
+    <div class="step-item">
+      <div class="step-num">08</div>
+      <div class="step-content">
+        <div class="step-tag">取得不起訴處分書後</div>
+        <h3>申請解除警示，逐一確認各銀行帳戶狀態</h3>
+        <p>拿到不起訴處分書，代表司法程序結束，接下來是最後的行政程序：</p>
+        <p style="margin-top:10px;">
+        <strong>① 前往偵查隊申請解除警示</strong><br>
+        攜帶不起訴處分書與身分證，至原通報警示的偵查隊，尋找負責「解除警示」的承辦人，填寫並提交申請書（可至警政署刑事警察局官網預先下載）。受理後約 3–5 個工作天收到解除公文。
+        </p>
+        <p style="margin-top:10px;">
+        <strong>② 主動聯繫各銀行確認解除狀態</strong><br>
+        警方公文發出後，各銀行約需 1–2 週才會收到並完成處理。請主動致電每一家相關銀行，逐一確認：<br>
+        • 主帳戶警示是否已正式解除<br>
+        • <strong>衍生管制帳戶</strong>是否一併解除——各銀行規定不同，部分銀行不會自動連動解除，需另行提出申請<br>
+        • 提款、轉帳、網路銀行等功能是否已全面恢復正常
+        </p>
+        <p style="margin-top:10px;">
+        解除後，建議向<strong>金融聯合徵信中心（聯徵中心）</strong>申請個人信用報告，確認警示紀錄是否已停止揭露。若結果為不起訴或無罪，解除當日起聯徵中心即應停止揭露，你的信用紀錄將恢復正常。
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- RISK CHECK -->
+<div id="check" style="background: var(--paper-warm);">
+<div class="section">
+  <div class="section-label">風險評估工具</div>
+  <div class="section-title">你的帳戶現在安全嗎？</div>
+  <p class="section-body">勾選下方符合你情況的選項，了解你目前面臨的風險等級及建議行動。</p>
+
+  <div class="check-wrap">
+    <div class="quiz-title">帳戶安全自我評估</div>
+    <p class="quiz-desc">這份評估僅供參考，不構成法律建議。如有緊急狀況請立即聯繫銀行或警察。</p>
+
+    <div id="riskForm">
+      <p style="font-size:13px; color:var(--ink-soft); margin-bottom:16px;">勾選所有符合你目前情況的選項，再按下方按鈕查看結果。</p>
+      <label class="checkbox-row"><input type="checkbox" id="r1"> 最近收到來自不認識帳號的匯款</label>
+      <label class="checkbox-row"><input type="checkbox" id="r2"> 有人請我幫忙「代收代轉」款項，給我佣金</label>
+      <label class="checkbox-row"><input type="checkbox" id="r3"> 我的帳戶資料（帳號、身分證）曾經洩露或遭冒用</label>
+      <label class="checkbox-row"><input type="checkbox" id="r4"> 我曾在不明平台「投資」並進行過轉帳操作</label>
+      <label class="checkbox-row"><input type="checkbox" id="r5"> 最近有人以工作或戀愛名義接觸我並涉及金錢往來</label>
+      <label class="checkbox-row"><input type="checkbox" id="r6"> 我曾提供帳戶給他人使用（即使對方是朋友）</label>
+      <label class="checkbox-row"><input type="checkbox" id="r7"> 我的帳戶最近出現不明的金流進出，自己也搞不清楚</label>
+      <label class="checkbox-row"><input type="checkbox" id="r8"> 我的帳戶功能近期有被銀行限制或通知</label>
+      <button type="button" class="btn-check" onclick="checkRisk()" style="cursor:pointer; position:relative; z-index:1;">立即評估我的風險 →</button>
+    </div>
+
+    <div id="riskResult" class="risk-result">
+      <div class="risk-level" id="riskLevel"></div>
+      <ul class="risk-list" id="riskActions"></ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- POLICY -->
+<div id="policy" style="background: #ffffff;">
+<div class="section">
+  <div class="section-label">制度改革白皮書</div>
+  <div class="section-title">我們要求的<br>制度改革</div>
+  <p class="section-body">台灣雖已有匯款端的收款人戶名顯示功能，與國際的 Confirmation of Payee 概念接近。然而英國、歐盟進一步建立了 Request to Pay 等收款端保護機制，新加坡更於 2025 年 10 月實施「高額轉帳 24 小時延遲冷靜期」。台灣目前缺乏的，是<strong>收款人</strong>的保護——收款人對於是否接受匯款毫無選擇權，一旦入帳即可能遭警示，卻完全無法事先防範。台灣現存近15萬個警示帳戶，警示解除程序時間視司法進度而定，數月至數年不等。我們提出四項具體訴求：</p>
+
+  <div style="background:var(--paper-warm); border:1px solid var(--border); border-left:4px solid var(--teal); padding:24px; margin-bottom:32px;">
+    <div style="font-size:12px; font-weight:600; letter-spacing:2px; color:var(--teal); margin-bottom:16px; text-transform:uppercase;">國際現有機制 vs. 台灣現況</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+      <div>
+        <div style="font-size:13px; font-weight:700; color:var(--ink); margin-bottom:6px;">🇬🇧🇪🇺🇹🇼 收款人戶名核對</div>
+        <div style="font-size:12px; color:var(--ink-soft); line-height:1.9;">匯款人輸入帳號時顯示收款人戶名，防止轉錯帳。台灣已有此功能，與英國 CoP 概念相近。<strong style="color:var(--teal);">保護匯款人。</strong></div>
+      </div>
+      <div>
+        <div style="font-size:13px; font-weight:700; color:var(--ink); margin-bottom:6px;">🇬🇧🇪🇺 Request to Pay（RtP）</div>
+        <div style="font-size:12px; color:var(--ink-soft); line-height:1.9;">收款方主動發出付款請求，付款人選擇接受或拒絕。主要用於帳單收款。<strong style="color:var(--ink);">雙方均有選擇權。</strong></div>
+      </div>
+      <div>
+        <div style="font-size:13px; font-weight:700; color:var(--ink); margin-bottom:6px;">🇸🇬 新加坡 24 小時延遲規定</div>
+        <div style="font-size:12px; color:var(--ink-soft); line-height:1.9;">2025 年 10 月起，高額轉帳自動暫緩 24 小時，設置「認知冷靜期」打斷詐騙心理操控。<strong style="color:var(--ink);">保護匯款人。</strong></div>
+      </div>
+      <div>
+        <div style="font-size:13px; font-weight:700; color:var(--ink); margin-bottom:6px;">🇨🇦 加拿大 Interac e-Transfer</div>
+        <div style="font-size:12px; color:var(--ink-soft); line-height:1.9;">收款人未開啟自動入帳時，必須主動選擇接受或拒絕匯款。拒絕後款項自動退回，帳戶不受影響。<strong style="color:var(--teal);">收款人有選擇權。最接近 PCIT 的實際案例。</strong></div>
+      </div>
+    </div>
+    <div style="padding:16px; background:rgba(26,107,107,0.06); border-left:3px solid var(--teal); font-size:12px; color:var(--ink-soft); line-height:1.9;">
+      💡 <strong style="color:var(--teal);">關鍵發現：</strong>加拿大的 Interac e-Transfer 證明「收款人入帳選擇權」在技術上完全可行，且已運作多年。台灣的 PCIT 提案可參考此模式，在現有銀行系統中加入通知與選擇機制，讓收款人也有保護自己的工具。
+    </div>
+  </div>
+
+  <div class="policy-grid">
+    <div class="policy-card">
+      <div class="policy-num">01</div>
+      <h4>金管會發布可行性研究報告</h4>
+      <p>要求金管會於 6 個月內完成「收款人帳戶保護機制」研究報告，評估 PCIT 的技術可行性。</p>
+    </div>
+    <div class="policy-card">
+      <div class="policy-num">02</div>
+      <h4>立法院財政委員會召開公聽會</h4>
+      <p>邀集學者、金融業者及民間受害者代表，公開討論制度改革方向，讓受害者的聲音被聽見。</p>
+    </div>
+    <div class="policy-card">
+      <div class="policy-num">03</div>
+      <h4>修訂警示戶認定標準</h4>
+      <p>明確將「被動收款之無辜當事人」排除於警示範圍之外，停止讓受害者承擔制度的代價。</p>
+    </div>
+    <div class="policy-card">
+      <div class="policy-num">04</div>
+      <h4>開放金融沙盒申請</h4>
+      <p>允許至少一件「收款人同意機制」相關的金融沙盒申請，讓創新技術在受控環境中被驗證。</p>
+    </div>
+  </div>
+
+  <div class="policy-statement">
+    <div class="policy-statement-title">我們的立場</div>
+    <p>
+      我們並非要求廢除警示戶制度，而是要求在現有制度中補足<strong>收款人保護的缺口</strong>。預防優於治療，賦予收款人主動防護能力，是最符合比例原則、也最能兼顧金融安全與個人權益的改革方向。
+    </p>
+    <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="https://www.slideshare.net/slideshow/pcit/287357618" target="_blank" style="
+        display: inline-flex; align-items: center; gap: 8px;
+        background: var(--ink); color: var(--paper);
+        padding: 10px 20px; text-decoration: none;
+        font-family: 'Noto Sans TC', sans-serif;
+        font-size: 13px; letter-spacing: 1px;">
+        📊 查看政策倡議簡報 →
+      </a>
+      <a href="https://join.gov.tw/idea/detail/ba071237-01f4-40c4-a322-b1c0b16111dd" target="_blank" style="
+        display: inline-flex; align-items: center; gap: 8px;
+        background: var(--teal); color: white;
+        padding: 10px 20px; text-decoration: none;
+        font-family: 'Noto Sans TC', sans-serif;
+        font-size: 13px; letter-spacing: 1px;">
+        🏛️ join.gov.tw 立即附議 →
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FAQ -->
+<div id="faq" style="background: #ffffff;">
+<div class="section">
+  <div class="section-label">常見問題</div>
+  <div class="section-title">你可能也想知道</div>
+
+  <div style="display: flex; flex-direction: column; gap: 0;">
+
+    <!-- 加拿大 Interac e-Transfer -->
+    <div style="padding: 28px 0; border-bottom: 1px solid var(--border);">
+      <div style="font-family: 'Noto Serif TC', serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 12px;">
+        Q：有國家已經實作收款人保護機制嗎？
+      </div>
+      <div style="font-size: 14px; color: var(--ink-soft); line-height: 2;">
+        <strong style="color: var(--ink);">有。加拿大的 Interac e-Transfer 是目前最接近 PCIT 概念的實際案例。</strong><br><br>
+        加拿大的 Interac e-Transfer 系統中，如果收款人<strong>沒有開啟自動入帳功能（Autodeposit）</strong>，收到匯款時會先收到通知，收款人必須<strong>主動選擇接受或拒絕</strong>。如果選擇拒絕，款項會自動退回給匯款人，收款人的帳戶完全不受影響。<br><br>
+        這代表「收款人入帳選擇權」在技術上完全可行，加拿大已經在日常金融服務中運作多年。<br><br>
+        <span style="background: rgba(26,107,107,0.08); border-left: 3px solid #1a6b6b; padding: 10px 14px; display: block; margin-top: 12px;">
+          💡 <strong style="color: #1a6b6b;">台灣 PCIT 的參考：</strong>加拿大的經驗證明，收款人選擇機制可以與現有金融基礎設施無縫整合，不影響一般交易效率。台灣可以參考此模式，在現有銀行系統中加入類似的通知與選擇機制。
+        </span>
+      </div>
+    </div>
+
+    <!-- 匯款人被詐騙的處理建議 -->
+    <div style="padding: 28px 0; border-bottom: 1px solid var(--border);">
+      <div style="font-family: 'Noto Serif TC', serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 12px;">
+        Q：我是匯款人，發現自己被詐騙了，第一步該怎麼做？
+      </div>
+      <div style="font-size: 14px; color: var(--ink-soft); line-height: 2;">
+        <strong style="color: var(--ink);">立刻打電話給你的銀行。</strong><br><br>
+        時間就是關鍵。你的第一步不是報警，而是：<br><br>
+        <strong style="color: var(--ink);">① 致電你的銀行客服</strong><br>
+        告知匯款可能涉及詐騙，請銀行立刻聯繫收款銀行，通知對方帳戶持有人這筆匯款可能有問題。如果款項尚未被提領或轉出，有機會直接攔截退回。<br><br>
+        <strong style="color: var(--ink);">② 撥打 165 反詐騙專線</strong><br>
+        報案後警方會啟動聯防機制，通知收款銀行凍結相關帳戶。<br><br>
+        <strong style="color: var(--ink);">③ 保留所有交易紀錄</strong><br>
+        匯款明細、對話紀錄、對方帳號資訊，這些都是後續追回款項的重要證據。<br><br>
+        <span style="background: rgba(184,134,11,0.1); border-left: 3px solid #b8860b; padding: 10px 14px; display: block; margin-top: 12px;">
+          ⚠️ <strong style="color: #b8860b;">特別提醒：</strong>直接報案雖然重要，但一旦啟動警方程序，收款人的帳戶會被列為警示戶，後續要取回你的款項也會因為司法程序而變得漫長。<strong>先透過銀行端處理，是最有機會快速取回款項的方式。</strong>如果收款人也是被利用的無辜第三方，銀行端的通知也能及早提醒對方帳戶可能被作為人頭戶使用。
+        </span>
+      </div>
+    </div>
+
+    <div style="padding: 28px 0; border-bottom: 1px solid var(--border);">
+      <div style="font-family: 'Noto Serif TC', serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 12px;">
+        Q：虛擬帳號（如超商條碼、街口、Line Pay）也有保護效果嗎？
+      </div>
+      <div style="font-size: 14px; color: var(--ink-soft); line-height: 2;">
+        <strong style="color: var(--ink);">目前保護效果有限，且因平台而異。</strong><br><br>
+        電子支付平台（如街口、Line Pay）的虛擬帳號雖然有一定的身份驗證機制，但<strong>收款人對是否接受入帳仍沒有選擇權</strong>。一旦款項被認定為詐騙金流，帳號同樣可能遭到凍結或限制，警示解除程序也因平台不同而差異極大，通常比傳統銀行帳戶更難處理。<br><br>
+        超商條碼類的虛擬帳號因為是一次性、特定用途的帳號，相對風險較低，但仍不代表完全免疫。<br><br>
+        <span style="background: rgba(184,134,11,0.1); border-left: 3px solid #b8860b; padding: 10px 14px; display: block; margin-top: 12px;">
+          💡 <strong style="color: #b8860b;">PCIT 機制的重要性：</strong>正因為各種支付管道都缺乏收款端保護，我們推動的 PCIT 機制應適用於所有支付形式，包括銀行轉帳、電子支付和虛擬帳號，讓收款人在任何管道都有選擇的權利。
+        </span>
+      </div>
+    </div>
+
+    <div style="padding: 28px 0; border-bottom: 1px solid var(--border);">
+      <div style="font-family: 'Noto Serif TC', serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 12px;">
+        Q：我沒有被警示，還需要關心這件事嗎？
+      </div>
+      <div style="font-size: 14px; color: var(--ink-soft); line-height: 2;">
+        需要。任何人都可能在毫無預警的情況下成為無辜收款人。詐騙集團會故意把資金轉入隨機的第三方帳戶製造金流中斷，你不需要做任何事，只是「被人匯款」就可能讓帳戶被凍結。現行法律沒有讓你事先防範的機制，這正是我們推動改革的原因。
+      </div>
+    </div>
+
+    <div style="padding: 28px 0;">
+      <div style="font-family: 'Noto Serif TC', serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 12px;">
+        Q：連署會有效嗎？
+      </div>
+      <div style="font-size: 14px; color: var(--ink-soft); line-height: 2;">
+        有效。英國的收款人保護改革，起點是消費者組織的一份投訴；新加坡的轉帳延遲機制，也是民間持續倡議的結果。台灣過去的金融消費者保護立法，同樣有民間連署的推動力量。<br><br>
+        連署本身不是終點，而是讓主管機關看到「有真實民意支持這件事」的第一步。你的名字，是讓改變發生的力量之一。
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- CTA -->
+<section id="cta" class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-label">加入行動</div>
+    <h2 class="cta-title">一個人的帳戶被警示是悲劇，<br>現存 15 萬戶的困境是制度問題</h2>
+    <p class="cta-sub">這個工具是倡議的起點，不是終點。你可以用以下方式，讓更多人得到保護。</p>
+
+    <!-- 即時連署計數器 -->
+    <div style="
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+      padding: 28px 32px; margin-bottom: 40px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; flex-wrap: wrap; text-align: center;">
+      <div>
+        <div style="font-family:'Noto Serif TC',serif; font-size:52px; font-weight:900; color:var(--gold-light); line-height:1;" id="ctaCountNum">—</div>
+        <div style="font-size:12px; color:rgba(247,244,239,0.6); letter-spacing:2px; margin-top:6px; text-transform:uppercase;">目前連署人數</div>
+      </div>
+      <div style="border-left:1px solid rgba(255,255,255,0.15); padding-left:40px;">
+        <div style="font-size:14px; color:rgba(247,244,239,0.75); line-height:2; max-width:260px; text-align:left;">
+          目標：<strong style="color:var(--paper);">1,000 人</strong>連署後<br>
+          正式提交金管會與立法院<br>
+          <span style="font-size:12px; opacity:0.6;">每一個簽名都讓改變更近一步</span>
+        </div>
+        <div style="margin-top:12px; background:rgba(255,255,255,0.08); height:6px; border-radius:3px; overflow:hidden; max-width:260px;">
+          <div id="progressBar" style="height:100%; background:var(--gold); width:0%; transition:width 1s ease; border-radius:3px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-cards">
+      <div class="cta-card card-sign">
+        <div class="cta-card-icon">✍️</div>
+        <h3>連署支持制度改革</h3>
+        <p>向金管會與立法院提交連署，要求建立收款人保護機制。每一個簽名都是改變的力量。</p>
+        <button class="cta-card-btn" onclick="openModal('signModal')">我要連署 →</button>
+      </div>
+
+      <div class="cta-card card-share">
+        <div class="cta-card-icon">📢</div>
+        <h3>分享給可能需要的人</h3>
+        <p>把這個工具分享給家人、朋友，尤其是長輩或正在求職的年輕人。一次分享可能防止一次災難。</p>
+        <button class="cta-card-btn" onclick="openModal('shareModal')">分享這個工具 →</button>
+      </div>
+
+      <div class="cta-card card-ai">
+        <div class="cta-card-icon">🤖</div>
+        <h3>搶先體驗 AI 助理</h3>
+        <p>我們正在開發 Line Bot 與 AI 問答工具，讓民眾即時詢問「這筆匯款安全嗎？」等問題。</p>
+        <button class="cta-card-btn" onclick="openModal('aiModal')">登記早鳥名單 →</button>
+      </div>
+
+      <div class="cta-card card-partner">
+        <div class="cta-card-icon">🏦</div>
+        <h3>銀行與支付平台合作</h3>
+        <p>最終目標是與各大銀行、電子支付平台合作，在匯款流程中內建收款人保護機制。</p>
+        <button class="cta-card-btn" onclick="openModal('partnerModal')">洽談合作 →</button>
+      </div>
+    </div>
+
+    <div class="cta-roadmap">
+      <div class="cta-roadmap-title">產品發展藍圖</div>
+      <div class="roadmap-track">
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-done"></div>
+          <div class="roadmap-phase">現在 · 2026</div>
+          <h4>民眾教育工具</h4>
+          <p>網頁風險評估、知識測試、應對指南</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-now"></div>
+          <div class="roadmap-phase">下一步 · 2026 Q3</div>
+          <h4>AI 問答助理</h4>
+          <p>Line Bot 即時諮詢、AI 風險分析、相關文件輔助產生</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-future"></div>
+          <div class="roadmap-phase">中期 · 2027</div>
+          <h4>金融機構串接</h4>
+          <p>與銀行 API 合作，提供入帳通知與攔截建議</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-future"></div>
+          <div class="roadmap-phase">長期 · 2028+</div>
+          <h4>PCIT 制度落地</h4>
+          <p>推動立法，讓「收款人同意機制」成為台灣金融標準</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODALS -->
+<style>
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 999;
+  background: rgba(10,10,20,0.7); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center; padding: 24px;
+}
+.modal-overlay.open { display: flex; animation: fadeDown 0.25s ease; }
+.modal-box {
+  background: var(--paper); max-width: 480px; width: 100%;
+  padding: 40px 36px; position: relative; max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+}
+.modal-close {
+  position: absolute; top: 16px; right: 20px; font-size: 22px;
+  background: none; border: none; cursor: pointer; color: var(--ink-soft);
+  line-height: 1;
+}
+.modal-close:hover { color: var(--ink); }
+.modal-title {
+  font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700;
+  color: var(--ink); margin-bottom: 8px;
+}
+.modal-sub {
+  font-size: 13px; color: var(--ink-soft); line-height: 1.8; margin-bottom: 24px;
+  padding-bottom: 20px; border-bottom: 1px solid var(--border);
+}
+.modal-field { margin-bottom: 16px; }
+.modal-field label {
+  display: block; font-size: 12px; font-weight: 500; letter-spacing: 1px;
+  color: var(--ink-soft); margin-bottom: 6px; text-transform: uppercase;
+}
+.modal-field input, .modal-field select, .modal-field textarea {
+  width: 100%; border: 1.5px solid var(--border); padding: 12px 14px;
+  font-family: 'Noto Sans TC', sans-serif; font-size: 14px; color: var(--ink);
+  background: white; outline: none; transition: border-color 0.2s;
+}
+.modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus {
+  border-color: var(--teal);
+}
+.modal-field textarea { resize: vertical; min-height: 90px; }
+.modal-note {
+  font-size: 11px; color: var(--ink-soft); line-height: 1.7;
+  margin-top: 12px; padding: 12px; background: var(--paper-warm);
+  border-left: 3px solid var(--gold);
+}
+.modal-submit {
+  width: 100%; padding: 14px; margin-top: 20px;
+  font-family: 'Noto Sans TC', sans-serif; font-size: 15px; font-weight: 500;
+  letter-spacing: 1px; border: none; cursor: pointer; transition: all 0.2s;
+}
+.modal-submit.teal { background: var(--teal); color: white; }
+.modal-submit.teal:hover { background: var(--teal-light); }
+.modal-submit.gold { background: var(--gold); color: white; }
+.modal-submit.gold:hover { background: var(--gold-light); }
+.modal-submit.purple { background: #6c4fb5; color: white; }
+.modal-submit.purple:hover { background: #7c5cbf; }
+.modal-success {
+  display: none; text-align: center; padding: 20px 0;
+}
+.modal-success.show { display: block; animation: fadeDown 0.4s ease; }
+.modal-success-icon { font-size: 48px; margin-bottom: 16px; }
+.modal-success h3 {
+  font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700;
+  margin-bottom: 8px; color: var(--ink);
+}
+.modal-success p { font-size: 13px; color: var(--ink-soft); line-height: 1.9; }
+</style>
+
+<!-- 連署 Modal -->
+<div class="modal-overlay" id="signModal" onclick="closeModalOutside(event,'signModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('signModal')">×</button>
+    <div class="modal-title">✍️ 連署支持收款人保護機制</div>
+    <p class="modal-sub">你的連署將彙整後正式提交給金融監督管理委員會及立法院財政委員會，要求主管機關於六個月內正式回應本倡議四項訴求。</p>
+
+    <div style="background:var(--paper-warm); border:1px solid var(--border); border-left:4px solid var(--gold); padding:20px; margin-bottom:20px;">
+      <div style="font-size:13px; color:var(--ink-soft); line-height:2;">
+        📋 填寫說明：<br>
+        • 個人資料僅用於連署彙整，不對外公開<br>
+        • 連署名單以匿名總數方式提交主管機關<br>
+        • 可隨時來信要求刪除連署資料
+      </div>
+    </div>
+
+    <div id="signCounter" style="text-align:center; padding:16px; background:rgba(26,107,107,0.06); border:1px solid rgba(26,107,107,0.2); margin-bottom:20px;">
+      <div style="font-family:'Noto Serif TC',serif; font-size:32px; font-weight:900; color:var(--teal);" id="modalCountNum">—</div>
+      <div style="font-size:12px; color:var(--ink-soft); letter-spacing:1px; margin-top:4px;">目前連署人數</div>
+    </div>
+
+    <a href="https://forms.gle/3fbf69hW7fpVB8CZ6" target="_blank" onclick="onSignClick()" style="
+      display:block; width:100%; padding:16px; margin-bottom:12px;
+      background:var(--gold); color:white; text-align:center;
+      font-family:'Noto Sans TC',sans-serif; font-size:15px; font-weight:500;
+      letter-spacing:1px; text-decoration:none; transition:all 0.2s;">
+      前往填寫連署表單 →
+    </a>
+    <p style="font-size:11px; color:var(--ink-soft); text-align:center; line-height:1.8;">
+      點擊後將開啟 Google Forms 填寫頁面<br>
+      填寫完成後回到此頁，你的連署即已完成
+    </p>
+  </div>
+</div>
+
+<!-- AI 早鳥 Modal -->
+<div class="modal-overlay" id="aiModal" onclick="closeModalOutside(event,'aiModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('aiModal')">×</button>
+    <div class="modal-title">🤖 登記 AI 帳戶安全助理早鳥名單</div>
+    <p class="modal-sub">我們正在開發 Line Bot 與網頁版 AI 問答工具，預計 2026 年 Q3 開放 Beta 測試。登記後你將第一批收到邀請，全程免費。</p>
+
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+      <div style="display:flex; gap:12px; align-items:flex-start;">
+        <span style="font-size:20px; min-width:28px;">💬</span>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;"><strong style="color:var(--ink); display:block; margin-bottom:2px;">Line Bot 即時問答</strong>隨時詢問「這筆匯款安全嗎？」</div>
+      </div>
+      <div style="display:flex; gap:12px; align-items:flex-start;">
+        <span style="font-size:20px; min-width:28px;">📄</span>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;"><strong style="color:var(--ink); display:block; margin-bottom:2px;">相關文件輔助產生</strong>AI 協助你撰寫警示戶陳述書</div>
+      </div>
+      <div style="display:flex; gap:12px; align-items:flex-start;">
+        <span style="font-size:20px; min-width:28px;">⚠️</span>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;"><strong style="color:var(--ink); display:block; margin-bottom:2px;">帳戶風險即時評估</strong>輸入情況，AI 給出建議行動</div>
+      </div>
+    </div>
+
+    <a href="https://forms.gle/UfedbmiqrwaBj27i7" target="_blank" style="
+      display:block; width:100%; padding:16px; margin-bottom:12px;
+      background:#6c4fb5; color:white; text-align:center;
+      font-family:'Noto Sans TC',sans-serif; font-size:15px; font-weight:500;
+      letter-spacing:1px; text-decoration:none; transition:all 0.2s;">
+      前往登記早鳥名單 →
+    </a>
+    <p style="font-size:11px; color:var(--ink-soft); text-align:center; line-height:1.8;">
+      點擊後將開啟 Google Forms 填寫頁面<br>
+      不會收到廣告信，僅於 Beta 開放時通知你
+    </p>
+  </div>
+</div>
+
+<!-- 合作洽談 Modal -->
+<div class="modal-overlay" id="partnerModal" onclick="closeModalOutside(event,'partnerModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('partnerModal')">×</button>
+    <div class="modal-title">🏦 金融機構合作洽談</div>
+    <p class="modal-sub">我們希望與銀行、電子支付平台及金融科技業者，共同探索收款人入帳同意機制（PCIT）的技術實作可能性。</p>
+
+    <div style="background:var(--paper-warm); border:1px solid var(--border); border-left:4px solid var(--teal); padding:20px; margin-bottom:20px;">
+      <div style="font-size:13px; color:var(--ink); font-weight:600; margin-bottom:10px;">合作方向包括：</div>
+      <div style="font-size:13px; color:var(--ink-soft); line-height:2.2;">
+        🏛️ 金融沙盒共同申請<br>
+        🔌 技術 API 串接評估<br>
+        📊 政策研究合作<br>
+        🤝 學術或公益贊助
+      </div>
+    </div>
+
+    <div style="background:rgba(26,107,107,0.05); border:1px solid rgba(26,107,107,0.15); padding:16px; margin-bottom:20px; font-size:13px; color:var(--ink-soft); line-height:1.9;">
+      收到申請後，我們將於 <strong style="color:var(--teal);">3 個工作天內</strong> 以 Email 與你聯繫，安排進一步說明或視訊會議。
+    </div>
+
+    <a href="https://forms.gle/qpBGJqZdcrKEgT2p8" target="_blank" style="
+      display:block; width:100%; padding:16px; margin-bottom:12px;
+      background:var(--teal); color:white; text-align:center;
+      font-family:'Noto Sans TC',sans-serif; font-size:15px; font-weight:500;
+      letter-spacing:1px; text-decoration:none; transition:all 0.2s;">
+      前往填寫合作洽談申請 →
+    </a>
+    <p style="font-size:11px; color:var(--ink-soft); text-align:center; line-height:1.8;">
+      點擊後將開啟 Google Forms 填寫頁面<br>
+      或直接來信：pcit.tw@gmail.com
+    </p>
+  </div>
+</div>
+
+<!-- 分享 Modal -->
+<div class="modal-overlay" id="shareModal" onclick="closeModalOutside(event,'shareModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('shareModal')">×</button>
+    <div class="modal-title">📢 分享這個工具</div>
+    <p class="modal-sub">一次分享可能防止一場災難。選擇你習慣的方式，把這個工具傳給家人或朋友。</p>
+
+    <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
+
+      <button onclick="copyLink()" id="copyBtn" style="
+        display:flex; align-items:center; gap:14px;
+        background:var(--paper-warm); border:1.5px solid var(--border);
+        padding:14px 18px; cursor:pointer; font-family:'Noto Sans TC',sans-serif;
+        font-size:14px; color:var(--ink); text-align:left; transition:all 0.2s;">
+        <span style="font-size:22px;">🔗</span>
+        <span><strong style="display:block; margin-bottom:2px;">複製連結</strong><span style="font-size:12px; color:var(--ink-soft);">貼到任何地方都能用</span></span>
+      </button>
+
+      <a href="https://line.me/R/msg/text/?%E6%88%91%E6%9C%80%E8%BF%91%E7%9C%8B%E5%88%B0%E4%B8%80%E5%80%8B%E5%B8%B3%E6%88%B6%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%B8%AC%E8%A9%A6%E8%87%AA%E5%B7%B1%E7%9A%84%E5%B8%B3%E6%88%B6%E5%AE%89%E5%85%A8%E7%9F%A5%E8%AD%98%E3%80%82%E8%B2%B7%E5%B9%B4%E5%8F%B0%E7%81%A3%E6%9C%89%E6%95%B8%E8%90%AC%E4%BA%BA%E5%9B%A0%E7%84%A1%E8%BE%9C%E6%94%B6%E5%88%B0%E8%A9%90%E9%A8%99%E6%AC%BE%E9%A0%85%E8%80%8C%E9%81%AD%E5%87%8D%E7%B5%90%E5%B8%B3%E6%88%B6%EF%BC%8C%E5%88%86%E4%BA%AB%E7%B5%A6%E5%AE%B6%E4%BA%BA%E7%9C%8B%E7%9C%8B%E5%90%A7%EF%BC%81" target="_blank" style="
+        display:flex; align-items:center; gap:14px;
+        background:#06C755; border:none;
+        padding:14px 18px; cursor:pointer; font-family:'Noto Sans TC',sans-serif;
+        font-size:14px; color:white; text-decoration:none; transition:all 0.2s;">
+        <span style="font-size:22px; filter:brightness(10);">💬</span>
+        <span><strong style="display:block; margin-bottom:2px;">用 LINE 分享</strong><span style="font-size:12px; opacity:0.85;">傳給家人、朋友或群組</span></span>
+      </a>
+
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpayee-protection.tw" target="_blank" style="
+        display:flex; align-items:center; gap:14px;
+        background:#1877F2; border:none;
+        padding:14px 18px; cursor:pointer; font-family:'Noto Sans TC',sans-serif;
+        font-size:14px; color:white; text-decoration:none; transition:all 0.2s;">
+        <span style="font-size:22px;">📘</span>
+        <span><strong style="display:block; margin-bottom:2px;">分享到 Facebook</strong><span style="font-size:12px; opacity:0.85;">擴大倡議觸及範圍</span></span>
+      </a>
+
+      <a href="https://twitter.com/intent/tweet?text=%E5%8F%B0%E7%81%A3%E6%AF%8F%E5%B9%B4%E6%9C%89%E6%95%B8%E8%90%AC%E4%BA%BA%E5%9B%A0%E7%84%A1%E8%BE%9C%E6%94%B6%E5%88%B0%E8%A9%90%E9%A8%99%E6%AC%BE%E9%A0%85%E8%80%8C%E9%81%AD%E5%87%8D%E7%B5%90%E5%B8%B3%E6%88%B6%EF%BC%8C%E7%8F%BE%E8%A1%8C%E6%B3%95%E8%A6%8F%E5%8D%BB%E7%84%A1%E4%BB%BB%E4%BD%95%E4%BF%9D%E8%AD%B7%E3%80%82%E6%B8%AC%E8%A9%A6%E4%BD%A0%E7%9A%84%E5%B8%B3%E6%88%B6%E5%AE%89%E5%85%A8%E7%9F%A5%E8%AD%98%EF%BC%81%20%23%E8%AD%A6%E7%A4%BA%E6%88%B6%20%23%E5%8F%B0%E7%81%A3%E9%87%91%E8%9E%8D%E6%94%B9%E9%9D%A9" target="_blank" style="
+        display:flex; align-items:center; gap:14px;
+        background:#000; border:none;
+        padding:14px 18px; cursor:pointer; font-family:'Noto Sans TC',sans-serif;
+        font-size:14px; color:white; text-decoration:none; transition:all 0.2s;">
+        <span style="font-size:22px;">𝕏</span>
+        <span><strong style="display:block; margin-bottom:2px;">分享到 X（Twitter）</strong><span style="font-size:12px; opacity:0.85;">讓更多人看見這個議題</span></span>
+      </a>
+
+    </div>
+
+    <div id="copyConfirm" style="display:none; background:rgba(26,107,107,0.08); border-left:4px solid var(--teal); padding:12px 16px; font-size:13px; color:var(--teal); font-weight:500; animation: fadeDown 0.3s ease;">
+      ✓ 連結已複製！請貼上分享給需要的人。
+    </div>
+
+    <p style="font-size:11px; color:var(--ink-soft); margin-top:16px; line-height:1.8; text-align:center;">
+      分享時建議加上一句話：<br>
+      「台灣每年有數萬人因無辜收到詐騙款項而遭凍結帳戶，你也可能是下一個。」
+    </p>
+  </div>
+</div>
+
+<!-- 防釣魚聲明欄 -->
+<div style="background: #1a6b6b; padding: 20px 24px;">
+  <div style="max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; text-align: center;">
+    <div style="font-size: 18px;">🔒</div>
+    <div style="font-size: 13px; color: white; line-height: 2;">
+      <strong>本站安全聲明：</strong>
+      唯一官方網址為 <strong>pcit-tw.pages.dev</strong>（網址列有鎖頭圖示）．
+      本站<strong>不收取任何費用</strong>，不要求帳號密碼．
+      連署使用 Google Forms，蒐集之電子信箱<strong>僅供倡議通知</strong>，不轉售、不作商業用途．
+      如發現假冒網站或有任何疑慮，請來信：<a href="mailto:pcit.tw@gmail.com" style="color: #d4a017;">pcit.tw@gmail.com</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">收款人帳戶安全守護站</div>
+  <p>本工具由收款人帳戶安全制度改革推動小組製作，資料依據《收款人帳戶安全保護機制建立之倡議》政策白皮書。</p>
+  <p style="margin-top: 8px;">本工具僅供教育與倡議用途，不構成法律建議。如有緊急需求請聯繫銀行或撥打 165 反詐騙專線。</p>
+  <p style="margin-top: 8px;">
+    如果你不放心留下電子信箱，完全可以只使用網站裡的風險評估工具和應對步驟說明，不需要填任何表單。
+  </p>
+  <p style="margin-top: 8px;">聯絡信箱：<a href="mailto:pcit.tw@gmail.com">pcit.tw@gmail.com</a> ｜ 政策簡報：<a href="https://www.slideshare.net/slideshow/pcit/287357618" target="_blank">SlideShare</a> ｜ 附議提案：<a href="https://join.gov.tw/idea/detail/ba071237-01f4-40c4-a322-b1c0b16111dd" target="_blank">join.gov.tw</a></p>
+  <p style="margin-top: 12px; opacity: 0.5;">Draft v1.0 ｜ 2026</p>
+</footer>
+
+<script>
+  let currentQ = 1;
+  let score = 0;
+  let answered = [false, false, false];
+
+  function answer(qNum, btn, isCorrect) {
+    if (answered[qNum - 1]) return;
+    answered[qNum - 1] = true;
+
+    const choices = btn.parentElement.querySelectorAll('.choice-btn');
+    choices.forEach(b => b.disabled = true);
+
+    if (isCorrect) {
+      btn.classList.add('correct');
+      score++;
+      document.getElementById('result' + qNum).classList.add('show');
+    } else {
+      btn.classList.add('wrong');
+      document.getElementById('result' + qNum + 'w').classList.add('show');
+      // also highlight correct
+      choices.forEach(b => {
+        if (b.onclick.toString().includes('true')) b.classList.add('correct');
+      });
+    }
+
+    const btnNext = document.getElementById('btnNext');
+    btnNext.classList.add('show');
+    if (qNum === 3) {
+      btnNext.textContent = '查看結果 →';
+    }
+  }
+
+  function nextQ() {
+    if (currentQ < 3) {
+      document.getElementById('q' + currentQ).style.display = 'none';
+      currentQ++;
+      document.getElementById('q' + currentQ).style.display = 'block';
+      document.getElementById('qProgress').textContent = `第 ${currentQ} 題，共 3 題`;
+      document.getElementById('btnNext').classList.remove('show');
+      if (currentQ === 3) {
+        document.getElementById('btnNext').textContent = '查看結果 →';
+      }
+    } else {
+      showScore();
+    }
+  }
+
+  function showScore() {
+    document.getElementById('q3').style.display = 'none';
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('qProgress').style.display = 'none';
+    document.getElementById('scorePanel').classList.add('show');
+    document.getElementById('scoreNum').textContent = score;
+
+    const msgs = [
+      ['需要加強了解', '帳戶安全知識需要提升。請仔細閱讀本頁的應對指南，並立即進行風險評估。'],
+      ['有一定認識，但仍有盲點', '你已了解部分風險，但仍有一些情境可能讓你措手不及。建議完整閱讀應對指南。'],
+      ['認識良好，但制度仍保護不了你', '你的帳戶安全意識很好！但即使如此，現行制度仍無法讓你事先拒絕可疑入帳。這正是我們推動改革的原因。'],
+      ['非常了解！', '你的帳戶安全意識非常高。請繼續支持我們的政策倡議，讓每個人都能擁有這樣的保護機制。']
+    ];
+    document.getElementById('scoreMsg').textContent = msgs[score][0];
+    document.getElementById('scoreSub').textContent = msgs[score][1];
+  }
+
+  function restartQuiz() {
+    currentQ = 1; score = 0; answered = [false, false, false];
+    for (let i = 1; i <= 3; i++) {
+      const qEl = document.getElementById('q' + i);
+      qEl.style.display = i === 1 ? 'block' : 'none';
+      qEl.querySelectorAll('.choice-btn').forEach(b => {
+        b.disabled = false;
+        b.classList.remove('correct', 'wrong');
+      });
+      const r = document.getElementById('result' + i);
+      const rw = document.getElementById('result' + i + 'w');
+      if (r) r.classList.remove('show');
+      if (rw) rw.classList.remove('show');
+    }
+    document.getElementById('scorePanel').classList.remove('show');
+    document.getElementById('btnNext').classList.remove('show');
+    document.getElementById('btnNext').style.display = '';
+    document.getElementById('btnNext').textContent = '下一題 →';
+    document.getElementById('qProgress').style.display = '';
+    document.getElementById('qProgress').textContent = '第 1 題，共 3 題';
+  }
+
+  function checkRisk() {
+    var c = [];
+    for (var i = 1; i <= 8; i++) {
+      c.push(document.getElementById('r' + i).checked);
+    }
+    var count = 0;
+    for (var j = 0; j < c.length; j++) { if (c[j]) count++; }
+
+    var resultEl  = document.getElementById('riskResult');
+    var levelEl   = document.getElementById('riskLevel');
+    var actionsEl = document.getElementById('riskActions');
+
+    resultEl.classList.remove('risk-high', 'risk-medium', 'risk-low');
+
+    var level, actions;
+
+    if (c[7]) {
+      level = '⚠️ 緊急：你的帳戶已被警示，請立即行動';
+      resultEl.classList.add('risk-high');
+      actions = ['立即撥打開戶銀行客服，詢問警示原因與警示解除程序','今天通知公司人資，將薪資改匯至其他帳戶','緊急檢查所有自動扣款（房貸、保費、水電），逐一處理','前往警察局報案，取得三聯單（受理編號）','向金管會申訴專線反映：02-8968-0899','可免費諮詢法律扶助基金會了解你的法律權利'];
+    } else if (count === 0) {
+      level = '🟢 目前無明顯風險，但制度仍有盲點';
+      resultEl.classList.add('risk-low');
+      actions = ['即使現在安全，現行制度仍無法讓你事先拒絕可疑入帳','建議啟用網銀交易即時通知簡訊，掌握帳戶動態','告知家人及長輩此類風險，提高整體警覺','支持收款人保護機制的政策倡議，保護更多人'];
+    } else if (count >= 3 || c[1] || c[5]) {
+      level = '🔴 高風險：你的帳戶可能正面臨威脅';
+      resultEl.classList.add('risk-high');
+      actions = ['立即停止任何「代收代轉」相關行為，這涉及刑事責任','若帳戶資料外洩，立即聯繫銀行申請帳號變更或強化驗證','拒絕任何涉及金錢往來的陌生接觸','主動聯繫銀行了解帳戶近期異常情況','撥打 165 反詐騙專線告知你的情況，尋求指引'];
+    } else {
+      level = '🟡 中度風險：有若干警訊需要注意';
+      resultEl.classList.add('risk-medium');
+      actions = ['不要留下來自不明帳號的匯款，聯繫銀行詢問退回方式','啟用網路銀行的交易通知簡訊功能，即時掌握金流','定期查詢帳戶往來明細，發現異常立即通報銀行','「代收轉帳」類工作機會一律拒絕，這是詐騙招募','向親友分享此資訊，提高周遭人的警覺'];
+    }
+
+    levelEl.textContent = level;
+    var html = '';
+    for (var k = 0; k < actions.length; k++) { html += '<li>' + actions[k] + '</li>'; }
+    actionsEl.innerHTML = html;
+    resultEl.classList.add('show');
+    setTimeout(function(){ resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+  }
+
+  // ── 訪客計數器 ──
+  function loadVisitorCount() {
+    var el = document.getElementById('visitorCount');
+    if (!el) return;
+    // 使用 GoatCounter 公開 API
+    fetch('https://pcit-tw.goatcounter.com/counter/TOTAL.json', {
+      mode: 'cors',
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.count) {
+          var num = parseInt(data.count.replace(/,/g, ''));
+          animateVisitorCount(el, num);
+        }
+      })
+      .catch(function() {
+        // CORS 被擋時改用 JSONP 方式
+        var script = document.createElement('script');
+        window._gcCallback = function(data) {
+          if (data && data.count) {
+            var num = parseInt(data.count.toString().replace(/,/g, ''));
+            animateVisitorCount(el, num);
+          }
+        };
+        script.src = 'https://pcit-tw.goatcounter.com/counter/TOTAL.json?callback=_gcCallback';
+        script.onerror = function() {
+          // 最後備援：直接顯示從 GoatCounter 讀到的靜態數字
+          el.textContent = '40+';
+        };
+        document.head.appendChild(script);
+      });
+  }
+
+  function animateVisitorCount(el, target) {
+    var start = 0;
+    var duration = 1500;
+    var step = Math.ceil(target / (duration / 16));
+    var timer = setInterval(function() {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = start.toLocaleString();
+    }, 16);
+  }
+
+  loadVisitorCount();
+
+  // ── 連署計數器 ──
+  // 從你的 Google 試算表讀取真實人數
+  // 試算表 ID: 13Zcclx9lUos8YJYgA-hYzWU6zB2ymPEjZr0NvxX6NBw
+  var SHEET_ID = '1URPdiSA7gYVsZZpK8egGc6uEIl-JcL8_HbZrgw0IbKU';
+  var GOAL = 1000;
+
+  function animateCount(el, target) {
+    var start = 0;
+    var duration = 1200;
+    var step = Math.ceil(target / (duration / 16));
+    var timer = setInterval(function() {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = start.toLocaleString();
+    }, 16);
+  }
+
+  function updateCounter(count) {
+    var ctaEl = document.getElementById('ctaCountNum');
+    var modalEl = document.getElementById('modalCountNum');
+    var bannerEl = document.getElementById('bannerCount');
+    var bar = document.getElementById('progressBar');
+    if (ctaEl) animateCount(ctaEl, count);
+    if (modalEl) modalEl.textContent = count.toLocaleString();
+    if (bannerEl) bannerEl.textContent = count.toLocaleString();
+    if (bar) {
+      var pct = Math.min((count / GOAL) * 100, 100);
+      setTimeout(function(){ bar.style.width = pct + '%'; }, 300);
+    }
+  }
+
+  function fetchCount() {
+    // 讀取試算表（需先在 Google Sheets 將共用設為「知道連結的任何人可檢視」）
+    var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&sheet=Sheet1';
+    fetch(url)
+      .then(function(r){ return r.text(); })
+      .then(function(csv) {
+        // 計算資料行數（扣除標題列）
+        var rows = csv.trim().split('\n').filter(function(r){ return r.trim() !== ''; });
+        var count = Math.max(0, rows.length - 1);
+        updateCounter(count);
+      })
+      .catch(function() {
+        // 若讀取失敗（試算表尚未公開），顯示 0
+        updateCounter(0);
+      });
+  }
+
+  // 頁面載入時執行
+  fetchCount();
+
+  function onSignClick() {
+    // 點連署連結後延遲更新計數（讓用戶填完表單回來時看到）
+    setTimeout(fetchCount, 5000);
+  }
+
+  function submitForm(formId, successId) {
+    document.getElementById(formId).style.display = 'none';
+    document.getElementById(successId).classList.add('show');
+  }
+
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e, id) {
+    if (e.target === document.getElementById(id)) closeModal(id);
+  }
+  function submitForm(formId, successId) {
+    document.getElementById(formId).style.display = 'none';
+    document.getElementById(successId).classList.add('show');
+  }
+
+  function copyLink() {
+    var url = window.location.href;
+    var confirm = document.getElementById('copyConfirm');
+    var btn = document.getElementById('copyBtn');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function() {
+        confirm.style.display = 'block';
+        btn.style.borderColor = 'var(--teal)';
+      }).catch(function() { fallbackCopy(url, confirm, btn); });
+    } else {
+      fallbackCopy(url, confirm, btn);
+    }
+  }
+  function fallbackCopy(url, confirm, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand('copy'); confirm.style.display = 'block'; if(btn) btn.style.borderColor = 'var(--teal)'; }
+    catch(e) { confirm.textContent = '請手動複製此連結：' + url; confirm.style.display = 'block'; }
+    document.body.removeChild(ta);
+  }
+
+  // Scroll animation for steps
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.step-item').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
