@@ -1,0 +1,75 @@
+@media (max-width: 600px) {
+  .stat-item { padding: 16px 20px; }
+  .quiz-wrap, .check-wrap { padding: 28px 20px; }
+  .step-num { font-size: 28px; min-width: 38px; }
+
+  nav {
+    flex-wrap: wrap;
+    align-items: center;
+    height: auto;
+    min-height: 52px;
+    padding: 0 16px;
+  }
+
+  .nav-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--paper);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .nav-toggle:checked + .nav-hamburger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle:checked + .nav-hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle:checked + .nav-hamburger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    padding: 0 0 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-toggle:checked ~ .nav-links {
+    display: flex;
+  }
+
+  .nav-links li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 14px 8px;
+    font-size: 13px;
+  }
+
+  .cta-cards { grid-template-columns: 1fr; }
+  .roadmap-track { flex-direction: column; align-items: center; gap: 16px; }
+  .roadmap-step {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 16px;
+  }
+}
