@@ -1061,7 +1061,7 @@
   <div class="petition-hero-inner">
     <div class="petition-eyebrow">公共政策附議倡議 · 現在就加入</div>
 
-    <div class="petition-count-big" id="heroCountNum">—</div>
+    <div class="petition-count-big petition-count" id="heroCountNum">—</div>
     <div class="petition-count-unit">人已附議</div>
 
     <!-- 進度條 / 50000 -->
@@ -1092,7 +1092,7 @@
 
     <!-- 倒數天數 -->
     <div class="petition-days-wrap">
-      <div class="petition-days-num js-days-left">—</div>
+      <div class="petition-days-num days-left">—</div>
       <div class="petition-days-label">天 · 附議截止倒數</div>
     </div>
 
@@ -1109,44 +1109,8 @@
   <div class="section-title" style="margin-bottom:24px;">媒體報導與政府回應</div>
   <div style="display:flex; flex-direction:column; gap:16px;">
 
-    <!-- 報導 1：自由時報台中版 -->
-    <a href="https://news.ltn.com.tw/news/Taichung/breakingnews/5454544" target="_blank"
-       style="display:block; text-decoration:none; border:1px solid var(--border); border-left:4px solid var(--red); padding:20px 24px; background:var(--paper-warm); transition:all 0.2s;"
-       onmouseover="this.style.borderLeftColor='var(--red-soft)';this.style.background='#fff'"
-       onmouseout="this.style.borderLeftColor='var(--red)';this.style.background='var(--paper-warm)'">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;">
-        <span style="font-size:11px; font-weight:600; letter-spacing:2px; color:var(--red); text-transform:uppercase;">媒體報導</span>
-        <span style="font-size:11px; color:var(--ink-soft);">自由時報（台中）· 2026/05/27</span>
-      </div>
-      <div style="font-family:'Noto Serif TC',serif; font-size:17px; font-weight:700; color:var(--ink); line-height:1.5; margin-bottom:8px;">
-        台灣 15 萬無辜收款人帳戶遭凍結，醫師倡議收款人入帳同意機制
-      </div>
-      <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;">
-        本倡議引發媒體關注，自由時報深度報導 PCIT 提案及台灣制度空白。
-      </div>
-      <div style="margin-top:10px; font-size:12px; color:var(--teal); font-weight:500;">閱讀全文 →</div>
-    </a>
-
-    <!-- 報導 2：自由時報社會版 -->
-    <a href="https://news.ltn.com.tw/news/society/breakingnews/5454544" target="_blank"
-       style="display:block; text-decoration:none; border:1px solid var(--border); border-left:4px solid var(--red); padding:20px 24px; background:var(--paper-warm); transition:all 0.2s;"
-       onmouseover="this.style.borderLeftColor='var(--red-soft)';this.style.background='#fff'"
-       onmouseout="this.style.borderLeftColor='var(--red)';this.style.background='var(--paper-warm)'">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;">
-        <span style="font-size:11px; font-weight:600; letter-spacing:2px; color:var(--red); text-transform:uppercase;">媒體報導</span>
-        <span style="font-size:11px; color:var(--ink-soft);">自由時報（社會）· 2026/05/27</span>
-      </div>
-      <div style="font-family:'Noto Serif TC',serif; font-size:17px; font-weight:700; color:var(--ink); line-height:1.5; margin-bottom:8px;">
-        台灣 15 萬無辜收款人帳戶遭凍結，醫師倡議收款人入帳同意機制
-      </div>
-      <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;">
-        本倡議引發媒體關注，自由時報深度報導 PCIT 提案及台灣制度空白。
-      </div>
-      <div style="margin-top:10px; font-size:12px; color:var(--teal); font-weight:500;">閱讀全文 →</div>
-    </a>
-
-    <!-- 報導 3：警政署回應 -->
-    <a href="https://news.ltn.com.tw/news/society/breakingnews/5451530" target="_blank"
+    <!-- 報導 1 -->
+    <a href="https://news.ltn.com.tw/news/society/breakingnews/5451530" target="_blank" rel="noopener noreferrer"
        style="display:block; text-decoration:none; border:1px solid var(--border); border-left:4px solid var(--gold); padding:20px 24px; background:var(--paper-warm); transition:all 0.2s;"
        onmouseover="this.style.borderLeftColor='var(--gold-light)';this.style.background='#fff'"
        onmouseout="this.style.borderLeftColor='var(--gold)';this.style.background='var(--paper-warm)'">
@@ -1155,10 +1119,46 @@
         <span style="font-size:11px; color:var(--ink-soft);">自由時報 · 2026/05/27</span>
       </div>
       <div style="font-family:'Noto Serif TC',serif; font-size:17px; font-weight:700; color:var(--ink); line-height:1.5; margin-bottom:8px;">
-        警政署說明：部分特殊情況可申請快速解除警示帳戶
+        警示帳戶解除免苦等判決！刑事局：遭盜用可快速解除
       </div>
       <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;">
         警政署澄清現行救濟機制，但強調「事後補救」不等於「事前保護」——這正是 PCIT 要解決的根本問題：讓收款人在入帳前就有選擇權，而非事後奔波申訴。
+      </div>
+      <div style="margin-top:10px; font-size:12px; color:var(--teal); font-weight:500;">閱讀全文 →</div>
+    </a>
+
+    <!-- 報導 2 -->
+    <a href="https://news.ltn.com.tw/news/society/breakingnews/5454561" target="_blank" rel="noopener noreferrer"
+       style="display:block; text-decoration:none; border:1px solid var(--border); border-left:4px solid var(--red); padding:20px 24px; background:var(--paper-warm); transition:all 0.2s;"
+       onmouseover="this.style.borderLeftColor='var(--red-soft)';this.style.background='#fff'"
+       onmouseout="this.style.borderLeftColor='var(--red)';this.style.background='var(--paper-warm)'">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;">
+        <span style="font-size:11px; font-weight:600; letter-spacing:2px; color:var(--red); text-transform:uppercase;">媒體報導</span>
+        <span style="font-size:11px; color:var(--ink-soft);">自由時報 · 2026/05/30</span>
+      </div>
+      <div style="font-family:'Noto Serif TC',serif; font-size:17px; font-weight:700; color:var(--ink); line-height:1.5; margin-bottom:8px;">
+        只是封鎖詐團……台中醫師慘遭報復被列警示帳戶 怒推改革
+      </div>
+      <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;">
+        本倡議引發媒體關注，自由時報深度報導 PCIT 提案人遭遇及台灣制度空白。
+      </div>
+      <div style="margin-top:10px; font-size:12px; color:var(--teal); font-weight:500;">閱讀全文 →</div>
+    </a>
+
+    <!-- 報導 3 -->
+    <a href="https://news.ltn.com.tw/news/society/breakingnews/5454544" target="_blank" rel="noopener noreferrer"
+       style="display:block; text-decoration:none; border:1px solid var(--border); border-left:4px solid var(--red); padding:20px 24px; background:var(--paper-warm); transition:all 0.2s;"
+       onmouseover="this.style.borderLeftColor='var(--red-soft)';this.style.background='#fff'"
+       onmouseout="this.style.borderLeftColor='var(--red)';this.style.background='var(--paper-warm)'">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;">
+        <span style="font-size:11px; font-weight:600; letter-spacing:2px; color:var(--red); text-transform:uppercase;">媒體報導</span>
+        <span style="font-size:11px; color:var(--ink-soft);">自由時報 · 2026/05/30</span>
+      </div>
+      <div style="font-family:'Noto Serif TC',serif; font-size:17px; font-weight:700; color:var(--ink); line-height:1.5; margin-bottom:8px;">
+        詐團隨便轉帳你就完了？醫師倡議「收款人入帳同意機制」引熱議
+      </div>
+      <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;">
+        本倡議引發廣泛媒體與社群討論，自由時報深度報導 PCIT 提案及台灣制度空白。
       </div>
       <div style="margin-top:10px; font-size:12px; color:var(--teal); font-weight:500;">閱讀全文 →</div>
     </a>
@@ -1666,7 +1666,7 @@
     </div>
 
     <div id="signCounter" style="text-align:center; padding:16px; background:rgba(26,107,107,0.06); border:1px solid rgba(26,107,107,0.2); margin-bottom:20px;">
-      <div style="font-family:'Noto Serif TC',serif; font-size:32px; font-weight:900; color:var(--teal);" id="modalCountNum">—</div>
+      <div style="font-family:'Noto Serif TC',serif; font-size:32px; font-weight:900; color:var(--teal);" id="modalCountNum" class="petition-count">—</div>
       <div style="font-size:12px; color:var(--ink-soft); letter-spacing:1px; margin-top:4px;">目前連署人數</div>
     </div>
 
@@ -2013,54 +2013,54 @@
 
   var GOAL_BIG = 50000;
 
-  function calcDaysLeft() {
-    var deadline = new Date('2026-07-11');
+  // ── 天數倒數（動態計算） ──
+  (function() {
+    var deadline = new Date('2026-07-11T23:59:59+08:00');
     var today    = new Date();
-    var daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-    return Math.max(0, daysLeft);
-  }
-
-  function animateHeroCount(el, target) {
-    var start = 0;
-    var duration = 1600;
-    var step = Math.ceil(target / (duration / 16));
-    var timer = setInterval(function() {
-      start += step;
-      if (start >= target) { start = target; clearInterval(timer); }
-      el.textContent = start.toLocaleString();
-    }, 16);
-  }
-
-  function fetchCount() {
-    var daysLeft = calcDaysLeft();
-
-    // 天數倒數（所有顯示點）
-    document.querySelectorAll('.js-days-left').forEach(function(el) {
+    var daysLeft = Math.max(0, Math.ceil((deadline - today) / (1000 * 60 * 60 * 24)));
+    document.querySelectorAll('.days-left').forEach(function(el) {
       el.textContent = daysLeft;
     });
+  })();
 
+  // ── 附議數（從 data/count.json 讀取） ──
+  function fetchCount() {
     fetch('data/count.json?_=' + Date.now())
-      .then(function(r){ return r.json(); })
+      .then(function(r) { return r.json(); })
       .then(function(data) {
         var count = data.count || 0;
 
-        // ── 舊 CTA 計數器（保留元素但可能已被移除） ──
-        updateCounter(count);
+        // 所有 .petition-count 元素同步顯示（含動畫版的 hero 大字）
+        var heroEl = document.getElementById('heroCountNum');
+        document.querySelectorAll('.petition-count').forEach(function(el) {
+          if (el === heroEl) {
+            // 大字用滾動動畫
+            var start = 0;
+            var step  = Math.ceil(count / (1600 / 16));
+            var timer = setInterval(function() {
+              start += step;
+              if (start >= count) { start = count; clearInterval(timer); }
+              el.textContent = start.toLocaleString();
+            }, 16);
+          } else {
+            el.textContent = count.toLocaleString();
+          }
+        });
 
-        // ── Hero 附議進度區塊 ──
-        var heroNum = document.getElementById('heroCountNum');
-        if (heroNum) animateHeroCount(heroNum, count);
-
+        // 進度條
         var fill = document.getElementById('heroPetitionFill');
         if (fill) {
           var pct = Math.min((count / GOAL_BIG) * 100, 100);
-          setTimeout(function(){ fill.style.width = pct + '%'; }, 400);
+          setTimeout(function() { fill.style.width = pct + '%'; }, 400);
         }
+
+        // 舊計數器（保留相容性）
+        updateCounter(count);
       })
       .catch(function() {
-        updateCounter(0);
-        var heroNum = document.getElementById('heroCountNum');
-        if (heroNum) heroNum.textContent = '—';
+        document.querySelectorAll('.petition-count').forEach(function(el) {
+          el.textContent = '—';
+        });
       });
   }
 
