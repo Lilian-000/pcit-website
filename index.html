@@ -1092,7 +1092,7 @@
 
     <!-- 倒數天數 -->
     <div class="petition-days-wrap">
-      <div class="petition-days-num" id="heroDaysNum">—</div>
+      <div class="petition-days-num js-days-left">—</div>
       <div class="petition-days-label">天 · 附議截止倒數</div>
     </div>
 
@@ -1100,6 +1100,53 @@
     <a href="https://reurl.cc/R2moVe" target="_blank" class="petition-cta-btn">立即附議 →</a>
     <div class="petition-note">需先在 join.gov.tw 註冊帳號 · 約 5–8 分鐘 · 完全免費</div>
   </div>
+</div>
+
+<!-- LATEST NEWS -->
+<div id="news" style="background:#fff; border-bottom:1px solid var(--border);">
+<div class="section" style="padding:40px 24px;">
+  <div class="section-label">最新動態</div>
+  <div class="section-title" style="margin-bottom:24px;">媒體報導與政府回應</div>
+  <div style="display:flex; flex-direction:column; gap:16px;">
+
+    <!-- 報導 1 -->
+    <a href="https://news.ltn.com.tw/news/society/breakingnews/5454544" target="_blank"
+       style="display:block; text-decoration:none; border:1px solid var(--border); border-left:4px solid var(--red); padding:20px 24px; background:var(--paper-warm); transition:all 0.2s;"
+       onmouseover="this.style.borderLeftColor='var(--red-soft)';this.style.background='#fff'"
+       onmouseout="this.style.borderLeftColor='var(--red)';this.style.background='var(--paper-warm)'">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;">
+        <span style="font-size:11px; font-weight:600; letter-spacing:2px; color:var(--red); text-transform:uppercase;">媒體報導</span>
+        <span style="font-size:11px; color:var(--ink-soft);">自由時報 · 2026/05/27</span>
+      </div>
+      <div style="font-family:'Noto Serif TC',serif; font-size:17px; font-weight:700; color:var(--ink); line-height:1.5; margin-bottom:8px;">
+        台灣 15 萬無辜收款人帳戶遭凍結，醫師倡議收款人入帳同意機制
+      </div>
+      <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;">
+        本倡議引發媒體關注，自由時報深度報導 PCIT 提案及台灣制度空白。
+      </div>
+      <div style="margin-top:10px; font-size:12px; color:var(--teal); font-weight:500;">閱讀全文 →</div>
+    </a>
+
+    <!-- 報導 2 -->
+    <a href="https://news.ltn.com.tw/news/society/breakingnews/5451530" target="_blank"
+       style="display:block; text-decoration:none; border:1px solid var(--border); border-left:4px solid var(--gold); padding:20px 24px; background:var(--paper-warm); transition:all 0.2s;"
+       onmouseover="this.style.borderLeftColor='var(--gold-light)';this.style.background='#fff'"
+       onmouseout="this.style.borderLeftColor='var(--gold)';this.style.background='var(--paper-warm)'">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;">
+        <span style="font-size:11px; font-weight:600; letter-spacing:2px; color:var(--gold); text-transform:uppercase;">政府回應</span>
+        <span style="font-size:11px; color:var(--ink-soft);">自由時報 · 2026/05/27</span>
+      </div>
+      <div style="font-family:'Noto Serif TC',serif; font-size:17px; font-weight:700; color:var(--ink); line-height:1.5; margin-bottom:8px;">
+        警政署說明：部分特殊情況可申請快速解除警示帳戶
+      </div>
+      <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;">
+        警政署澄清現行救濟機制，但強調「事後補救」不等於「事前保護」——這正是 PCIT 要解決的根本問題：讓收款人在入帳前就有選擇權，而非事後奔波申訴。
+      </div>
+      <div style="margin-top:10px; font-size:12px; color:var(--teal); font-weight:500;">閱讀全文 →</div>
+    </a>
+
+  </div>
+</div>
 </div>
 
 <!-- STATS -->
@@ -1453,42 +1500,6 @@
     <h2 class="cta-title">一個人的帳戶被警示是悲劇，<br>現存 15 萬戶的困境是制度問題</h2>
     <p class="cta-sub">這個工具是倡議的起點，不是終點。你可以用以下方式，讓更多人得到保護。</p>
 
-    <!-- 公共政策附議 CTA -->
-    <div style="background:rgba(192,57,43,0.08); border:2px solid var(--red); padding:32px; margin-bottom:32px; text-align:center;">
-      <div style="font-size:12px; font-weight:600; letter-spacing:2px; color:var(--red); text-transform:uppercase; margin-bottom:12px;">最直接的行動</div>
-      <div style="font-family:'Noto Serif TC',serif; font-size:22px; font-weight:700; color:var(--paper); margin-bottom:8px;">在政府平台附議，讓制度真的改變</div>
-      <div style="font-size:14px; color:rgba(247,244,239,0.7); line-height:1.9; margin-bottom:24px;">
-        5,000 人附議 → 政府必須正式回應<br>
-        50,000 人附議 → 產生真正的政策壓力<br>
-        <span style="font-size:12px; opacity:0.6;" id="ctaSummaryText">載入中…</span>
-      </div>
-      <a href="https://reurl.cc/R2moVe" target="_blank" style="display:inline-block; background:var(--red); color:white; padding:16px 48px; font-family:'Noto Sans TC',sans-serif; font-size:16px; font-weight:600; letter-spacing:2px; text-decoration:none; transition:all 0.2s;">立即附議 →</a>
-      <div style="margin-top:16px; font-size:12px; color:rgba(247,244,239,0.5);">需要先在 join.gov.tw 註冊帳號 · 約 5-8 分鐘 · 完全免費</div>
-    </div>
-
-    <!-- 即時連署計數器 -->
-    <div style="
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.05);
-      padding: 28px 32px; margin-bottom: 40px;
-      display: flex; align-items: center; justify-content: center;
-      gap: 40px; flex-wrap: wrap; text-align: center;">
-      <div>
-        <div style="font-family:'Noto Serif TC',serif; font-size:52px; font-weight:900; color:var(--gold-light); line-height:1;" id="ctaCountNum">—</div>
-        <div style="font-size:12px; color:rgba(247,244,239,0.6); letter-spacing:2px; margin-top:6px; text-transform:uppercase;">目前連署人數</div>
-      </div>
-      <div style="border-left:1px solid rgba(255,255,255,0.15); padding-left:40px;">
-        <div style="font-size:14px; color:rgba(247,244,239,0.75); line-height:2; max-width:260px; text-align:left;">
-          目標：<strong style="color:var(--paper);">5,000 人</strong>附議後<br>
-          政府必須正式回應<br>
-          <span style="font-size:12px; opacity:0.6;">終極目標 50,000 — 產生真正的政策壓力</span>
-        </div>
-        <div style="margin-top:12px; background:rgba(255,255,255,0.08); height:6px; border-radius:3px; overflow:hidden; max-width:260px;">
-          <div id="progressBar" style="height:100%; background:var(--gold); width:0%; transition:width 1s ease; border-radius:3px;"></div>
-        </div>
-      </div>
-    </div>
-
     <div class="cta-cards">
       <div class="cta-card card-sign">
         <div class="cta-card-icon">✍️</div>
@@ -1520,31 +1531,31 @@
     </div>
 
     <div class="cta-roadmap">
-      <div class="cta-roadmap-title">產品發展藍圖</div>
+      <div class="cta-roadmap-title">行動藍圖</div>
       <div class="roadmap-track">
         <div class="roadmap-step">
-          <div class="roadmap-dot dot-done"></div>
-          <div class="roadmap-phase">現在 · 2026</div>
-          <h4>民眾教育工具</h4>
-          <p>網頁風險評估、知識測試、應對指南</p>
-        </div>
-        <div class="roadmap-step">
           <div class="roadmap-dot dot-now"></div>
-          <div class="roadmap-phase">下一步 · 2026 Q3</div>
-          <h4>AI 問答助理</h4>
-          <p>Line Bot 即時諮詢、AI 風險分析、申訴文件輔助產生</p>
+          <div class="roadmap-phase">進行中 · 2026 Q3</div>
+          <h4>立法倡議 · 5,000 人附議</h4>
+          <p>完成公共政策附議，達到 5,000 人門檻，促使金管會正式回應並啟動研究</p>
         </div>
         <div class="roadmap-step">
           <div class="roadmap-dot dot-future"></div>
-          <div class="roadmap-phase">中期 · 2027</div>
-          <h4>金融機構串接</h4>
-          <p>與銀行 API 合作，提供入帳通知與攔截建議</p>
+          <div class="roadmap-phase">2026 Q3–Q4</div>
+          <h4>金管會研究報告</h4>
+          <p>金管會發布可行性報告，開放金融沙盒申請，至少一家銀行啟動試點</p>
         </div>
         <div class="roadmap-step">
           <div class="roadmap-dot dot-future"></div>
-          <div class="roadmap-phase">長期 · 2028+</div>
-          <h4>PCIT 制度落地</h4>
-          <p>推動立法，讓「收款人同意機制」成為台灣金融標準</p>
+          <div class="roadmap-phase">2026 Q4</div>
+          <h4>試點上線 · 修法推動</h4>
+          <p>試點銀行推出收款人同意機制，保護第一批用戶；推動修法納入《電子支付機構管理條例》</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-future"></div>
+          <div class="roadmap-phase">2027 Q1 起</div>
+          <h4>全面推廣 · 制度落地</h4>
+          <p>全面推廣至所有金融機構，台灣建立完整的收款人保護標準</p>
         </div>
       </div>
     </div>
@@ -1983,6 +1994,14 @@
   }
 
   var GOAL_BIG = 50000;
+  // 附議截止日（從提案起算 60 天）
+  var PETITION_DEADLINE = new Date('2026-07-13T23:59:59+08:00');
+
+  function calcDaysLeft() {
+    var now  = new Date();
+    var diff = Math.ceil((PETITION_DEADLINE - now) / 86400000);
+    return Math.max(0, diff);
+  }
 
   function animateHeroCount(el, target) {
     var start = 0;
@@ -1996,20 +2015,20 @@
   }
 
   function fetchCount() {
+    var daysLeft = calcDaysLeft();
+
+    // 天數倒數（所有顯示點）
+    document.querySelectorAll('.js-days-left').forEach(function(el) {
+      el.textContent = daysLeft;
+    });
+
     fetch('data/count.json?_=' + Date.now())
       .then(function(r){ return r.json(); })
       .then(function(data) {
-        var count    = data.count    || 0;
-        var daysLeft = data.days_left != null ? data.days_left : '—';
+        var count = data.count || 0;
 
-        // ── 舊 CTA 計數器 ──
+        // ── 舊 CTA 計數器（保留元素但可能已被移除） ──
         updateCounter(count);
-
-        // ── 摘要文字 ──
-        var summary = document.getElementById('ctaSummaryText');
-        if (summary) {
-          summary.textContent = '目前 ' + count.toLocaleString() + ' 人 · 還有 ' + daysLeft + ' 天 · 目標 50,000';
-        }
 
         // ── Hero 附議進度區塊 ──
         var heroNum = document.getElementById('heroCountNum');
@@ -2020,9 +2039,6 @@
           var pct = Math.min((count / GOAL_BIG) * 100, 100);
           setTimeout(function(){ fill.style.width = pct + '%'; }, 400);
         }
-
-        var daysEl = document.getElementById('heroDaysNum');
-        if (daysEl) daysEl.textContent = daysLeft;
       })
       .catch(function() {
         updateCounter(0);
