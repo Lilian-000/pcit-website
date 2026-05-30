@@ -16,69 +16,59 @@ jobs:
 
       - name: Fetch count from join.gov.tw
         run: |
-          # 爬取附議頁面
-          PAGE=$(curl -s --max-time 30 \
+          # 下載頁面
+          curl -s --max-time 30 \
             -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
-            "https://join.gov.tw/idea/detail/ba071237-01f4-40c4-a322-b1c0b16111dd")
+            "https://join.gov.tw/idea/detail/ba071237-01f4-40c4-a322-b1c0b16111dd" \
+            -o /tmp/page.html
 
-          # 取得附議數（HTML 中 agreeCount 或類似欄位）
-          COUNT=$(echo "$PAGE" | grep -oP '"agreeCount"\s*:\s*\K[0-9]+' | head -1)
+          # 用 Python 解析（資料以 \"field\":value 格式嵌在 JS 中）
+          python3 << 'PYEOF'
+          import re, json, datetime, sys
 
-          # 若 JSON 欄位找不到，嘗試從頁面文字取數字
-          if [ -z "$COUNT" ]; then
-            COUNT=$(echo "$PAGE" | grep -oP '(?<=附議人數[：:]\s{0,5})[0-9,]+' | tr -d ',' | head -1)
-          fi
+          with open('/tmp/page.html', encoding='utf-8', errors='ignore') as f:
+              html = f.read()
 
-          # 備用：直接呼叫 join.gov.tw API
-          if [ -z "$COUNT" ]; then
-            API=$(curl -s --max-time 30 \
-              -H "Accept: application/json" \
-              "https://join.gov.tw/idea/detail/ba071237-01f4-40c4-a322-b1c0b16111dd")
-            COUNT=$(echo "$API" | python3 -c "
-          import sys, json, re
-          raw = sys.stdin.read()
-          # try JSON parse
-          try:
-              d = json.loads(raw)
-              for key in ('agreeCount','agree_count','count','signCount'):
-                  if key in d:
-                      print(d[key]); exit()
-              # nested
-              for v in d.values():
-                  if isinstance(v, dict):
-                      for key in ('agreeCount','agree_count','count','signCount'):
-                          if key in v:
-                              print(v[key]); exit()
-          except Exception:
-              pass
-          # fallback regex
-          m = re.search(r'['\''\"](agreeCount|agree_count|signCount)['\''\"]\s*:\s*['\''\"]*(\d+)', raw)
-          if m:
-              print(m.group(2))
-          " 2>/dev/null)
-          fi
+          # 取附議數
+          m = re.search(r'\\"endorseCount\\":\s*(\d+)', html)
+          if not m:
+              # 備用：無轉義格式
+              m = re.search(r'"endorseCount"\s*:\s*(\d+)', html)
 
-          # 計算剩餘天數（附議截止日 2026-07-09）
-          DEADLINE="2026-07-09"
-          TODAY=$(date -u +%Y-%m-%d)
-          DAYS_LEFT=$(( ( $(date -d "$DEADLINE" +%s) - $(date -d "$TODAY" +%s) ) / 86400 ))
-          if [ "$DAYS_LEFT" -lt 0 ]; then DAYS_LEFT=0; fi
+          if not m:
+              print("ERROR: cannot find endorseCount", file=sys.stderr)
+              # 保留現有值
+              with open('data/count.json') as f:
+                  existing = json.load(f)
+              count = existing['count']
+          else:
+              count = int(m.group(1))
 
-          # 若還是取不到，保留舊值
-          if [ -z "$COUNT" ] || ! [[ "$COUNT" =~ ^[0-9]+$ ]]; then
-            COUNT=$(python3 -c "import json; d=json.load(open('data/count.json')); print(d['count'])")
-          fi
+          # 取截止日期 (approvedDueDate，毫秒時間戳)
+          d = re.search(r'\\"approvedDueDate\\":\s*(\d+)', html)
+          if not d:
+              d = re.search(r'"approvedDueDate"\s*:\s*(\d+)', html)
 
-          echo "COUNT=$COUNT  DAYS_LEFT=$DAYS_LEFT  DATE=$TODAY"
+          today = datetime.date.today()
+          if d:
+              due_ts  = int(d.group(1)) / 1000
+              due_date = datetime.datetime.utcfromtimestamp(due_ts).date()
+              days_left = max(0, (due_date - today).days)
+          else:
+              # 保留現有值
+              with open('data/count.json') as f:
+                  days_left = json.load(f).get('days_left', 0)
 
-          # 寫入 data/count.json
-          python3 -c "
-          import json, datetime
-          data = {'count': int('$COUNT'), 'updated': '$TODAY', 'days_left': int('$DAYS_LEFT')}
-          with open('data/count.json', 'w') as f:
+          data = {
+              'count':     count,
+              'updated':   str(today),
+              'days_left': days_left
+          }
+          with open('data/count.json', 'w', encoding='utf-8') as f:
               json.dump(data, f, ensure_ascii=False)
-          print(json.dumps(data))
-          "
+
+          print(f"count={count}  days_left={days_left}  date={today}")
+          PYEOF
 
       - name: Commit and push if changed
         run: |
