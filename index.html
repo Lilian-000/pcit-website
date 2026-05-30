@@ -728,6 +728,265 @@
     .roadmap-track { flex-direction: column; align-items: center; gap: 16px; }
     .roadmap-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; }
   }
+
+  /* ── 附議進度橫幅 ── */
+  .petition-hero-wrap {
+    background: linear-gradient(135deg, #1a0a0a 0%, #2d0d0d 50%, #1a1a2e 100%);
+    border-top: 3px solid var(--red);
+    border-bottom: 3px solid var(--red);
+    padding: 48px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .petition-hero-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg, transparent, transparent 30px,
+      rgba(192,57,43,0.04) 30px, rgba(192,57,43,0.04) 31px
+    );
+    pointer-events: none;
+  }
+  .petition-hero-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .petition-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--red-soft);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .petition-count-big {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(72px, 18vw, 120px);
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1;
+    letter-spacing: -2px;
+    text-shadow: 0 0 60px rgba(192,57,43,0.4);
+  }
+  .petition-count-unit {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(22px, 5vw, 32px);
+    color: rgba(247,244,239,0.7);
+    margin-bottom: 28px;
+    letter-spacing: 4px;
+  }
+  .petition-progress-wrap {
+    margin: 0 auto 12px;
+    max-width: 500px;
+  }
+  .petition-track {
+    background: rgba(255,255,255,0.1);
+    height: 10px;
+    border-radius: 5px;
+    overflow: visible;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  .petition-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--red), var(--red-soft));
+    border-radius: 5px;
+    width: 0%;
+    transition: width 1.2s ease;
+    position: relative;
+  }
+  .petition-fill::after {
+    content: '';
+    position: absolute;
+    right: -4px; top: 50%;
+    transform: translateY(-50%);
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 8px rgba(192,57,43,0.8);
+  }
+  .petition-milestone-marker {
+    position: absolute;
+    top: -4px;
+    width: 2px;
+    height: 18px;
+    background: rgba(255,255,255,0.4);
+    transform: translateX(-50%);
+  }
+  .petition-milestones {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: rgba(247,244,239,0.5);
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+  }
+  .petition-milestones span b { color: rgba(247,244,239,0.8); }
+  .petition-days-wrap {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+  .petition-days-num {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(36px, 8vw, 52px);
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .petition-days-label {
+    font-size: 14px;
+    color: rgba(247,244,239,0.6);
+    letter-spacing: 2px;
+  }
+  .petition-cta-btn {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 18px 56px;
+    text-decoration: none;
+    transition: all 0.2s;
+    min-height: 56px;
+    line-height: 1.2;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(192,57,43,0.5);
+    margin-bottom: 12px;
+  }
+  .petition-cta-btn:hover {
+    background: var(--red-soft);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(192,57,43,0.6);
+  }
+  .petition-note {
+    font-size: 12px;
+    color: rgba(247,244,239,0.4);
+    letter-spacing: 0.5px;
+  }
+  .petition-goal-pills {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0 28px;
+  }
+  .goal-pill {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 10px 20px;
+    font-size: 13px;
+    color: rgba(247,244,239,0.75);
+    line-height: 1.6;
+    text-align: left;
+  }
+  .goal-pill strong { color: var(--gold-light); display: block; font-family: 'Noto Serif TC', serif; font-size: 15px; }
+
+  /* ── 全站 RWD（375–390px） ── */
+  @media (max-width: 480px) {
+    /* 基礎字體：最小 16px */
+    body { font-size: 16px; }
+    .section-body { font-size: 16px; }
+    .step-content p { font-size: 15px; }
+    .policy-card p { font-size: 13px; }
+    .quiz-desc { font-size: 15px; }
+
+    /* Hero */
+    .hero { padding: 48px 16px 40px; }
+    .hero h1 { font-size: clamp(26px, 8vw, 36px); }
+    .hero-sub { font-size: 15px; margin-bottom: 28px; }
+    .hero-cta { gap: 8px; }
+    .hero-cta a, .hero-cta button {
+      width: 100%; max-width: 280px;
+      min-height: 48px;
+      font-size: 15px !important;
+      padding: 14px 20px !important;
+    }
+
+    /* 附議進度 */
+    .petition-hero-wrap { padding: 36px 16px; }
+    .petition-cta-btn { width: 100%; max-width: 320px; font-size: 17px; padding: 16px 24px; }
+    .goal-pill { width: 100%; }
+
+    /* Stats bar */
+    .stats-bar { flex-direction: column; }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding: 16px 20px; }
+    .stat-item:last-child { border-bottom: none; }
+    .stat-num { font-size: 24px; }
+    .stat-label { font-size: 13px; }
+
+    /* Sections */
+    .section { padding: 40px 16px; }
+    .section-title { font-size: clamp(20px, 6vw, 28px); }
+
+    /* Quiz */
+    .quiz-wrap { padding: 24px 16px; }
+    .choice-btn { padding: 14px 16px; font-size: 15px; min-height: 52px; }
+    .btn-next { min-height: 48px; font-size: 15px; }
+    .btn-primary { min-height: 48px; font-size: 15px; padding: 14px 24px; }
+
+    /* Steps */
+    .step-item { gap: 14px; }
+    .step-num { font-size: 26px; min-width: 34px; }
+    .step-content h3 { font-size: 16px; }
+
+    /* Risk check */
+    .check-wrap { padding: 24px 16px; }
+    .check-input { font-size: 16px; min-height: 48px; }
+    .btn-check { min-height: 52px; font-size: 16px; }
+    .checkbox-row { font-size: 15px; }
+    .checkbox-row input[type="checkbox"] { width: 20px; height: 20px; }
+
+    /* Policy grid → 1 column */
+    .policy-grid { grid-template-columns: 1fr; }
+    .policy-card { padding: 20px 16px; }
+    /* 國際比較 3 欄 → 1 欄 */
+    div[style*="grid-template-columns:1fr 1fr 1fr"] {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    /* CTA section */
+    .cta-section { padding: 48px 16px; }
+    .cta-title { font-size: clamp(20px, 6vw, 28px); }
+    .cta-sub { font-size: 15px; }
+    .cta-card { padding: 20px 16px; }
+    .cta-card-btn { min-height: 44px; font-size: 13px; padding: 10px 16px; }
+
+    /* 連署計數器 flex → vertical */
+    div[style*="display: flex"][style*="gap: 40px"] {
+      flex-direction: column !important;
+      gap: 20px !important;
+    }
+    div[style*="border-left:1px solid"][style*="padding-left:40px"] {
+      border-left: none !important;
+      padding-left: 0 !important;
+      border-top: 1px solid rgba(255,255,255,0.15) !important;
+      padding-top: 20px !important;
+    }
+
+    /* Overflow 防護 */
+    img, video, iframe { max-width: 100%; height: auto; }
+    table { display: block; overflow-x: auto; }
+    pre, code { white-space: pre-wrap; word-break: break-all; }
+
+    /* Nav */
+    nav { padding: 0 16px; }
+
+    /* Modal */
+    .modal-box { padding: 28px 20px; }
+
+    /* Footer */
+    footer { padding: 32px 16px; font-size: 13px; }
+  }
 </style>
 </head>
 <body>
@@ -796,6 +1055,52 @@
       50% { box-shadow: 0 0 0 6px rgba(45,155,155,0.1); }
     }
   </style>
+
+<!-- PETITION PROGRESS -->
+<div class="petition-hero-wrap" id="petition-progress">
+  <div class="petition-hero-inner">
+    <div class="petition-eyebrow">公共政策附議倡議 · 現在就加入</div>
+
+    <div class="petition-count-big" id="heroCountNum">—</div>
+    <div class="petition-count-unit">人已附議</div>
+
+    <!-- 進度條 / 50000 -->
+    <div class="petition-progress-wrap">
+      <div class="petition-track">
+        <div class="petition-fill" id="heroPetitionFill"></div>
+        <!-- 5000 milestone marker at 10% -->
+        <div class="petition-milestone-marker" style="left:10%;" title="5,000 人里程碑"></div>
+      </div>
+      <div class="petition-milestones">
+        <span><b>0</b></span>
+        <span style="position:relative; left:0;"><b>5,000</b> 政府必須正式回應</span>
+        <span><b>50,000</b> 真正政策壓力</span>
+      </div>
+    </div>
+
+    <!-- 目標說明 pills -->
+    <div class="petition-goal-pills">
+      <div class="goal-pill">
+        <strong>5,000 人</strong>
+        政府必須在 60 天內正式書面回應
+      </div>
+      <div class="goal-pill">
+        <strong>50,000 人</strong>
+        產生真正的政策壓力，推動制度改革
+      </div>
+    </div>
+
+    <!-- 倒數天數 -->
+    <div class="petition-days-wrap">
+      <div class="petition-days-num" id="heroDaysNum">—</div>
+      <div class="petition-days-label">天 · 附議截止倒數</div>
+    </div>
+
+    <!-- 紅色 CTA 按鈕 -->
+    <a href="https://reurl.cc/R2moVe" target="_blank" class="petition-cta-btn">立即附議 →</a>
+    <div class="petition-note">需先在 join.gov.tw 註冊帳號 · 約 5–8 分鐘 · 完全免費</div>
+  </div>
+</div>
 
 <!-- STATS -->
 <div class="stats-bar">
@@ -1677,20 +1982,52 @@
     }
   }
 
+  var GOAL_BIG = 50000;
+
+  function animateHeroCount(el, target) {
+    var start = 0;
+    var duration = 1600;
+    var step = Math.ceil(target / (duration / 16));
+    var timer = setInterval(function() {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = start.toLocaleString();
+    }, 16);
+  }
+
   function fetchCount() {
     fetch('data/count.json?_=' + Date.now())
       .then(function(r){ return r.json(); })
       .then(function(data) {
-        var count = data.count || 0;
+        var count    = data.count    || 0;
         var daysLeft = data.days_left != null ? data.days_left : '—';
+
+        // ── 舊 CTA 計數器 ──
         updateCounter(count);
+
+        // ── 摘要文字 ──
         var summary = document.getElementById('ctaSummaryText');
         if (summary) {
           summary.textContent = '目前 ' + count.toLocaleString() + ' 人 · 還有 ' + daysLeft + ' 天 · 目標 50,000';
         }
+
+        // ── Hero 附議進度區塊 ──
+        var heroNum = document.getElementById('heroCountNum');
+        if (heroNum) animateHeroCount(heroNum, count);
+
+        var fill = document.getElementById('heroPetitionFill');
+        if (fill) {
+          var pct = Math.min((count / GOAL_BIG) * 100, 100);
+          setTimeout(function(){ fill.style.width = pct + '%'; }, 400);
+        }
+
+        var daysEl = document.getElementById('heroDaysNum');
+        if (daysEl) daysEl.textContent = daysLeft;
       })
       .catch(function() {
         updateCounter(0);
+        var heroNum = document.getElementById('heroCountNum');
+        if (heroNum) heroNum.textContent = '—';
       });
   }
 
