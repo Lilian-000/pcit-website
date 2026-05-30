@@ -1155,7 +1155,7 @@
       <div style="font-size:14px; color:rgba(247,244,239,0.7); line-height:1.9; margin-bottom:24px;">
         5,000 人附議 → 政府必須正式回應<br>
         50,000 人附議 → 產生真正的政策壓力<br>
-        <span style="font-size:12px; opacity:0.6;">目前 485 人 · 還有 48 天 · 目標 50,000</span>
+        <span style="font-size:12px; opacity:0.6;" id="ctaSummaryText">載入中…</span>
       </div>
       <a href="https://reurl.cc/R2moVe" target="_blank" style="display:inline-block; background:var(--red); color:white; padding:16px 48px; font-family:'Noto Sans TC',sans-serif; font-size:16px; font-weight:600; letter-spacing:2px; text-decoration:none; transition:all 0.2s;">立即附議 →</a>
       <div style="margin-top:16px; font-size:12px; color:rgba(247,244,239,0.5);">需要先在 join.gov.tw 註冊帳號 · 約 5-8 分鐘 · 完全免費</div>
@@ -1678,18 +1678,18 @@
   }
 
   function fetchCount() {
-    // 讀取試算表（需先在 Google Sheets 將共用設為「知道連結的任何人可檢視」）
-    var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&sheet=Sheet1';
-    fetch(url)
-      .then(function(r){ return r.text(); })
-      .then(function(csv) {
-        // 計算資料行數（扣除標題列）
-        var rows = csv.trim().split('\n').filter(function(r){ return r.trim() !== ''; });
-        var count = Math.max(0, rows.length - 1);
+    fetch('data/count.json?_=' + Date.now())
+      .then(function(r){ return r.json(); })
+      .then(function(data) {
+        var count = data.count || 0;
+        var daysLeft = data.days_left != null ? data.days_left : '—';
         updateCounter(count);
+        var summary = document.getElementById('ctaSummaryText');
+        if (summary) {
+          summary.textContent = '目前 ' + count.toLocaleString() + ' 人 · 還有 ' + daysLeft + ' 天 · 目標 50,000';
+        }
       })
       .catch(function() {
-        // 若讀取失敗（試算表尚未公開），顯示 0
         updateCounter(0);
       });
   }
