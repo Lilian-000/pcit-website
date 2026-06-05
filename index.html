@@ -1913,30 +1913,31 @@
     setTimeout(function(){ resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
   }
 
-  // ── 訪客計數器 ──
-  // 使用 GoatCounter 免費統計服務
-  // 需先到 goatcounter.com 註冊並取得你的 code
-  // 註冊後將下方的 'pcit-tw' 換成你的 GoatCounter code
-  function loadVisitorCount() {
-    var el = document.getElementById('visitorCount');
-    if (!el) return;
-    fetch('https://pcit-tw.goatcounter.com/counter/TOTAL.json')
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data && data.count) {
-          var num = parseInt(data.count.replace(/,/g, ''));
-          animateVisitorCount(el, num);
-        }
-      })
-      .catch(function() {
-        el.textContent = '—';
-      });
-  }
+  // ════════════════════════════════════════════════
+  // ██  全站設定（只需在這裡改數字）
+  // ════════════════════════════════════════════════
+  var PCIT_CONFIG = {
+    // 訪客人次備用值：GoatCounter 抓取失敗時顯示此數字
+    // → 請定期到 https://pcit-tw.goatcounter.com 查看並更新
+    manualVisitorCount: 1200,
 
-  function animateVisitorCount(el, target) {
+    // 附議數備用值：/signatures 和 data/count.json 都失敗時顯示
+    fallbackSignatures: 2065,
+
+    // 附議目標
+    goalSmall: 5000,
+    goalBig:   50000,
+  };
+  // ════════════════════════════════════════════════
+
+  var GOAL      = PCIT_CONFIG.goalSmall;
+  var GOAL_BIG  = PCIT_CONFIG.goalBig;
+
+  // ── 工具函式：數字滾動動畫 ──────────────────────
+  function animateNumber(el, target, duration) {
+    duration = duration || 1400;
     var start = 0;
-    var duration = 1500;
-    var step = Math.ceil(target / (duration / 16));
+    var step  = Math.ceil(target / (duration / 16));
     var timer = setInterval(function() {
       start += step;
       if (start >= target) { start = target; clearInterval(timer); }
@@ -1944,40 +1945,60 @@
     }, 16);
   }
 
-  loadVisitorCount();
-
-  // ── 連署計數器 ──
-  // 從你的 Google 試算表讀取真實人數
-  // 試算表 ID: 13Zcclx9lUos8YJYgA-hYzWU6zB2ymPEjZr0NvxX6NBw
-  var SHEET_ID = '1URPdiSA7gYVsZZpK8egGc6uEIl-JcL8_HbZrgw0IbKU';
-  var GOAL = 5000;
-
-  function animateCount(el, target) {
-    var start = 0;
-    var duration = 1200;
-    var step = Math.ceil(target / (duration / 16));
-    var timer = setInterval(function() {
-      start += step;
-      if (start >= target) { start = target; clearInterval(timer); }
-      el.textContent = start.toLocaleString();
-    }, 16);
-  }
-
-  function updateCounter(count) {
-    var ctaEl = document.getElementById('ctaCountNum');
-    var modalEl = document.getElementById('modalCountNum');
+  // ── 更新附議數到所有顯示點 ──────────────────────
+  function applyCount(count) {
+    var heroEl = document.getElementById('heroCountNum');
+    document.querySelectorAll('.petition-count').forEach(function(el) {
+      if (el === heroEl) {
+        animateNumber(el, count, 1600);   // Hero 大字：滾動動畫
+      } else {
+        el.textContent = count.toLocaleString();
+      }
+    });
+    // 進度條
+    var fill = document.getElementById('heroPetitionFill');
+    if (fill) {
+      var pct = Math.min((count / GOAL_BIG) * 100, 100);
+      setTimeout(function() { fill.style.width = pct + '%'; }, 400);
+    }
+    // 舊版相容元素（modal bar 等）
     var bar = document.getElementById('progressBar');
-    if (ctaEl) animateCount(ctaEl, count);
-    if (modalEl) modalEl.textContent = count.toLocaleString();
     if (bar) {
-      var pct = Math.min((count / GOAL) * 100, 100);
-      setTimeout(function(){ bar.style.width = pct + '%'; }, 300);
+      var pct2 = Math.min((count / GOAL) * 100, 100);
+      setTimeout(function() { bar.style.width = pct2 + '%'; }, 300);
     }
   }
 
-  var GOAL_BIG = 50000;
+  // ── 附議數抓取（三層降級）────────────────────────
+  // 優先順序：① /signatures（Cloudflare Edge 即時）
+  //           ② data/count.json（GitHub Actions 每小時更新）
+  //           ③ PCIT_CONFIG.fallbackSignatures（靜態備用）
+  function fetchCount() {
+    // ① 嘗試 Cloudflare Pages Function（即時）
+    fetch('/signatures')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.signatures != null) {
+          applyCount(data.signatures);
+        } else {
+          throw new Error('no signatures in response');
+        }
+      })
+      .catch(function() {
+        // ② 降級：抓靜態 JSON（GitHub Actions 每小時更新）
+        fetch('data/count.json?_=' + Date.now())
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            applyCount(data.count || PCIT_CONFIG.fallbackSignatures);
+          })
+          .catch(function() {
+            // ③ 最終備用：靜態數字，不顯示錯誤
+            applyCount(PCIT_CONFIG.fallbackSignatures);
+          });
+      });
+  }
 
-  // ── 天數倒數（動態計算） ──
+  // ── 天數倒數（動態計算）─────────────────────────
   (function() {
     var deadline = new Date('2026-07-10T23:59:59+08:00');
     var today    = new Date();
@@ -1988,49 +2009,38 @@
     });
   })();
 
-  // ── 附議數（從 data/count.json 讀取） ──
-  function fetchCount() {
-    fetch('data/count.json?_=' + Date.now())
+  // ── 訪客人次（GoatCounter → 備用值）────────────
+  // 累積瀏覽人次：id="visitorCount"
+  // GoatCounter 提供公開 API，若失敗則顯示 PCIT_CONFIG.manualVisitorCount
+  // → 要手動更新備用值：修改上方 PCIT_CONFIG.manualVisitorCount
+  function loadVisitorCount() {
+    var el = document.getElementById('visitorCount');
+    if (!el) return;
+    fetch('https://pcit-tw.goatcounter.com/counter/TOTAL.json')
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        var count = data.count || 0;
-
-        // 所有 .petition-count 元素同步顯示（含動畫版的 hero 大字）
-        var heroEl = document.getElementById('heroCountNum');
-        document.querySelectorAll('.petition-count').forEach(function(el) {
-          if (el === heroEl) {
-            // 大字用滾動動畫
-            var start = 0;
-            var step  = Math.ceil(count / (1600 / 16));
-            var timer = setInterval(function() {
-              start += step;
-              if (start >= count) { start = count; clearInterval(timer); }
-              el.textContent = start.toLocaleString();
-            }, 16);
-          } else {
-            el.textContent = count.toLocaleString();
-          }
-        });
-
-        // 進度條
-        var fill = document.getElementById('heroPetitionFill');
-        if (fill) {
-          var pct = Math.min((count / GOAL_BIG) * 100, 100);
-          setTimeout(function() { fill.style.width = pct + '%'; }, 400);
+        if (data && data.count) {
+          var num = parseInt(data.count.replace(/,/g, ''), 10);
+          if (num > 0) { animateNumber(el, num, 1500); return; }
         }
-
-        // 舊計數器（保留相容性）
-        updateCounter(count);
+        el.textContent = PCIT_CONFIG.manualVisitorCount.toLocaleString();
       })
       .catch(function() {
-        document.querySelectorAll('.petition-count').forEach(function(el) {
-          el.textContent = '2,065';
-        });
+        // GoatCounter 失敗：靜默顯示備用值
+        el.textContent = PCIT_CONFIG.manualVisitorCount.toLocaleString();
       });
   }
 
-  // 頁面載入時執行
+  // ── 舊版相容 stub（保留被呼叫的函式名稱）───────
+  function updateCounter(count) {
+    var modalEl = document.getElementById('modalCountNum');
+    if (modalEl) modalEl.textContent = count.toLocaleString();
+  }
+  function animateCount(el, target) { animateNumber(el, target, 1200); }
+
+  // ── 頁面載入 ────────────────────────────────────
   fetchCount();
+  loadVisitorCount();
 
   function onSignClick() {
     // 點連署連結後延遲更新計數（讓用戶填完表單回來時看到）
