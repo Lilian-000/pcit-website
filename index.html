@@ -1969,32 +1969,19 @@
     }
   }
 
-  // ── 附議數抓取（三層降級）────────────────────────
-  // 優先順序：① /signatures（Cloudflare Edge 即時）
-  //           ② data/count.json（GitHub Actions 每小時更新）
-  //           ③ PCIT_CONFIG.fallbackSignatures（靜態備用）
+  // ── 附議數抓取（兩層降級）────────────────────────
+  // 優先順序：① data/count.json（GitHub Actions 每天更新）
+  //           ② PCIT_CONFIG.fallbackSignatures（靜態備用）
   function fetchCount() {
-    // ① 嘗試 Cloudflare Pages Function（即時）
-    fetch('/signatures')
+    // ① 抓靜態 JSON（GitHub Actions 每天 08:00 台灣時間更新）
+    fetch('data/count.json?_=' + Date.now())
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        if (data && data.signatures != null) {
-          applyCount(data.signatures);
-        } else {
-          throw new Error('no signatures in response');
-        }
+        applyCount(data.signatures || data.count || PCIT_CONFIG.fallbackSignatures);
       })
       .catch(function() {
-        // ② 降級：抓靜態 JSON（GitHub Actions 每小時更新）
-        fetch('data/count.json?_=' + Date.now())
-          .then(function(r) { return r.json(); })
-          .then(function(data) {
-            applyCount(data.count || PCIT_CONFIG.fallbackSignatures);
-          })
-          .catch(function() {
-            // ③ 最終備用：靜態數字，不顯示錯誤
-            applyCount(PCIT_CONFIG.fallbackSignatures);
-          });
+        // ② 最終備用：靜態數字，不顯示錯誤
+        applyCount(PCIT_CONFIG.fallbackSignatures);
       });
   }
 

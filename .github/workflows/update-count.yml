@@ -1,0 +1,91 @@
+name: Update Petition Count
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # 每天 UTC 00:00 = 台灣時間 08:00
+  workflow_dispatch:        # 允許手動觸發
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch and parse count from join.gov.tw
+        run: |
+          node - << 'JSEOF'
+          const https = require('https');
+          const fs    = require('fs');
+
+          const URL = 'https://join.gov.tw/idea/detail/ba071237-01f4-40c4-a322-b1c0b16111dd';
+
+          const options = {
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+              'Accept': 'text/html,application/xhtml+xml',
+              'Accept-Language': 'zh-TW,zh;q=0.9',
+            },
+          };
+
+          function get(url, redirects = 5) {
+            return new Promise((resolve, reject) => {
+              https.get(url, options, (res) => {
+                if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location && redirects > 0) {
+                  return get(res.headers.location, redirects - 1).then(resolve).catch(reject);
+                }
+                let body = '';
+                res.setEncoding('utf8');
+                res.on('data', chunk => body += chunk);
+                res.on('end', () => resolve({ status: res.statusCode, body }));
+              }).on('error', reject);
+            });
+          }
+
+          (async () => {
+            try {
+              const { status, body } = await get(URL);
+              console.log(`HTTP ${status}, body length: ${body.length}`);
+
+              // 頁面以 \"endorseCount\":數字 格式嵌入計數
+              let match = body.match(/\\"endorseCount\\":\s*(\d+)/);
+              if (!match) match = body.match(/"endorseCount"\s*:\s*(\d+)/);
+
+              let signatures;
+              if (match) {
+                signatures = parseInt(match[1], 10);
+                console.log(`Found signatures: ${signatures}`);
+              } else {
+                // 無法解析時保留現有值
+                const existing = JSON.parse(fs.readFileSync('data/count.json', 'utf8'));
+                signatures = existing.signatures || existing.count || 0;
+                console.warn('WARNING: endorseCount not found, keeping existing value:', signatures);
+              }
+
+              const output = {
+                signatures,
+                updated_at: new Date().toISOString(),
+              };
+
+              fs.writeFileSync('data/count.json', JSON.stringify(output, null, 2) + '\n', 'utf8');
+              console.log('Wrote data/count.json:', JSON.stringify(output));
+            } catch (err) {
+              console.error('ERROR:', err.message);
+              process.exit(1);
+            }
+          })();
+          JSEOF
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/count.json
+          if git diff --cached --quiet; then
+            echo "No change, skipping commit."
+          else
+            git commit -m "chore: update petition count [skip ci]"
+            git push
+          fi
