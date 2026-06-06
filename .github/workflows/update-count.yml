@@ -14,27 +14,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch and parse count from join.gov.tw
+      - name: Fetch signatures and visitors
+        env:
+          GOATCOUNTER_TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
         run: |
           node - << 'JSEOF'
           const https = require('https');
           const fs    = require('fs');
 
-          const URL = 'https://join.gov.tw/idea/detail/ba071237-01f4-40c4-a322-b1c0b16111dd';
-
-          const options = {
-            headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
-              'Accept': 'text/html,application/xhtml+xml',
-              'Accept-Language': 'zh-TW,zh;q=0.9',
-            },
-          };
-
-          function get(url, redirects = 5) {
+          // ── 工具：HTTPS GET（自動跟隨轉址）──────────────────────
+          function get(url, reqOptions = {}, redirects = 5) {
             return new Promise((resolve, reject) => {
-              https.get(url, options, (res) => {
-                if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location && redirects > 0) {
-                  return get(res.headers.location, redirects - 1).then(resolve).catch(reject);
+              const parsed = new URL(url);
+              const opts = {
+                hostname: parsed.hostname,
+                path: parsed.pathname + parsed.search,
+                headers: reqOptions.headers || {},
+              };
+              https.get(opts, (res) => {
+                if ([301, 302, 303, 307, 308].includes(res.statusCode) &&
+                    res.headers.location && redirects > 0) {
+                  return get(res.headers.location, reqOptions, redirects - 1)
+                    .then(resolve).catch(reject);
                 }
                 let body = '';
                 res.setEncoding('utf8');
@@ -44,37 +45,80 @@ jobs:
             });
           }
 
-          (async () => {
-            try {
-              const { status, body } = await get(URL);
-              console.log(`HTTP ${status}, body length: ${body.length}`);
+          // ── 讀取現有 count.json（作為失敗時的備用值）────────────
+          let existing = { signatures: 0, visitors: 0 };
+          try {
+            existing = JSON.parse(fs.readFileSync('data/count.json', 'utf8'));
+          } catch (_) {}
 
-              // 頁面以 \"endorseCount\":數字 格式嵌入計數
+          (async () => {
+            // ── ① 抓附議數（join.gov.tw）─────────────────────────
+            let signatures = existing.signatures || existing.count || 0;
+            try {
+              const JOIN_URL = 'https://join.gov.tw/idea/detail/ba071237-01f4-40c4-a322-b1c0b16111dd';
+              const { status, body } = await get(JOIN_URL, {
+                headers: {
+                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+                  'Accept': 'text/html,application/xhtml+xml',
+                  'Accept-Language': 'zh-TW,zh;q=0.9',
+                },
+              });
+              console.log(`join.gov.tw HTTP ${status}, length: ${body.length}`);
               let match = body.match(/\\"endorseCount\\":\s*(\d+)/);
               if (!match) match = body.match(/"endorseCount"\s*:\s*(\d+)/);
-
-              let signatures;
               if (match) {
                 signatures = parseInt(match[1], 10);
-                console.log(`Found signatures: ${signatures}`);
+                console.log(`signatures: ${signatures}`);
               } else {
-                // 無法解析時保留現有值
-                const existing = JSON.parse(fs.readFileSync('data/count.json', 'utf8'));
-                signatures = existing.signatures || existing.count || 0;
-                console.warn('WARNING: endorseCount not found, keeping existing value:', signatures);
+                console.warn('WARNING: endorseCount not found, keeping existing:', signatures);
               }
-
-              const output = {
-                signatures,
-                updated_at: new Date().toISOString(),
-              };
-
-              fs.writeFileSync('data/count.json', JSON.stringify(output, null, 2) + '\n', 'utf8');
-              console.log('Wrote data/count.json:', JSON.stringify(output));
             } catch (err) {
-              console.error('ERROR:', err.message);
-              process.exit(1);
+              console.warn('WARNING: join.gov.tw fetch failed:', err.message);
             }
+
+            // ── ② 抓瀏覽人次（GoatCounter API）──────────────────
+            let visitors = existing.visitors || 0;
+            const token = process.env.GOATCOUNTER_TOKEN;
+            if (token) {
+              try {
+                const GC_URL = 'https://pcit-tw.goatcounter.com/api/v0/stats/total';
+                const { status, body } = await get(GC_URL, {
+                  headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                  },
+                });
+                console.log(`GoatCounter HTTP ${status}`);
+                if (status === 200) {
+                  const data = JSON.parse(body);
+                  // API 回傳 { "total": N } 或 { "total_hits": N }
+                  const raw = data.total ?? data.total_hits ?? data.count ?? null;
+                  if (raw !== null) {
+                    visitors = typeof raw === 'string'
+                      ? parseInt(raw.replace(/,/g, ''), 10)
+                      : parseInt(raw, 10);
+                    console.log(`visitors: ${visitors}`);
+                  } else {
+                    console.warn('WARNING: unexpected GoatCounter response shape:', JSON.stringify(data).slice(0, 200));
+                  }
+                } else {
+                  console.warn(`WARNING: GoatCounter returned ${status}:`, body.slice(0, 200));
+                }
+              } catch (err) {
+                console.warn('WARNING: GoatCounter fetch failed:', err.message);
+              }
+            } else {
+              console.warn('WARNING: GOATCOUNTER_TOKEN not set, skipping visitors');
+            }
+
+            // ── ③ 寫入 data/count.json ────────────────────────────
+            const output = {
+              signatures,
+              visitors,
+              updated_at: new Date().toISOString(),
+            };
+            fs.writeFileSync('data/count.json', JSON.stringify(output, null, 2) + '\n', 'utf8');
+            console.log('Wrote data/count.json:', JSON.stringify(output));
           })();
           JSEOF
 
@@ -86,6 +130,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No change, skipping commit."
           else
-            git commit -m "chore: update petition count [skip ci]"
+            git commit -m "chore: update petition count and visitors [skip ci]"
             git push
           fi

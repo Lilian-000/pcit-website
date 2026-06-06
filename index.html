@@ -1917,8 +1917,8 @@
   // ██  全站設定（只需在這裡改數字）
   // ════════════════════════════════════════════════
   var PCIT_CONFIG = {
-    // 訪客人次備用值：GoatCounter 抓取失敗時顯示此數字
-    // → 請定期到 https://pcit-tw.goatcounter.com 查看並更新
+    // 訪客人次備用值：count.json 無 visitors 欄位時顯示
+    // → GitHub Actions 每天自動更新；如手動需要，也可直接改這裡
     manualVisitorCount: 1006,
 
     // 附議數備用值：data/count.json 失敗時顯示
@@ -1969,18 +1969,22 @@
     }
   }
 
-  // ── 附議數抓取（兩層降級）────────────────────────
-  // 優先順序：① data/count.json（GitHub Actions 每天更新）
-  //           ② PCIT_CONFIG.fallbackSignatures（靜態備用）
+  // ── 附議數 + 瀏覽人次抓取（兩層降級）───────────────
+  // 優先順序：① data/count.json（GitHub Actions 每天 08:00 台灣時間更新）
+  //           ② PCIT_CONFIG 靜態備用值
   function fetchCount() {
-    // ① 抓靜態 JSON（GitHub Actions 每天 08:00 台灣時間更新）
     fetch('data/count.json?_=' + Date.now())
       .then(function(r) { return r.json(); })
       .then(function(data) {
+        // 附議數
         applyCount(data.signatures || data.count || PCIT_CONFIG.fallbackSignatures);
+        // 瀏覽人次（visitors 欄位由 GitHub Actions 從 GoatCounter 寫入）
+        if (data.visitors) {
+          var el = document.getElementById('visitorCount');
+          if (el) animateNumber(el, data.visitors, 1500);
+        }
       })
       .catch(function() {
-        // ② 最終備用：靜態數字，不顯示錯誤
         applyCount(PCIT_CONFIG.fallbackSignatures);
       });
   }
@@ -1996,26 +2000,17 @@
     });
   })();
 
-  // ── 訪客人次（GoatCounter → 備用值）────────────
+  // ── 訪客人次（count.json visitors → 備用值）────────
   // 累積瀏覽人次：id="visitorCount"
-  // GoatCounter 提供公開 API，若失敗則顯示 PCIT_CONFIG.manualVisitorCount
-  // → 要手動更新備用值：修改上方 PCIT_CONFIG.manualVisitorCount
+  // visitors 欄位由 GitHub Actions 每天從 GoatCounter API 寫入 data/count.json
+  // → fetchCount() 已負責更新，loadVisitorCount() 僅處理 count.json 抓取失敗的備用
   function loadVisitorCount() {
     var el = document.getElementById('visitorCount');
     if (!el) return;
-    fetch('https://pcit-tw.goatcounter.com/counter/TOTAL.json')
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data && data.count) {
-          var num = parseInt(data.count.replace(/,/g, ''), 10);
-          if (num > 0) { animateNumber(el, num, 1500); return; }
-        }
-        el.textContent = PCIT_CONFIG.manualVisitorCount.toLocaleString();
-      })
-      .catch(function() {
-        // GoatCounter 失敗：靜默顯示備用值
-        el.textContent = PCIT_CONFIG.manualVisitorCount.toLocaleString();
-      });
+    // fetchCount() 尚未更新此元素時（例如 count.json 無 visitors 欄位），顯示備用值
+    if (!el.textContent || el.textContent === '—') {
+      el.textContent = PCIT_CONFIG.manualVisitorCount.toLocaleString();
+    }
   }
 
   // ── 舊版相容 stub（保留被呼叫的函式名稱）───────
