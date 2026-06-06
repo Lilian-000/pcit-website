@@ -1976,16 +1976,21 @@
     fetch('data/count.json?_=' + Date.now())
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        // 附議數
+        // ① 附議數
         applyCount(data.signatures || data.count || PCIT_CONFIG.fallbackSignatures);
-        // 瀏覽人次（visitors 欄位由 GitHub Actions 從 GoatCounter 寫入）
-        if (data.visitors) {
-          var el = document.getElementById('visitorCount');
-          if (el) animateNumber(el, data.visitors, 1500);
+
+        // ② 瀏覽人次（visitors > 0 才更新；0 或缺欄位時用備用值）
+        var visEl = document.getElementById('visitorCount');
+        if (visEl) {
+          var v = (data.visitors > 0) ? data.visitors : PCIT_CONFIG.manualVisitorCount;
+          animateNumber(visEl, v, 1500);
         }
       })
       .catch(function() {
+        // count.json 完全失敗：兩個值都用靜態備用
         applyCount(PCIT_CONFIG.fallbackSignatures);
+        var visEl = document.getElementById('visitorCount');
+        if (visEl) visEl.textContent = PCIT_CONFIG.manualVisitorCount.toLocaleString();
       });
   }
 
@@ -2000,29 +2005,16 @@
     });
   })();
 
-  // ── 訪客人次（count.json visitors → 備用值）────────
-  // 累積瀏覽人次：id="visitorCount"
-  // visitors 欄位由 GitHub Actions 每天從 GoatCounter API 寫入 data/count.json
-  // → fetchCount() 已負責更新，loadVisitorCount() 僅處理 count.json 抓取失敗的備用
-  function loadVisitorCount() {
-    var el = document.getElementById('visitorCount');
-    if (!el) return;
-    // fetchCount() 尚未更新此元素時（例如 count.json 無 visitors 欄位），顯示備用值
-    if (!el.textContent || el.textContent === '—') {
-      el.textContent = PCIT_CONFIG.manualVisitorCount.toLocaleString();
-    }
-  }
-
   // ── 舊版相容 stub（保留被呼叫的函式名稱）───────
   function updateCounter(count) {
     var modalEl = document.getElementById('modalCountNum');
     if (modalEl) modalEl.textContent = count.toLocaleString();
   }
   function animateCount(el, target) { animateNumber(el, target, 1200); }
+  function loadVisitorCount() {} // 已整合至 fetchCount()，保留空函式避免舊呼叫報錯
 
   // ── 頁面載入 ────────────────────────────────────
   fetchCount();
-  loadVisitorCount();
 
   function onSignClick() {
     // 點連署連結後延遲更新計數（讓用戶填完表單回來時看到）

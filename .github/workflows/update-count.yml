@@ -77,7 +77,8 @@ jobs:
             }
 
             // ── ② 抓瀏覽人次（GoatCounter API）──────────────────
-            let visitors = existing.visitors || 0;
+            // 失敗時保留既有值（不蓋掉），既有值不存在才退回 0
+            let visitors = (existing.visitors > 0) ? existing.visitors : 0;
             const token = process.env.GOATCOUNTER_TOKEN;
             if (token) {
               try {
@@ -88,27 +89,33 @@ jobs:
                     'Content-Type': 'application/json',
                   },
                 });
-                console.log(`GoatCounter HTTP ${status}`);
+                console.log(`GoatCounter HTTP ${status}, body: ${body.slice(0, 300)}`);
                 if (status === 200) {
                   const data = JSON.parse(body);
-                  // API 回傳 { "total": N } 或 { "total_hits": N }
-                  const raw = data.total ?? data.total_hits ?? data.count ?? null;
+                  // 嘗試各種可能的欄位名稱；完整 log 方便偵錯
+                  console.log('GoatCounter response keys:', Object.keys(data).join(', '));
+                  const raw = data.total ?? data.total_hits ?? data.count ?? data.hits ?? null;
                   if (raw !== null) {
-                    visitors = typeof raw === 'string'
+                    const parsed = typeof raw === 'string'
                       ? parseInt(raw.replace(/,/g, ''), 10)
                       : parseInt(raw, 10);
-                    console.log(`visitors: ${visitors}`);
+                    if (parsed > 0) {
+                      visitors = parsed;
+                      console.log(`visitors: ${visitors}`);
+                    } else {
+                      console.warn('WARNING: GoatCounter parsed to 0 or NaN, keeping existing:', visitors);
+                    }
                   } else {
-                    console.warn('WARNING: unexpected GoatCounter response shape:', JSON.stringify(data).slice(0, 200));
+                    console.warn('WARNING: no known field found. Full response:', JSON.stringify(data).slice(0, 500));
                   }
                 } else {
-                  console.warn(`WARNING: GoatCounter returned ${status}:`, body.slice(0, 200));
+                  console.warn(`WARNING: GoatCounter returned ${status}, keeping existing visitors: ${visitors}`);
                 }
               } catch (err) {
-                console.warn('WARNING: GoatCounter fetch failed:', err.message);
+                console.warn('WARNING: GoatCounter fetch failed:', err.message, '— keeping existing visitors:', visitors);
               }
             } else {
-              console.warn('WARNING: GOATCOUNTER_TOKEN not set, skipping visitors');
+              console.warn('WARNING: GOATCOUNTER_TOKEN not set — keeping existing visitors:', visitors);
             }
 
             // ── ③ 寫入 data/count.json ────────────────────────────
