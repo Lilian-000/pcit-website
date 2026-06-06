@@ -1969,25 +1969,27 @@
     }
   }
 
-  // ── 附議數 + 瀏覽人次抓取（兩層降級）───────────────
-  // 優先順序：① data/count.json（GitHub Actions 每天 08:00 台灣時間更新）
-  //           ② PCIT_CONFIG 靜態備用值
+  // ── 附議數 + 瀏覽人次抓取 ──────────────────────────
+  // 顯示值 = Max(count.json 爬取值, PCIT_CONFIG 手動設定值)
+  // → 自動爬取只會往上更新，不會覆蓋手動設定的數字
+  // → 要手動鎖定下限：修改 PCIT_CONFIG.fallbackSignatures / manualVisitorCount
   function fetchCount() {
     fetch('data/count.json?_=' + Date.now())
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        // ① 附議數
-        applyCount(data.signatures || data.count || PCIT_CONFIG.fallbackSignatures);
+        // 附議數：取爬取值與手動設定值的較大者
+        var scraped = data.signatures || data.count || 0;
+        applyCount(Math.max(scraped, PCIT_CONFIG.fallbackSignatures));
 
-        // ② 瀏覽人次（visitors > 0 才更新；0 或缺欄位時用備用值）
+        // 瀏覽人次：同樣取較大者
         var visEl = document.getElementById('visitorCount');
         if (visEl) {
-          var v = (data.visitors > 0) ? data.visitors : PCIT_CONFIG.manualVisitorCount;
-          animateNumber(visEl, v, 1500);
+          var vis = Math.max(data.visitors || 0, PCIT_CONFIG.manualVisitorCount);
+          animateNumber(visEl, vis, 1500);
         }
       })
       .catch(function() {
-        // count.json 完全失敗：兩個值都用靜態備用
+        // count.json 完全失敗：直接用手動設定值
         applyCount(PCIT_CONFIG.fallbackSignatures);
         var visEl = document.getElementById('visitorCount');
         if (visEl) visEl.textContent = PCIT_CONFIG.manualVisitorCount.toLocaleString();
