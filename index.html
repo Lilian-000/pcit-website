@@ -1154,32 +1154,26 @@
     <div style="
       border: 2px solid var(--gold);
       background: rgba(184,134,11,0.08);
-      padding: 36px 32px; margin-bottom: 40px;">
+      padding: 36px 32px; margin-bottom: 40px;
+      position:relative; z-index:5; text-align:center;">
       <div style="font-size:12px; letter-spacing:3px; color:var(--gold-light); margin-bottom:10px;">我們不只倡議，直接做給你看</div>
       <h3 style="font-family:'Noto Serif TC',serif; font-size:24px; font-weight:900; color:var(--paper); margin-bottom:12px; line-height:1.5;">案件進度查詢，本該像查包裹一樣簡單</h3>
-      <p style="font-size:15px; color:rgba(247,244,239,0.8); line-height:2; margin-bottom:20px; max-width:560px;">
+      <p style="font-size:15px; color:rgba(247,244,239,0.8); line-height:2; margin:0 auto 20px; max-width:560px;">
         警示帳戶當事人和報案被害人，現在只能打電話到偵查隊、地檢署一次次詢問進度。我們用兩天做出了示範網站——展示如果政府願意做，民眾應該看到的樣子。介面不難做，身分驗證機制政府也早已建好。缺的不是技術，是一個決定。
       </p>
-      <a href="/case-tracker-demo" style="
+      <a href="/case-tracker-demo.html" target="_blank" style="
         display:inline-block; background:var(--gold); color:var(--ink);
         padding:14px 36px; font-size:15px; font-weight:700; letter-spacing:2px;
-        text-decoration:none;">體驗示範網站 →</a>
-      <span style="display:inline-block; margin-left:16px; font-size:12.5px; color:rgba(247,244,239,0.5);">時間軸取自發起人真實案件</span>
+        text-decoration:none; position:relative; z-index:10;">體驗示範網站 →</a>
+      <span style="display:block; margin-top:12px; font-size:12.5px; color:rgba(247,244,239,0.5);">時間軸取自發起人真實案件</span>
     </div>
 
     <div class="cta-cards">
-      <div class="cta-card card-sign">
-        <div class="cta-card-icon">✍️</div>
-        <h3>連署支持制度改革</h3>
-        <p>向金管會與立法院提交連署，要求建立收款人保護機制。每一個簽名都是改變的力量。</p>
-        <button class="cta-card-btn" onclick="openModal('signModal')">我要連署 →</button>
-      </div>
-
       <div class="cta-card card-share">
         <div class="cta-card-icon">📢</div>
         <h3>分享給可能需要的人</h3>
-        <p>把這個工具分享給家人、朋友，尤其是長輩或正在求職的年輕人。一次分享可能防止一次災難。</p>
-        <button class="cta-card-btn" onclick="openModal('shareModal')">分享這個工具 →</button>
+        <p>把這個網站分享給家人、朋友，尤其是長輩或正在求職的年輕人。一次分享可能防止一次災難。</p>
+        <button class="cta-card-btn" onclick="openModal('shareModal')">分享這個網站 →</button>
       </div>
 
       <div class="cta-card card-ai">
@@ -1999,12 +1993,6 @@
     if (fill) {
       var pct = Math.min((count / GOAL_BIG) * 100, 100);
       setTimeout(function() { fill.style.width = pct + '%'; }, 400);
-    }
-    // 舊版相容元素（modal bar 等）
-    var bar = document.getElementById('progressBar');
-    if (bar) {
-      var pct2 = Math.min((count / GOAL) * 100, 100);
-      setTimeout(function() { bar.style.width = pct2 + '%'; }, 300);
     }
   }
 
