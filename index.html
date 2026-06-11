@@ -1991,30 +1991,40 @@
   }
 
   // ── 附議數 + 瀏覽人次抓取 ──────────────────────────
-  // 顯示值 = Max(count.json 爬取值, PCIT_CONFIG 手動設定值)
-  // → 自動爬取只會往上更新，不會覆蓋手動設定的數字
-  // → 要手動鎖定下限：修改 PCIT_CONFIG.fallbackSignatures / manualVisitorCount
+  // 顯示值 = Max(各來源, PCIT_CONFIG 手動設定值)：只會往上，不會倒退
+  // 附議數來源：data/count.json（GitHub Actions 每天爬 join.gov.tw）
+  // 瀏覽人次來源：GoatCounter 公開 API（即時）＋ count.json（備援）
   function fetchCount() {
     fetch('data/count.json?_=' + Date.now())
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        // 附議數：取爬取值與手動設定值的較大者
         var scraped = data.signatures || data.count || 0;
         applyCount(Math.max(scraped, PCIT_CONFIG.fallbackSignatures));
-
-        // 瀏覽人次：同樣取較大者
-        var visEl = document.getElementById('visitorCount');
-        if (visEl) {
-          var vis = Math.max(data.visitors || 0, PCIT_CONFIG.manualVisitorCount);
-          animateNumber(visEl, vis, 1500);
-        }
+        showVisitors(data.visitors || 0);
       })
       .catch(function() {
-        // count.json 完全失敗：直接用手動設定值
         applyCount(PCIT_CONFIG.fallbackSignatures);
-        var visEl = document.getElementById('visitorCount');
-        if (visEl) visEl.textContent = PCIT_CONFIG.manualVisitorCount.toLocaleString();
+        showVisitors(0);
       });
+  }
+
+  // 瀏覽人次：先用 count.json/備用值顯示，再用 GoatCounter 即時數字覆蓋
+  function showVisitors(fromJson) {
+    var visEl = document.getElementById('visitorCount');
+    if (!visEl) return;
+    var base = Math.max(fromJson, PCIT_CONFIG.manualVisitorCount);
+    animateNumber(visEl, base, 1500);
+
+    // GoatCounter 公開計數 API（免 token，瀏覽器可直接呼叫）
+    fetch('https://pcit-tw.goatcounter.com/counter/TOTAL.json')
+      .then(function(r) { return r.json(); })
+      .then(function(gc) {
+        if (gc && gc.count) {
+          var live = parseInt(String(gc.count).replace(/[^0-9]/g, ''), 10);
+          if (live > base) visEl.textContent = live.toLocaleString();
+        }
+      })
+      .catch(function() { /* 即時抓取失敗就維持 base，不報錯 */ });
   }
 
   // ── 天數倒數（動態計算）─────────────────────────

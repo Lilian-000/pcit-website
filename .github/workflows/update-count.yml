@@ -137,6 +137,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No change, skipping commit."
           else
-            git commit -m "chore: update petition count and visitors [skip ci]"
+            # 不加 [skip ci]：必須讓 Cloudflare Pages 重新部署，網站才會拿到新數字
+            git commit -m "chore: update petition count and visitors"
             git push
           fi
