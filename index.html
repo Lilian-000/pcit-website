@@ -37,978 +37,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1a1a2e;
-    --ink-soft: #3a3a5c;
-    --paper: #f7f4ef;
-    --paper-warm: #ede9e0;
-    --red: #c0392b;
-    --red-soft: #e74c3c;
-    --gold: #b8860b;
-    --gold-light: #d4a017;
-    --teal: #1a6b6b;
-    --teal-light: #2d9b9b;
-    --border: #c8c0b0;
-    --shadow: rgba(26,26,46,0.12);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Noto Sans TC', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 80px 24px 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 40px,
-      rgba(255,255,255,0.02) 40px,
-      rgba(255,255,255,0.02) 41px
-    );
-  }
-  .hero-badge {
-    display: inline-block;
-    border: 1px solid rgba(184,134,11,0.6);
-    color: var(--gold-light);
-    font-size: 11px;
-    letter-spacing: 3px;
-    padding: 6px 16px;
-    margin-bottom: 28px;
-    font-weight: 500;
-    text-transform: uppercase;
-    animation: fadeDown 0.6s ease both;
-  }
-  .hero h1 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: clamp(28px, 7vw, 52px);
-    font-weight: 900;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    animation: fadeDown 0.6s 0.1s ease both;
-  }
-  .hero h1 span { color: var(--gold-light); }
-  .hero-sub {
-    font-size: clamp(14px, 3vw, 18px);
-    color: rgba(247,244,239,0.7);
-    max-width: 560px;
-    margin: 0 auto 40px;
-    line-height: 1.8;
-    animation: fadeDown 0.6s 0.2s ease both;
-  }
-  .hero-cta {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-    animation: fadeDown 0.6s 0.3s ease both;
-  }
-  .btn-primary {
-    background: var(--gold);
-    color: var(--paper);
-    border: none;
-    padding: 14px 28px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 1px;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .btn-outline {
-    background: transparent;
-    color: var(--paper);
-    border: 1px solid rgba(247,244,239,0.4);
-    padding: 14px 28px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 1px;
-  }
-  .btn-outline:hover { border-color: var(--paper); background: rgba(247,244,239,0.08); }
-
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── STATS BAR ── */
-  .stats-bar {
-    background: var(--red);
-    color: white;
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    flex-wrap: wrap;
-  }
-  .stat-item {
-    padding: 20px 32px;
-    text-align: center;
-    border-right: 1px solid rgba(255,255,255,0.2);
-  }
-  .stat-item:last-child { border-right: none; }
-  .stat-num {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 28px;
-    font-weight: 900;
-    display: block;
-  }
-  .stat-label {
-    font-size: 12px;
-    opacity: 0.85;
-    letter-spacing: 1px;
-    margin-top: 2px;
-  }
-
-  /* ── SECTION ── */
-  .section {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 64px 24px;
-  }
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Noto Serif TC', serif;
-    font-size: clamp(22px, 5vw, 32px);
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 16px;
-    line-height: 1.4;
-  }
-  .section-body {
-    font-size: 15px;
-    color: var(--ink-soft);
-    line-height: 2;
-    margin-bottom: 32px;
-  }
-  hr.divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 0;
-  }
-
-  /* ── QUIZ ── */
-  .quiz-wrap {
-    background: white;
-    border: 1px solid var(--border);
-    padding: 40px 32px;
-    margin-top: 8px;
-    box-shadow: 0 4px 24px var(--shadow);
-  }
-  .quiz-title {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--ink);
-  }
-  .quiz-desc {
-    font-size: 13px;
-    color: var(--ink-soft);
-    margin-bottom: 28px;
-    line-height: 1.8;
-  }
-  .scenario-box {
-    background: var(--paper-warm);
-    border-left: 4px solid var(--teal);
-    padding: 20px;
-    margin-bottom: 24px;
-    font-size: 14px;
-    line-height: 2;
-    color: var(--ink);
-  }
-  .scenario-box strong { color: var(--teal); }
-  .choices { display: flex; flex-direction: column; gap: 10px; }
-  .choice-btn {
-    background: white;
-    border: 1.5px solid var(--border);
-    padding: 14px 20px;
-    text-align: left;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
-    color: var(--ink);
-    cursor: pointer;
-    transition: all 0.2s;
-    line-height: 1.6;
-  }
-  .choice-btn:hover { border-color: var(--teal); background: rgba(26,107,107,0.04); }
-  .choice-btn.correct { border-color: var(--teal); background: rgba(26,107,107,0.08); color: var(--teal); }
-  .choice-btn.wrong { border-color: var(--red); background: rgba(192,57,43,0.06); color: var(--red); }
-  .choice-btn:disabled { cursor: default; }
-
-  .result-box {
-    margin-top: 20px;
-    padding: 20px;
-    border-left: 4px solid var(--teal);
-    background: rgba(26,107,107,0.05);
-    font-size: 14px;
-    line-height: 1.9;
-    display: none;
-    color: var(--ink);
-  }
-  .result-box.show { display: block; animation: fadeDown 0.4s ease; }
-  .result-box.wrong-result { border-left-color: var(--red); background: rgba(192,57,43,0.05); }
-  .result-box h4 { font-family: 'Noto Serif TC', serif; margin-bottom: 8px; font-size: 15px; }
-  .result-box .correct-tag { color: var(--teal); font-weight: 600; }
-  .result-box .wrong-tag { color: var(--red); font-weight: 600; }
-
-  .quiz-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 24px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .quiz-progress {
-    font-size: 12px;
-    color: var(--ink-soft);
-    letter-spacing: 1px;
-  }
-  .btn-next {
-    background: var(--ink);
-    color: var(--paper);
-    border: none;
-    padding: 12px 24px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: none;
-    letter-spacing: 1px;
-  }
-  .btn-next.show { display: block; }
-  .btn-next:hover { background: var(--teal); }
-
-  /* score final */
-  .score-final {
-    text-align: center;
-    padding: 20px 0;
-    display: none;
-  }
-  .score-final.show { display: block; animation: fadeDown 0.5s ease; }
-  .score-circle {
-    width: 100px; height: 100px;
-    border-radius: 50%;
-    background: var(--teal);
-    color: white;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-    font-family: 'Noto Serif TC', serif;
-  }
-  .score-circle .num { font-size: 36px; font-weight: 900; line-height: 1; }
-  .score-circle .denom { font-size: 13px; opacity: 0.8; }
-  .score-msg { font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; }
-  .score-sub { font-size: 14px; color: var(--ink-soft); line-height: 1.9; max-width: 400px; margin: 0 auto 24px; }
-
-  /* ── STEPS ── */
-  .steps-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .step-item {
-    display: flex;
-    gap: 24px;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--border);
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: all 0.5s ease;
-  }
-  .step-item.visible { opacity: 1; transform: translateX(0); }
-  .step-item:last-child { border-bottom: none; }
-  .step-num {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 36px;
-    font-weight: 900;
-    color: var(--border);
-    min-width: 50px;
-    line-height: 1;
-    padding-top: 4px;
-  }
-  .step-content h3 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--ink);
-  }
-  .step-content p {
-    font-size: 14px;
-    color: var(--ink-soft);
-    line-height: 2;
-  }
-
-  /* ── ALERT CHECK ── */
-  .check-wrap {
-    background: white;
-    border: 1px solid var(--border);
-    padding: 40px 32px;
-    box-shadow: 0 4px 24px var(--shadow);
-    position: relative;
-    z-index: 1;
-  }
-  .check-input {
-    width: 100%;
-    border: 1.5px solid var(--border);
-    padding: 14px 16px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 15px;
-    color: var(--ink);
-    background: var(--paper);
-    outline: none;
-    transition: border-color 0.2s;
-    margin-bottom: 12px;
-  }
-  .check-input:focus { border-color: var(--teal); }
-  .checkbox-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--ink-soft);
-    line-height: 1.7;
-  }
-  .checkbox-row input[type="checkbox"] {
-    margin-top: 3px;
-    accent-color: var(--teal);
-    width: 16px; height: 16px;
-    flex-shrink: 0;
-  }
-  .btn-check {
-    background: var(--teal);
-    color: white;
-    border: none;
-    width: 100%;
-    padding: 16px;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    margin-top: 16px;
-    letter-spacing: 1px;
-  }
-  .btn-check:hover { background: var(--teal-light); }
-  .risk-result {
-    margin-top: 20px;
-    padding: 20px;
-    display: none;
-    animation: fadeDown 0.4s ease;
-  }
-  .risk-result.show { display: block; }
-  .risk-high { background: rgba(192,57,43,0.07); border-left: 4px solid var(--red); }
-  .risk-medium { background: rgba(184,134,11,0.07); border-left: 4px solid var(--gold); }
-  .risk-low { background: rgba(26,107,107,0.07); border-left: 4px solid var(--teal); }
-  .risk-level {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: var(--ink);
-  }
-  .risk-high .risk-level { color: var(--red); }
-  .risk-medium .risk-level { color: var(--gold); }
-  .risk-low .risk-level { color: var(--teal); }
-  .risk-list {
-    list-style: none;
-    padding: 0;
-  }
-  .risk-list li {
-    font-size: 13px;
-    color: var(--ink-soft);
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    line-height: 1.7;
-  }
-  .risk-list li:last-child { border-bottom: none; }
-  .risk-list li::before { content: '→ '; font-weight: 600; }
-
-  /* ── POLICY ── */
-  .policy-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .policy-card {
-    background: var(--paper-warm);
-    border: 1px solid var(--border);
-    border-top: 4px solid var(--gold);
-    padding: 28px 24px;
-  }
-  .policy-num {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 36px;
-    font-weight: 900;
-    color: var(--paper-warm);
-    margin-bottom: 8px;
-    line-height: 1;
-    -webkit-text-stroke: 1.5px var(--gold);
-  }
-  .policy-card h4 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--ink);
-    line-height: 1.5;
-  }
-  .policy-card p {
-    font-size: 12px;
-    color: var(--ink-soft);
-    line-height: 1.9;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--ink);
-    color: rgba(247,244,239,0.6);
-    text-align: center;
-    padding: 40px 24px;
-    font-size: 12px;
-    line-height: 2;
-  }
-  footer a { color: var(--gold-light); text-decoration: none; }
-  .footer-logo {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--paper);
-    margin-bottom: 12px;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: sticky;
-    top: 0;
-    background: rgba(26,26,46,0.97);
-    backdrop-filter: blur(8px);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-    height: 52px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .nav-logo {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--paper);
-    letter-spacing: 1px;
-  }
-  .nav-links {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-  }
-  .nav-links a {
-    color: rgba(247,244,239,0.65);
-    text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 1px;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold-light); }
-
-  /* ── LIGHT SECTION (steps & policy) ── */
-  .section-light {
-    background: #ffffff;
-  }
-  .section-light .section-title { color: var(--ink); }
-
-  /* ── STEPS light bg ── */
-  .step-tag {
-    display: inline-block;
-    background: var(--teal);
-    color: white;
-    font-size: 11px;
-    padding: 3px 10px;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-  }
-
-  /* ── POLICY light ── */
-  .policy-statement {
-    margin-top: 40px;
-    background: var(--paper-warm);
-    border: 1px solid var(--border);
-    border-left: 5px solid var(--gold);
-    padding: 32px;
-    text-align: center;
-  }
-  .policy-statement-title {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: var(--ink);
-  }
-  .policy-statement p {
-    font-size: 14px;
-    color: var(--ink-soft);
-    line-height: 2;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-  .policy-statement strong { color: var(--teal); }
-
-  /* bg section alt */
-  .section-alt { background: var(--paper-warm); }
-  .section-alt .section { padding: 64px 24px; }
-
-  @media (max-width: 600px) {
-    .stat-item { padding: 16px 20px; }
-    .quiz-wrap, .check-wrap { padding: 28px 20px; }
-    .nav-links { display: none; }
-    .step-num { font-size: 28px; min-width: 38px; }
-  }
-  /* ── CTA SECTION ── */
-  .cta-section {
-    background: var(--ink);
-    padding: 80px 24px;
-    text-align: center;
-  }
-  .cta-inner { max-width: 860px; margin: 0 auto; }
-  .cta-label {
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--gold-light);
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 16px;
-  }
-  .cta-title {
-    font-family: 'Noto Serif TC', serif;
-    font-size: clamp(24px, 5vw, 36px);
-    font-weight: 900;
-    color: var(--paper);
-    margin-bottom: 16px;
-    line-height: 1.3;
-  }
-  .cta-sub {
-    font-size: 15px;
-    color: rgba(247,244,239,0.65);
-    max-width: 540px;
-    margin: 0 auto 52px;
-    line-height: 1.9;
-  }
-  .cta-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
-    margin-bottom: 48px;
-    text-align: left;
-  }
-  .cta-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
-    padding: 28px 24px;
-    transition: all 0.2s;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .cta-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-  }
-  .cta-card.card-sign::before { background: var(--gold); }
-  .cta-card.card-share::before { background: var(--teal-light); }
-  .cta-card.card-ai::before { background: #7c5cbf; }
-  .cta-card.card-partner::before { background: var(--red-soft); }
-  .cta-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-3px); border-color: rgba(255,255,255,0.22); }
-  .cta-card-icon { font-size: 28px; margin-bottom: 14px; }
-  .cta-card h3 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--paper);
-    margin-bottom: 8px;
-    line-height: 1.4;
-  }
-  .cta-card p {
-    font-size: 13px;
-    color: rgba(247,244,239,0.6);
-    line-height: 1.8;
-    margin-bottom: 16px;
-  }
-  .cta-card-btn {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-    font-family: 'Noto Sans TC', sans-serif;
-    transition: all 0.2s;
-  }
-  .card-sign .cta-card-btn { background: var(--gold); color: var(--ink); }
-  .card-share .cta-card-btn { background: var(--teal); color: white; }
-  .card-ai .cta-card-btn { background: #7c5cbf; color: white; }
-  .card-partner .cta-card-btn { background: var(--red); color: white; }
-  .cta-card-btn:hover { opacity: 0.85; transform: translateY(-1px); }
-
-  .cta-roadmap {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 40px;
-    margin-top: 8px;
-  }
-  .cta-roadmap-title {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: rgba(247,244,239,0.5);
-    letter-spacing: 2px;
-    margin-bottom: 24px;
-    text-transform: uppercase;
-    font-size: 11px;
-  }
-  .roadmap-track {
-    display: flex;
-    gap: 0;
-    align-items: stretch;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .roadmap-step {
-    flex: 1;
-    min-width: 160px;
-    max-width: 220px;
-    padding: 0 16px;
-    border-right: 1px solid rgba(255,255,255,0.1);
-    text-align: center;
-  }
-  .roadmap-step:last-child { border-right: none; }
-  .roadmap-phase {
-    font-size: 10px;
-    letter-spacing: 2px;
-    color: var(--gold-light);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-  }
-  .roadmap-step h4 {
-    font-family: 'Noto Serif TC', serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--paper);
-    margin-bottom: 6px;
-    line-height: 1.4;
-  }
-  .roadmap-step p {
-    font-size: 11px;
-    color: rgba(247,244,239,0.45);
-    line-height: 1.7;
-  }
-  .roadmap-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-  }
-  .dot-done { background: var(--gold); }
-  .dot-now { background: var(--teal-light); box-shadow: 0 0 0 3px rgba(45,155,155,0.3); }
-  .dot-future { background: rgba(255,255,255,0.2); }
-
-  @media (max-width: 600px) {
-    .cta-cards { grid-template-columns: 1fr; }
-    .roadmap-track { flex-direction: column; align-items: center; gap: 16px; }
-    .roadmap-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; }
-  }
-
-  /* ── 附議進度橫幅 ── */
-  .petition-hero-wrap {
-    background: linear-gradient(135deg, #1a0a0a 0%, #2d0d0d 50%, #1a1a2e 100%);
-    border-top: 3px solid var(--red);
-    border-bottom: 3px solid var(--red);
-    padding: 48px 24px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .petition-hero-wrap::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      -45deg, transparent, transparent 30px,
-      rgba(192,57,43,0.04) 30px, rgba(192,57,43,0.04) 31px
-    );
-    pointer-events: none;
-  }
-  .petition-hero-inner {
-    max-width: 680px;
-    margin: 0 auto;
-    position: relative;
-  }
-  .petition-eyebrow {
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--red-soft);
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-  .petition-count-big {
-    font-family: 'Noto Serif TC', serif;
-    font-size: clamp(72px, 18vw, 120px);
-    font-weight: 900;
-    color: var(--paper);
-    line-height: 1;
-    letter-spacing: -2px;
-    text-shadow: 0 0 60px rgba(192,57,43,0.4);
-  }
-  .petition-count-unit {
-    font-family: 'Noto Serif TC', serif;
-    font-size: clamp(22px, 5vw, 32px);
-    color: rgba(247,244,239,0.7);
-    margin-bottom: 28px;
-    letter-spacing: 4px;
-  }
-  .petition-progress-wrap {
-    margin: 0 auto 12px;
-    max-width: 500px;
-  }
-  .petition-track {
-    background: rgba(255,255,255,0.1);
-    height: 10px;
-    border-radius: 5px;
-    overflow: visible;
-    position: relative;
-    margin-bottom: 10px;
-  }
-  .petition-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--red), var(--red-soft));
-    border-radius: 5px;
-    width: 0%;
-    transition: width 1.2s ease;
-    position: relative;
-  }
-  .petition-fill::after {
-    content: '';
-    position: absolute;
-    right: -4px; top: 50%;
-    transform: translateY(-50%);
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: white;
-    box-shadow: 0 0 8px rgba(192,57,43,0.8);
-  }
-  .petition-milestone-marker {
-    position: absolute;
-    top: -4px;
-    width: 2px;
-    height: 18px;
-    background: rgba(255,255,255,0.4);
-    transform: translateX(-50%);
-  }
-  .petition-milestones {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    color: rgba(247,244,239,0.5);
-    letter-spacing: 0.5px;
-    margin-top: 8px;
-  }
-  .petition-milestones span b { color: rgba(247,244,239,0.8); }
-  .petition-days-wrap {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 6px;
-    margin-bottom: 28px;
-  }
-  .petition-days-num {
-    font-family: 'Noto Serif TC', serif;
-    font-size: clamp(36px, 8vw, 52px);
-    font-weight: 900;
-    color: var(--gold-light);
-    line-height: 1;
-  }
-  .petition-days-label {
-    font-size: 14px;
-    color: rgba(247,244,239,0.6);
-    letter-spacing: 2px;
-  }
-  .petition-cta-btn {
-    display: inline-block;
-    background: var(--red);
-    color: white;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    padding: 18px 56px;
-    text-decoration: none;
-    transition: all 0.2s;
-    min-height: 56px;
-    line-height: 1.2;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(192,57,43,0.5);
-    margin-bottom: 12px;
-  }
-  .petition-cta-btn:hover {
-    background: var(--red-soft);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(192,57,43,0.6);
-  }
-  .petition-note {
-    font-size: 12px;
-    color: rgba(247,244,239,0.4);
-    letter-spacing: 0.5px;
-  }
-  .petition-goal-pills {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 20px 0 28px;
-  }
-  .goal-pill {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 10px 20px;
-    font-size: 13px;
-    color: rgba(247,244,239,0.75);
-    line-height: 1.6;
-    text-align: left;
-  }
-  .goal-pill strong { color: var(--gold-light); display: block; font-family: 'Noto Serif TC', serif; font-size: 15px; }
-
-  /* ── 全站 RWD（375–390px） ── */
-  @media (max-width: 480px) {
-    /* 基礎字體：最小 16px */
-    body { font-size: 16px; }
-    .section-body { font-size: 16px; }
-    .step-content p { font-size: 15px; }
-    .policy-card p { font-size: 13px; }
-    .quiz-desc { font-size: 15px; }
-
-    /* Hero */
-    .hero { padding: 48px 16px 40px; }
-    .hero h1 { font-size: clamp(26px, 8vw, 36px); }
-    .hero-sub { font-size: 15px; margin-bottom: 28px; }
-    .hero-cta { gap: 8px; }
-    .hero-cta a, .hero-cta button {
-      width: 100%; max-width: 280px;
-      min-height: 48px;
-      font-size: 15px !important;
-      padding: 14px 20px !important;
-    }
-
-    /* 附議進度 */
-    .petition-hero-wrap { padding: 36px 16px; }
-    .petition-cta-btn { width: 100%; max-width: 320px; font-size: 17px; padding: 16px 24px; }
-    .goal-pill { width: 100%; }
-
-    /* Stats bar */
-    .stats-bar { flex-direction: column; }
-    .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding: 16px 20px; }
-    .stat-item:last-child { border-bottom: none; }
-    .stat-num { font-size: 24px; }
-    .stat-label { font-size: 13px; }
-
-    /* Sections */
-    .section { padding: 40px 16px; }
-    .section-title { font-size: clamp(20px, 6vw, 28px); }
-
-    /* Quiz */
-    .quiz-wrap { padding: 24px 16px; }
-    .choice-btn { padding: 14px 16px; font-size: 15px; min-height: 52px; }
-    .btn-next { min-height: 48px; font-size: 15px; }
-    .btn-primary { min-height: 48px; font-size: 15px; padding: 14px 24px; }
-
-    /* Steps */
-    .step-item { gap: 14px; }
-    .step-num { font-size: 26px; min-width: 34px; }
-    .step-content h3 { font-size: 16px; }
-
-    /* Risk check */
-    .check-wrap { padding: 24px 16px; }
-    .check-input { font-size: 16px; min-height: 48px; }
-    .btn-check { min-height: 52px; font-size: 16px; }
-    .checkbox-row { font-size: 15px; }
-    .checkbox-row input[type="checkbox"] { width: 20px; height: 20px; }
-
-    /* Policy grid → 1 column */
-    .policy-grid { grid-template-columns: 1fr; }
-    .policy-card { padding: 20px 16px; }
-    /* 國際比較 3 欄 → 1 欄 */
-    div[style*="grid-template-columns:1fr 1fr 1fr"] {
-      display: flex !important;
-      flex-direction: column !important;
-    }
-
-    /* CTA section */
-    .cta-section { padding: 48px 16px; }
-    .cta-title { font-size: clamp(20px, 6vw, 28px); }
-    .cta-sub { font-size: 15px; }
-    .cta-card { padding: 20px 16px; }
-    .cta-card-btn { min-height: 44px; font-size: 13px; padding: 10px 16px; }
-
-    /* 連署計數器 flex → vertical */
-    div[style*="display: flex"][style*="gap: 40px"] {
-      flex-direction: column !important;
-      gap: 20px !important;
-    }
-    div[style*="border-left:1px solid"][style*="padding-left:40px"] {
-      border-left: none !important;
-      padding-left: 0 !important;
-      border-top: 1px solid rgba(255,255,255,0.15) !important;
-      padding-top: 20px !important;
-    }
-
-    /* Overflow 防護 */
-    img, video, iframe { max-width: 100%; height: auto; }
-    table { display: block; overflow-x: auto; }
-    pre, code { white-space: pre-wrap; word-break: break-all; }
-
-    /* Nav */
-    nav { padding: 0 16px; }
-
-    /* Modal */
-    .modal-box { padding: 28px 20px; }
-
-    /* Footer */
-    footer { padding: 32px 16px; font-size: 13px; }
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -1016,10 +45,11 @@
   <span class="nav-logo">守護帳戶</span>
   <ul class="nav-links">
     <li><a href="#quiz">自我測試</a></li>
-    <li><a href="#steps">遭遇應對</a></li>
     <li><a href="#check">風險評估</a></li>
-    <li><a href="#policy">制度改革白皮書</a></li>
-    <li><a href="#cta">加入行動</a></li>
+    <li><a href="guide.html">應對指南</a></li>
+    <li><a href="policy.html">制度改革</a></li>
+    <li><a href="faq.html">常見問題</a></li>
+    <li><a href="#cta">立即附議</a></li>
   </ul>
 </nav>
 
@@ -1031,8 +61,8 @@
   <div class="hero-cta">
     <a href="https://reurl.cc/R2moVe" target="_blank" style="background:var(--red);color:white;border:none;padding:16px 36px;font-family:'Noto Sans TC',sans-serif;font-size:16px;font-weight:600;letter-spacing:1px;text-decoration:none;display:inline-block;transition:all 0.2s;" onmouseover="this.style.background='#e74c3c'" onmouseout="this.style.background='var(--red)'">立即附議 →</a>
     <button class="btn-outline" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">了解議題</button>
-    <button class="btn-outline" onclick="document.getElementById('steps').scrollIntoView({behavior:'smooth'})">應對指南</button>
-    <button class="btn-outline" onclick="document.getElementById('policy').scrollIntoView({behavior:'smooth'})">政策白皮書</button>
+    <button class="btn-outline" onclick="location.href='guide.html'">應對指南</button>
+    <button class="btn-outline" onclick="location.href='policy.html'">政策白皮書</button>
   </div>
 
   <!-- 訪客計數器 -->
@@ -1143,86 +173,6 @@
   </div>
 </div>
 
-<!-- CTA -->
-<section id="cta" class="cta-section">
-  <div class="cta-inner">
-    <div class="cta-label">行動進行中</div>
-    <h2 class="cta-title">附議達標只是開始，<br>我們已經在做下一步</h2>
-    <p class="cta-sub">在政府回應之前，我們不等待。以下是正在進行的行動——你可以加入任何一項。</p>
-
-    <!-- Demo 展示區 -->
-    <div style="
-      border: 2px solid var(--gold);
-      background: rgba(184,134,11,0.08);
-      padding: 36px 32px; margin-bottom: 40px;
-      position:relative; z-index:5; text-align:center;">
-      <div style="font-size:12px; letter-spacing:3px; color:var(--gold-light); margin-bottom:10px;">我們不只倡議，直接做給你看</div>
-      <h3 style="font-family:'Noto Serif TC',serif; font-size:24px; font-weight:900; color:var(--paper); margin-bottom:12px; line-height:1.5;">案件進度查詢，本該像查包裹一樣簡單</h3>
-      <p style="font-size:15px; color:rgba(247,244,239,0.8); line-height:2; margin:0 auto 20px; max-width:560px;">
-        警示帳戶當事人和報案被害人，現在只能打電話到偵查隊、地檢署一次次詢問進度。我們用兩天做出了示範網站——展示如果政府願意做，民眾應該看到的樣子。介面不難做，身分驗證機制政府也早已建好。缺的不是技術，是一個決定。
-      </p>
-      <a href="/case-tracker-demo.html" target="_blank" style="
-        display:inline-block; background:var(--gold); color:var(--ink);
-        padding:14px 36px; font-size:15px; font-weight:700; letter-spacing:2px;
-        text-decoration:none; position:relative; z-index:10;">體驗示範網站 →</a>
-      <span style="display:block; margin-top:12px; font-size:12.5px; color:rgba(247,244,239,0.5);">時間軸取自發起人真實案件</span>
-    </div>
-
-    <div class="cta-cards">
-      <div class="cta-card card-share">
-        <div class="cta-card-icon">📢</div>
-        <h3>分享給可能需要的人</h3>
-        <p>把這個網站分享給家人、朋友，尤其是長輩或正在求職的年輕人。一次分享可能防止一次災難。</p>
-        <button class="cta-card-btn" onclick="openModal('shareModal')">分享這個網站 →</button>
-      </div>
-
-      <div class="cta-card card-ai">
-        <div class="cta-card-icon">🤖</div>
-        <h3>搶先體驗 AI 助理</h3>
-        <p>我們正在開發 Line Bot 與 AI 問答工具，讓民眾即時詢問「這筆匯款安全嗎？」等問題。</p>
-        <button class="cta-card-btn" onclick="openModal('aiModal')">登記早鳥名單 →</button>
-      </div>
-
-      <div class="cta-card card-partner">
-        <div class="cta-card-icon">🏦</div>
-        <h3>銀行與支付平台合作</h3>
-        <p>最終目標是與各大銀行、電子支付平台合作，在匯款流程中內建收款人保護機制。</p>
-        <button class="cta-card-btn" onclick="openModal('partnerModal')">洽談合作 →</button>
-      </div>
-    </div>
-
-    <div class="cta-roadmap">
-      <div class="cta-roadmap-title">行動藍圖</div>
-      <div class="roadmap-track">
-        <div class="roadmap-step">
-          <div class="roadmap-dot dot-now"></div>
-          <div class="roadmap-phase">進行中 · 2026 Q3</div>
-          <h4>立法倡議 · 5,000 人附議</h4>
-          <p>完成公共政策附議，達到 5,000 人門檻，促使金管會正式回應並啟動研究</p>
-        </div>
-        <div class="roadmap-step">
-          <div class="roadmap-dot dot-future"></div>
-          <div class="roadmap-phase">2026 Q3–Q4</div>
-          <h4>金管會研究報告</h4>
-          <p>金管會發布可行性報告，開放金融沙盒申請，至少一家銀行啟動試點</p>
-        </div>
-        <div class="roadmap-step">
-          <div class="roadmap-dot dot-future"></div>
-          <div class="roadmap-phase">2026 Q4</div>
-          <h4>試點上線 · 修法推動</h4>
-          <p>試點銀行推出收款人同意機制，保護第一批用戶；推動修法納入《電子支付機構管理條例》</p>
-        </div>
-        <div class="roadmap-step">
-          <div class="roadmap-dot dot-future"></div>
-          <div class="roadmap-phase">2027 Q1 起</div>
-          <h4>全面推廣 · 制度落地</h4>
-          <p>全面推廣至所有金融機構，台灣建立完整的收款人保護標準</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- QUIZ -->
 <div id="quiz" style="background: var(--paper-warm);">
 <div class="section">
@@ -1319,169 +269,6 @@
 
 <hr class="divider">
 
-<!-- STEPS -->
-<div id="steps" style="background: #ffffff;">
-<div class="section">
-  <div class="section-label">緊急應對指南</div>
-  <div class="section-title">帳戶被警示時，<br>你應該這樣做</div>
-  <p class="section-body">以下流程來自真實當事人的親身經歷，比一般網路資訊更貼近實況。帳戶遭警示的每一天都是損失，請冷靜、依序行動。</p>
-
-  <div class="steps-grid">
-    <div class="step-item">
-      <div class="step-num">01</div>
-      <div class="step-content">
-        <div class="step-tag">立即（0–2 小時）</div>
-        <h3>聯繫銀行，釐清警示原因</h3>
-        <p>帳戶遭警示，可能是銀行主動來電通知，也可能是你發現無法提款或轉帳後自行察覺。無論哪種情況，第一步都是致電開戶銀行客服，確認並記錄下列關鍵資訊：</p>
-        <p style="margin-top:10px;">
-        • 涉及的可疑交易金額與入帳時間<br>
-        • <strong>匯款方的銀行帳號</strong>——後續你可請該銀行協助代為轉達，但匯款人是否主動聯繫你，仍取決於對方意願<br>
-        • <strong>165 案號</strong>——165 反詐騙平台的通報編號，是警方查詢案件的重要依據<br>
-        • 客服人員的員工編號與通話時間，作為日後追蹤的紀錄
-        </p>
-      </div>
-    </div>
-
-    <div class="step-item">
-      <div class="step-num">02</div>
-      <div class="step-content">
-        <div class="step-tag">同一天</div>
-        <h3>立即處理財務，避免連鎖損害</h3>
-        <p>帳戶遭警示後，提款、轉帳、網路銀行等所有交易功能將全面停止。若不即時處理，後續可能引發房貸違約、薪資入帳失敗等連鎖問題。請當天完成以下事項：</p>
-        <p style="margin-top:10px;">
-        • 通知公司人資，將薪資轉匯至備用帳戶（可暫用親友帳號）<br>
-        • 逐一清查所有自動扣款項目，包括房貸、車貸、保費、水電費，逐項辦理帳號變更或暫停，避免因扣款失敗留下違約紀錄<br>
-        • 備妥一個可正常使用的帳戶，支應日常生活開銷
-        </p>
-      </div>
-    </div>
-
-    <div class="step-item">
-      <div class="step-num">03</div>
-      <div class="step-content">
-        <div class="step-tag">第 1–3 天</div>
-        <h3>前往警察局報案，取得受理證明</h3>
-        <p>前往住家附近的警察局，向承辦員警說明你是「被動收款的無辜第三方」，主動要求報案。</p>
-        <p style="margin-top:10px;">
-        ⚠️ <strong>常見誤解：</strong>警方通常提供的是「<strong>受理案件證明單影本</strong>」，而非坊間常說的「三聯單」。各地警局格式略有不同，但兩者在後續程序中具備同等效力，請勿因格式不同而困惑。
-        </p>
-        <p style="margin-top:10px;">這份文件貫穿後續所有行政與司法程序，請妥善保管，並多備幾份影本。</p>
-      </div>
-    </div>
-
-    <div class="step-item">
-      <div class="step-num">04</div>
-      <div class="step-content">
-        <div class="step-tag">第 3–14 天</div>
-        <h3>主動追蹤分案，備妥筆錄資料</h3>
-        <p>報案後，案件通常不會留在原報案警局，而是依程序「分案」至你的<strong>戶籍地偵查隊</strong>處理。這個步驟需要你主動出擊，而不是被動等待：</p>
-        <p style="margin-top:10px;">
-        • 致電原報案警局，取得「<strong>分案文號</strong>」<br>
-        • 持分案文號聯繫戶籍地偵查隊，詢問承辦人姓名與目前進度<br>
-        • 給警方約兩週的作業時間，致電時主動說明自己是「警示帳戶嫌疑人」，表達配合調查的意願<br>
-        • 同時整理能證明清白的資料，例如與匯款方的通訊紀錄、交易說明等，等候通知製作嫌疑人筆錄
-        </p>
-      </div>
-    </div>
-
-    <div class="step-item">
-      <div class="step-num">05</div>
-      <div class="step-content">
-        <div class="step-tag">筆錄後 1–2 週</div>
-        <h3>等候案件移送地檢署</h3>
-        <p>嫌疑人筆錄製作完成後，偵查隊需約<strong>一至兩週</strong>時間完成相關公文，將案件正式移送至地方法院檢察署（地檢署），由檢察官接手審理。</p>
-        <p style="margin-top:10px;">移送後你將進入等待地檢署傳票的階段。<strong>這段期間通常是整個流程中最漫長的部分</strong>，從數個月到半年以上都有可能，請調整好心理預期，持續關注案件動態。</p>
-      </div>
-    </div>
-
-    <div class="step-item">
-      <div class="step-num">06</div>
-      <div class="step-content">
-        <div class="step-tag">全程建議</div>
-        <h3>隨時可尋求法律諮詢或委任律師</h3>
-        <p>面對陌生的司法程序，不需要獨自摸索。以下資源在整個流程的任何階段都可以使用：</p>
-        <p style="margin-top:10px;">
-        • <strong>法律扶助基金會</strong>：提供免費法律諮詢，適合剛接觸案件、想先了解自身權利與程序的人<br>
-        • <strong>委任律師</strong>：律師可協助撰寫書狀、陪同偵訊、向檢察官表達立場，對於爭取不起訴處分、加速案件結束有實質幫助<br>
-        • <strong>金管會申訴專線</strong>：02-8968-0899，可反映金融機構的處理問題
-        </p>
-        <p style="margin-top:10px;">⚠️ <strong>提醒：</strong>本指南依據當事人親身經歷整理，各地警局與案件情況不同，實際流程可能略有差異，建議同時諮詢專業律師以確認個案適用做法。</p>
-      </div>
-    </div>
-
-    <div class="step-item">
-      <div class="step-num">07</div>
-      <div class="step-content">
-        <div class="step-tag">地檢署審理期間</div>
-        <h3>出庭應訊，等候不起訴處分書</h3>
-        <p>案件進入地檢署後，請做好以下準備：</p>
-        <p style="margin-top:10px;">
-        • 確認戶籍地址有人能收信，或委任律師代收訴訟文書，以免傳票送達失敗<br>
-        • 收到「<strong>刑事被告傳票</strong>」後，務必準時出庭應訊，切勿缺席——無故不到庭可能導致法官核發拘票，對案件不利<br>
-        • 出庭前建議事先與律師討論，確認陳述方向與應準備的資料<br>
-        • 若檢察官審查後認定你屬無辜收款，將核發「<strong>不起訴處分書</strong>」。這份文件是解除警示的唯一通行證，收到後請立即妥善保存正本
-        </p>
-      </div>
-    </div>
-
-    <div class="step-item">
-      <div class="step-num">08</div>
-      <div class="step-content">
-        <div class="step-tag">取得不起訴處分書後</div>
-        <h3>申請解除警示，逐一確認各銀行帳戶狀態</h3>
-        <p>拿到不起訴處分書，代表司法程序結束，接下來是最後的行政程序：</p>
-        <p style="margin-top:10px;">
-        <strong>① 前往偵查隊申請解除警示</strong><br>
-        攜帶不起訴處分書與身分證，至原通報警示的偵查隊，尋找負責「解除警示」的承辦人，填寫並提交申請書（可至警政署刑事警察局官網預先下載）。受理後約 3–5 個工作天收到解除公文。
-        </p>
-        <p style="margin-top:10px;">
-        <strong>② 主動聯繫各銀行確認解除狀態</strong><br>
-        警方公文發出後，各銀行約需 1–2 週才會收到並完成處理。請主動致電每一家相關銀行，逐一確認：<br>
-        • 主帳戶警示是否已正式解除<br>
-        • <strong>衍生管制帳戶</strong>是否一併解除——各銀行規定不同，部分銀行不會自動連動解除，需另行提出申請<br>
-        • 提款、轉帳、網路銀行等功能是否已全面恢復正常
-        </p>
-        <p style="margin-top:10px;">
-        解除後，建議向<strong>金融聯合徵信中心（聯徵中心）</strong>申請個人信用報告，確認警示紀錄是否已停止揭露。若結果為不起訴或無罪，解除當日起聯徵中心即應停止揭露，你的信用紀錄將恢復清白。
-        </p>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- FAQ -->
-  <div style="margin-top:40px; border-top:1px solid var(--border); padding-top:40px;">
-    <div class="section-label">常見問題</div>
-    <div style="margin-top:20px; display:flex; flex-direction:column; gap:0;">
-
-      <div style="border:1px solid var(--border); border-left:4px solid var(--teal); background:var(--paper-warm); padding:24px 28px;">
-        <div style="font-family:'Noto Serif TC',serif; font-size:16px; font-weight:700; color:var(--ink); margin-bottom:14px; line-height:1.5;">
-          Q：我的帳戶已經被警示了，一定要等不起訴才能解除嗎？
-        </div>
-        <div style="font-size:14px; color:var(--ink-soft); line-height:2;">
-          <p><strong style="color:var(--ink);">不一定。</strong>警政署刑事局說明，現行救濟機制相當彈性。除等待不起訴處分書外，若符合以下特殊情形，可備妥相關佐證文件，親赴案件管轄分局申請撤銷：</p>
-          <ul style="list-style:none; padding:0; margin:12px 0;">
-            <li style="padding:4px 0; border-bottom:1px solid rgba(0,0,0,0.06);">・ 一般商業交易糾紛</li>
-            <li style="padding:4px 0; border-bottom:1px solid rgba(0,0,0,0.06);">・ 三方詐騙案件</li>
-            <li style="padding:4px 0; border-bottom:1px solid rgba(0,0,0,0.06);">・ 遭詐騙集團惡意報復（如被小額匯款騷擾）</li>
-            <li style="padding:4px 0; border-bottom:1px solid rgba(0,0,0,0.06);">・ 存款帳戶遭盜用或冒用</li>
-            <li style="padding:4px 0;">・ 行政程序或資料登錄錯誤</li>
-          </ul>
-          <p>警方查證屬實後即可依法撤銷，無須等待冗長司法程序。</p>
-          <div style="margin-top:16px; padding:16px 20px; background:rgba(192,57,43,0.06); border-left:3px solid var(--red);">
-            <p><strong style="color:var(--red);">但這是「事後補救」。</strong>PCIT 要做的是「事前保護」：讓收款人在款項入帳前就有選擇權，從源頭避免成為警示帳戶，不需要走進警察局。</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-</div>
-</div>
-
-<hr class="divider">
-
 <!-- RISK CHECK -->
 <div id="check" style="background: var(--paper-warm);">
 <div class="section">
@@ -1516,66 +303,107 @@
 
 <hr class="divider">
 
-<!-- POLICY -->
-<div id="policy" style="background: #ffffff;">
+<!-- EXPLORE 深入了解 -->
+<div style="background: #ffffff;">
 <div class="section">
-  <div class="section-label">制度改革白皮書</div>
-  <div class="section-title">我們要求的<br>制度改革</div>
-  <p class="section-body">台灣雖已有匯款端的收款人戶名顯示功能，與國際的 Confirmation of Payee 概念接近。然而英國、歐盟進一步建立了 Request to Pay 等收款端保護機制，新加坡更於 2025 年 10 月實施「高額轉帳 24 小時延遲冷靜期」。台灣目前缺乏的，是<strong>收款人</strong>的保護——收款人對於是否接受匯款毫無選擇權，一旦入帳即可能遭警示，卻完全無法事先防範。台灣現存近15萬個警示帳戶，申訴解除最短半年、常見逾一年。我們提出四項具體訴求：</p>
-
-  <div style="background:var(--paper-warm); border:1px solid var(--border); border-left:4px solid var(--teal); padding:24px; margin-bottom:32px;">
-    <div style="font-size:12px; font-weight:600; letter-spacing:2px; color:var(--teal); margin-bottom:16px; text-transform:uppercase;">國際現有機制 vs. 台灣現況</div>
-    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:16px;">
-      <div>
-        <div style="font-size:13px; font-weight:700; color:var(--ink); margin-bottom:6px;">🇬🇧🇪🇺🇹🇼 收款人戶名核對</div>
-        <div style="font-size:12px; color:var(--ink-soft); line-height:1.9;">匯款人輸入帳號時顯示收款人戶名，防止轉錯帳。台灣已有此功能，與英國 CoP 概念相近。<strong style="color:var(--teal);">匯款人受保護。</strong></div>
-      </div>
-      <div>
-        <div style="font-size:13px; font-weight:700; color:var(--ink); margin-bottom:6px;">🇬🇧🇪🇺 Request to Pay（RtP）</div>
-        <div style="font-size:12px; color:var(--ink-soft); line-height:1.9;">收款方主動發出付款請求，付款人選擇接受或拒絕。主要用於帳單收款。<strong style="color:var(--ink);">雙方均有選擇權。</strong></div>
-      </div>
-      <div>
-        <div style="font-size:13px; font-weight:700; color:var(--ink); margin-bottom:6px;">🇸🇬 新加坡 24 小時延遲規定</div>
-        <div style="font-size:12px; color:var(--ink-soft); line-height:1.9;">2025 年 10 月起，高額轉帳自動暫緩 24 小時，設置「認知冷靜期」打斷詐騙心理操控。<strong style="color:var(--ink);">保護匯款人。</strong></div>
-      </div>
-    </div>
-    <div style="padding:16px; background:rgba(192,57,43,0.06); border-left:3px solid var(--red); font-size:12px; color:var(--ink-soft); line-height:1.9;">
-      ⚠️ <strong style="color:var(--red);">台灣的缺口：</strong>上述機制均保護<strong style="color:var(--ink);">匯款人</strong>。台灣目前完全缺乏<strong style="color:var(--ink);">收款端</strong>保護——收款人對於是否接受匯款毫無選擇權，一旦詐騙款項入帳，帳戶即可能遭警示，收款人卻無從事先拒絕或防範。PCIT 正是要填補這個空白。
-    </div>
-  </div>
-
-  <div class="policy-grid">
-    <div class="policy-card">
-      <div class="policy-num">01</div>
-      <h4>金管會發布可行性研究報告</h4>
-      <p>要求金管會於 6 個月內完成「收款人帳戶保護機制」研究報告，評估 PCIT 的技術可行性。</p>
-    </div>
-    <div class="policy-card">
-      <div class="policy-num">02</div>
-      <h4>立法院財政委員會召開公聽會</h4>
-      <p>邀集學者、金融業者及民間受害者代表，公開討論制度改革方向，讓受害者的聲音被聽見。</p>
-    </div>
-    <div class="policy-card">
-      <div class="policy-num">03</div>
-      <h4>修訂警示戶認定標準</h4>
-      <p>明確將「被動收款之無辜當事人」排除於警示範圍之外，停止讓受害者承擔制度的代價。</p>
-    </div>
-    <div class="policy-card">
-      <div class="policy-num">04</div>
-      <h4>開放金融沙盒申請</h4>
-      <p>允許至少一件「收款人同意機制」相關的金融沙盒申請，讓創新技術在受控環境中被驗證。</p>
-    </div>
-  </div>
-
-  <div class="policy-statement">
-    <div class="policy-statement-title">我們的立場</div>
-    <p>
-      我們並非要求廢除警示戶制度，而是要求在現有制度中補足<strong>收款人保護的缺口</strong>。預防優於治療，賦予收款人主動防護能力，是最符合比例原則、也最能兼顧金融安全與個人權益的改革方向。
-    </p>
+  <div class="section-label">深入了解</div>
+  <div class="section-title">想知道更多？</div>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:20px; margin-top:32px;">
+    <a href="guide.html" style="display:block; border:1px solid var(--border); border-top:4px solid var(--teal); background:var(--paper-warm); padding:28px 24px; text-decoration:none; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px var(--shadow)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="font-family:'Noto Serif TC',serif; font-size:18px; font-weight:700; color:var(--ink); margin-bottom:8px;">緊急應對指南 →</div>
+      <div style="font-size:14px; color:var(--ink-soft); line-height:1.8;">帳戶被警示了怎麼辦？八個步驟帶你走完全程。</div>
+    </a>
+    <a href="policy.html" style="display:block; border:1px solid var(--border); border-top:4px solid var(--gold); background:var(--paper-warm); padding:28px 24px; text-decoration:none; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px var(--shadow)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="font-family:'Noto Serif TC',serif; font-size:18px; font-weight:700; color:var(--ink); margin-bottom:8px;">制度改革白皮書 →</div>
+      <div style="font-size:14px; color:var(--ink-soft); line-height:1.8;">國際比較、四項訴求，看我們要求的具體改革。</div>
+    </a>
+    <a href="faq.html" style="display:block; border:1px solid var(--border); border-top:4px solid var(--red); background:var(--paper-warm); padding:28px 24px; text-decoration:none; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px var(--shadow)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="font-family:'Noto Serif TC',serif; font-size:18px; font-weight:700; color:var(--ink); margin-bottom:8px;">常見問題 →</div>
+      <div style="font-size:14px; color:var(--ink-soft); line-height:1.8;">警示解除一定要等不起訴嗎？常見疑問解答。</div>
+    </a>
   </div>
 </div>
 </div>
 
+<!-- CTA -->
+<section id="cta" class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-label">行動進行中</div>
+    <h2 class="cta-title">附議達標只是開始，<br>我們已經在做下一步</h2>
+    <p class="cta-sub">在政府回應之前，我們不等待。以下是正在進行的行動——你可以加入任何一項。</p>
+
+    <!-- Demo 展示區 -->
+    <div style="
+      border: 2px solid var(--gold);
+      background: rgba(184,134,11,0.08);
+      padding: 36px 32px; margin-bottom: 40px;
+      position:relative; z-index:5; text-align:center;">
+      <div style="font-size:12px; letter-spacing:3px; color:var(--gold-light); margin-bottom:10px;">我們不只倡議，直接做給你看</div>
+      <h3 style="font-family:'Noto Serif TC',serif; font-size:24px; font-weight:900; color:var(--paper); margin-bottom:12px; line-height:1.5;">案件進度查詢，本該像查包裹一樣簡單</h3>
+      <p style="font-size:15px; color:rgba(247,244,239,0.8); line-height:2; margin:0 auto 20px; max-width:560px;">
+        警示帳戶當事人和報案被害人，現在只能打電話到偵查隊、地檢署一次次詢問進度。我們用兩天做出了示範網站——展示如果政府願意做，民眾應該看到的樣子。介面不難做，身分驗證機制政府也早已建好。缺的不是技術，是一個決定。
+      </p>
+      <a href="/case-tracker-demo.html" target="_blank" style="
+        display:inline-block; background:var(--gold); color:var(--ink);
+        padding:14px 36px; font-size:15px; font-weight:700; letter-spacing:2px;
+        text-decoration:none; position:relative; z-index:10;">體驗示範網站 →</a>
+      <span style="display:block; margin-top:12px; font-size:12.5px; color:rgba(247,244,239,0.5);">時間軸取自發起人真實案件</span>
+    </div>
+
+    <div class="cta-cards">
+      <div class="cta-card card-share">
+        <div class="cta-card-icon">📢</div>
+        <h3>分享給可能需要的人</h3>
+        <p>把這個網站分享給家人、朋友，尤其是長輩或正在求職的年輕人。一次分享可能防止一次災難。</p>
+        <button class="cta-card-btn" onclick="openModal('shareModal')">分享這個網站 →</button>
+      </div>
+
+      <div class="cta-card card-ai">
+        <div class="cta-card-icon">🤖</div>
+        <h3>搶先體驗 AI 助理</h3>
+        <p>我們正在開發 Line Bot 與 AI 問答工具，讓民眾即時詢問「這筆匯款安全嗎？」等問題。</p>
+        <button class="cta-card-btn" onclick="openModal('aiModal')">登記早鳥名單 →</button>
+      </div>
+
+      <div class="cta-card card-partner">
+        <div class="cta-card-icon">🏦</div>
+        <h3>銀行與支付平台合作</h3>
+        <p>最終目標是與各大銀行、電子支付平台合作，在匯款流程中內建收款人保護機制。</p>
+        <button class="cta-card-btn" onclick="openModal('partnerModal')">洽談合作 →</button>
+      </div>
+    </div>
+
+    <div class="cta-roadmap">
+      <div class="cta-roadmap-title">行動藍圖</div>
+      <div class="roadmap-track">
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-now"></div>
+          <div class="roadmap-phase">進行中 · 2026 Q3</div>
+          <h4>立法倡議 · 5,000 人附議</h4>
+          <p>完成公共政策附議，達到 5,000 人門檻，促使金管會正式回應並啟動研究</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-future"></div>
+          <div class="roadmap-phase">2026 Q3–Q4</div>
+          <h4>金管會研究報告</h4>
+          <p>金管會發布可行性報告，開放金融沙盒申請，至少一家銀行啟動試點</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-future"></div>
+          <div class="roadmap-phase">2026 Q4</div>
+          <h4>試點上線 · 修法推動</h4>
+          <p>試點銀行推出收款人同意機制，保護第一批用戶；推動修法納入《電子支付機構管理條例》</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-future"></div>
+          <div class="roadmap-phase">2027 Q1 起</div>
+          <h4>全面推廣 · 制度落地</h4>
+          <p>全面推廣至所有金融機構，台灣建立完整的收款人保護標準</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- MODALS -->
 <style>

@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>常見問題｜收款人帳戶安全守護站</title>
+<meta name="description" content="警示帳戶常見問題：解除警示的特殊管道、申訴流程疑問解答。">
+<script data-goatcounter="https://pcit-tw.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">守護帳戶</span>
+  <ul class="nav-links">
+    <li><a href="index.html">回主頁</a></li>
+    <li><a href="guide.html">應對指南</a></li>
+    <li><a href="policy.html">制度改革</a></li>
+    <li><a href="faq.html">常見問題</a></li>
+    <li><a href="index.html#cta">立即附議</a></li>
+  </ul>
+</nav>
+
+<div style="max-width:1080px; margin:0 auto; padding:24px 24px 0;">
+  <a href="index.html" style="display:inline-block; font-size:14px; color:var(--teal); text-decoration:none; font-weight:500; letter-spacing:1px;">&larr; 回主頁</a>
+</div>
+
+<div style="background: #ffffff;">
+<div class="section">
+  <!-- FAQ -->
+  <div style="margin-top:40px; border-top:1px solid var(--border); padding-top:40px;">
+    <div class="section-label">常見問題</div>
+    <div style="margin-top:20px; display:flex; flex-direction:column; gap:0;">
+
+      <div style="border:1px solid var(--border); border-left:4px solid var(--teal); background:var(--paper-warm); padding:24px 28px;">
+        <div style="font-family:'Noto Serif TC',serif; font-size:16px; font-weight:700; color:var(--ink); margin-bottom:14px; line-height:1.5;">
+          Q：我的帳戶已經被警示了，一定要等不起訴才能解除嗎？
+        </div>
+        <div style="font-size:14px; color:var(--ink-soft); line-height:2;">
+          <p><strong style="color:var(--ink);">不一定。</strong>警政署刑事局說明，現行救濟機制相當彈性。除等待不起訴處分書外，若符合以下特殊情形，可備妥相關佐證文件，親赴案件管轄分局申請撤銷：</p>
+          <ul style="list-style:none; padding:0; margin:12px 0;">
+            <li style="padding:4px 0; border-bottom:1px solid rgba(0,0,0,0.06);">・ 一般商業交易糾紛</li>
+            <li style="padding:4px 0; border-bottom:1px solid rgba(0,0,0,0.06);">・ 三方詐騙案件</li>
+            <li style="padding:4px 0; border-bottom:1px solid rgba(0,0,0,0.06);">・ 遭詐騙集團惡意報復（如被小額匯款騷擾）</li>
+            <li style="padding:4px 0; border-bottom:1px solid rgba(0,0,0,0.06);">・ 存款帳戶遭盜用或冒用</li>
+            <li style="padding:4px 0;">・ 行政程序或資料登錄錯誤</li>
+          </ul>
+          <p>警方查證屬實後即可依法撤銷，無須等待冗長司法程序。</p>
+          <div style="margin-top:16px; padding:16px 20px; background:rgba(192,57,43,0.06); border-left:3px solid var(--red);">
+            <p><strong style="color:var(--red);">但這是「事後補救」。</strong>PCIT 要做的是「事前保護」：讓收款人在款項入帳前就有選擇權，從源頭避免成為警示帳戶，不需要走進警察局。</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>
+  <div class="footer-logo">收款人帳戶安全守護站</div>
+  <p>本工具由警示戶制度改革推動小組製作，資料依據《收款人帳戶安全保護機制建立之倡議》政策白皮書。</p>
+  <p style="margin-top: 8px;">本工具僅供教育與倡議用途，不構成法律建議。如有緊急需求請聯繫銀行或撥打 165 反詐騙專線。</p>
+  <p style="margin-top: 8px;">聯絡信箱：<a href="mailto:pcit.tw@gmail.com">pcit.tw@gmail.com</a></p>
+  <p style="margin-top: 12px; opacity: 0.5;">最後更新：2026/06/11</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.step-item').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
+
