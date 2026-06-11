@@ -1,0 +1,404 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>行動進行中｜收款人帳戶安全守護站</title>
+<meta name="description" content="PCIT 倡議正在進行的行動：案件進度查詢示範網站、分享推廣、AI 助理早鳥名單、銀行合作洽談與行動藍圖。">
+<script data-goatcounter="https://pcit-tw.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">守護帳戶</span>
+  <ul class="nav-links">
+    <li><a href="index.html">回主頁</a></li>
+    <li><a href="guide.html">應對指南</a></li>
+    <li><a href="policy.html">制度改革</a></li>
+    <li><a href="faq.html">常見問題</a></li>
+    <li><a href="https://join.gov.tw/idea/detail/ba071237-01f4-40c4-a322-b1c0b16111dd" target="_blank">立即附議</a></li>
+  </ul>
+</nav>
+
+<div style="max-width:1080px; margin:0 auto; padding:24px 24px 0;">
+  <a href="index.html" style="display:inline-block; font-size:14px; color:var(--teal); text-decoration:none; font-weight:500; letter-spacing:1px;">&larr; 回主頁</a>
+</div>
+
+<!-- CTA -->
+<section id="cta" class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-label">行動進行中</div>
+    <h2 class="cta-title">附議達標只是開始，<br>我們已經在做下一步</h2>
+    <p class="cta-sub">在政府回應之前，我們不等待。以下是正在進行的行動——你可以加入任何一項。</p>
+
+    <!-- Demo 展示區 -->
+    <div style="
+      border: 2px solid var(--gold);
+      background: rgba(184,134,11,0.08);
+      padding: 36px 32px; margin-bottom: 40px;
+      position:relative; z-index:5; text-align:center;">
+      <div style="font-size:12px; letter-spacing:3px; color:var(--gold-light); margin-bottom:10px;">我們不只倡議，直接做給你看</div>
+      <h3 style="font-family:'Noto Serif TC',serif; font-size:24px; font-weight:900; color:var(--paper); margin-bottom:12px; line-height:1.5;">案件進度查詢，本該像查包裹一樣簡單</h3>
+      <p style="font-size:15px; color:rgba(247,244,239,0.8); line-height:2; margin:0 auto 20px; max-width:560px;">
+        警示帳戶當事人和報案被害人，現在只能打電話到偵查隊、地檢署一次次詢問進度。我們用兩天做出了示範網站——展示如果政府願意做，民眾應該看到的樣子。介面不難做，身分驗證機制政府也早已建好。缺的不是技術，是一個決定。
+      </p>
+      <a href="/case-tracker-demo.html" target="_blank" style="
+        display:inline-block; background:var(--gold); color:var(--ink);
+        padding:14px 36px; font-size:15px; font-weight:700; letter-spacing:2px;
+        text-decoration:none; position:relative; z-index:10;">體驗示範網站 →</a>
+      <span style="display:block; margin-top:12px; font-size:12.5px; color:rgba(247,244,239,0.5);">時間軸取自發起人真實案件</span>
+    </div>
+
+    <div class="cta-cards">
+      <div class="cta-card card-share">
+        <div class="cta-card-icon">📢</div>
+        <h3>分享給可能需要的人</h3>
+        <p>把這個網站分享給家人、朋友，尤其是長輩或正在求職的年輕人。一次分享可能防止一次災難。</p>
+        <button class="cta-card-btn" onclick="openModal('shareModal')">分享這個網站 →</button>
+      </div>
+
+      <div class="cta-card card-ai">
+        <div class="cta-card-icon">🤖</div>
+        <h3>搶先體驗 AI 助理</h3>
+        <p>我們正在開發 Line Bot 與 AI 問答工具，讓民眾即時詢問「這筆匯款安全嗎？」等問題。</p>
+        <button class="cta-card-btn" onclick="openModal('aiModal')">登記早鳥名單 →</button>
+      </div>
+
+      <div class="cta-card card-partner">
+        <div class="cta-card-icon">🏦</div>
+        <h3>銀行與支付平台合作</h3>
+        <p>最終目標是與各大銀行、電子支付平台合作，在匯款流程中內建收款人保護機制。</p>
+        <button class="cta-card-btn" onclick="openModal('partnerModal')">洽談合作 →</button>
+      </div>
+    </div>
+
+    <div class="cta-roadmap">
+      <div class="cta-roadmap-title">行動藍圖</div>
+      <div class="roadmap-track">
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-now"></div>
+          <div class="roadmap-phase">進行中 · 2026 Q3</div>
+          <h4>立法倡議 · 5,000 人附議</h4>
+          <p>完成公共政策附議，達到 5,000 人門檻，促使金管會正式回應並啟動研究</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-future"></div>
+          <div class="roadmap-phase">2026 Q3–Q4</div>
+          <h4>金管會研究報告</h4>
+          <p>金管會發布可行性報告，開放金融沙盒申請，至少一家銀行啟動試點</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-future"></div>
+          <div class="roadmap-phase">2026 Q4</div>
+          <h4>試點上線 · 修法推動</h4>
+          <p>試點銀行推出收款人同意機制，保護第一批用戶；推動修法納入《電子支付機構管理條例》</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot dot-future"></div>
+          <div class="roadmap-phase">2027 Q1 起</div>
+          <h4>全面推廣 · 制度落地</h4>
+          <p>全面推廣至所有金融機構，台灣建立完整的收款人保護標準</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODALS -->
+<style>
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 999;
+  background: rgba(10,10,20,0.7); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center; padding: 24px;
+}
+.modal-overlay.open { display: flex; animation: fadeDown 0.25s ease; }
+.modal-box {
+  background: var(--paper); max-width: 480px; width: 100%;
+  padding: 40px 36px; position: relative; max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+}
+.modal-close {
+  position: absolute; top: 16px; right: 20px; font-size: 22px;
+  background: none; border: none; cursor: pointer; color: var(--ink-soft);
+  line-height: 1;
+}
+.modal-close:hover { color: var(--ink); }
+.modal-title {
+  font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700;
+  color: var(--ink); margin-bottom: 8px;
+}
+.modal-sub {
+  font-size: 13px; color: var(--ink-soft); line-height: 1.8; margin-bottom: 24px;
+  padding-bottom: 20px; border-bottom: 1px solid var(--border);
+}
+.modal-field { margin-bottom: 16px; }
+.modal-field label {
+  display: block; font-size: 12px; font-weight: 500; letter-spacing: 1px;
+  color: var(--ink-soft); margin-bottom: 6px; text-transform: uppercase;
+}
+.modal-field input, .modal-field select, .modal-field textarea {
+  width: 100%; border: 1.5px solid var(--border); padding: 12px 14px;
+  font-family: 'Noto Sans TC', sans-serif; font-size: 14px; color: var(--ink);
+  background: white; outline: none; transition: border-color 0.2s;
+}
+.modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus {
+  border-color: var(--teal);
+}
+.modal-field textarea { resize: vertical; min-height: 90px; }
+.modal-note {
+  font-size: 11px; color: var(--ink-soft); line-height: 1.7;
+  margin-top: 12px; padding: 12px; background: var(--paper-warm);
+  border-left: 3px solid var(--gold);
+}
+.modal-submit {
+  width: 100%; padding: 14px; margin-top: 20px;
+  font-family: 'Noto Sans TC', sans-serif; font-size: 15px; font-weight: 500;
+  letter-spacing: 1px; border: none; cursor: pointer; transition: all 0.2s;
+}
+.modal-submit.teal { background: var(--teal); color: white; }
+.modal-submit.teal:hover { background: var(--teal-light); }
+.modal-submit.gold { background: var(--gold); color: white; }
+.modal-submit.gold:hover { background: var(--gold-light); }
+.modal-submit.purple { background: #6c4fb5; color: white; }
+.modal-submit.purple:hover { background: #7c5cbf; }
+.modal-success {
+  display: none; text-align: center; padding: 20px 0;
+}
+.modal-success.show { display: block; animation: fadeDown 0.4s ease; }
+.modal-success-icon { font-size: 48px; margin-bottom: 16px; }
+.modal-success h3 {
+  font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700;
+  margin-bottom: 8px; color: var(--ink);
+}
+.modal-success p { font-size: 13px; color: var(--ink-soft); line-height: 1.9; }
+</style>
+
+<!-- 連署 Modal -->
+<div class="modal-overlay" id="signModal" onclick="closeModalOutside(event,'signModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('signModal')">×</button>
+    <div class="modal-title">✍️ 連署支持收款人保護機制</div>
+    <p class="modal-sub">你的連署將彙整後正式提交給金融監督管理委員會及立法院財政委員會，要求主管機關於六個月內正式回應本倡議四項訴求。</p>
+
+    <div style="background:var(--paper-warm); border:1px solid var(--border); border-left:4px solid var(--gold); padding:20px; margin-bottom:20px;">
+      <div style="font-size:13px; color:var(--ink-soft); line-height:2;">
+        📋 填寫說明：<br>
+        • 個人資料僅用於連署彙整，不對外公開<br>
+        • 連署名單以匿名總數方式提交主管機關<br>
+        • 可隨時來信要求刪除連署資料
+      </div>
+    </div>
+
+    <div id="signCounter" style="text-align:center; padding:16px; background:rgba(26,107,107,0.06); border:1px solid rgba(26,107,107,0.2); margin-bottom:20px;">
+      <div style="font-family:'Noto Serif TC',serif; font-size:32px; font-weight:900; color:var(--teal);" id="modalCountNum" class="petition-count">—</div>
+      <div style="font-size:12px; color:var(--ink-soft); letter-spacing:1px; margin-top:4px;">目前連署人數</div>
+    </div>
+
+    <a href="https://forms.gle/3fbf69hW7fpVB8CZ6" target="_blank" onclick="onSignClick()" style="
+      display:block; width:100%; padding:16px; margin-bottom:12px;
+      background:var(--gold); color:white; text-align:center;
+      font-family:'Noto Sans TC',sans-serif; font-size:15px; font-weight:500;
+      letter-spacing:1px; text-decoration:none; transition:all 0.2s;">
+      前往填寫連署表單 →
+    </a>
+    <p style="font-size:11px; color:var(--ink-soft); text-align:center; line-height:1.8;">
+      點擊後將開啟 Google Forms 填寫頁面<br>
+      填寫完成後回到此頁，你的連署即已完成
+    </p>
+  </div>
+</div>
+
+<!-- AI 早鳥 Modal -->
+<div class="modal-overlay" id="aiModal" onclick="closeModalOutside(event,'aiModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('aiModal')">×</button>
+    <div class="modal-title">🤖 登記 AI 帳戶安全助理早鳥名單</div>
+    <p class="modal-sub">我們正在開發 Line Bot 與網頁版 AI 問答工具，預計 2026 年 Q3 開放 Beta 測試。登記後你將第一批收到邀請，全程免費。</p>
+
+    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+      <div style="display:flex; gap:12px; align-items:flex-start;">
+        <span style="font-size:20px; min-width:28px;">💬</span>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;"><strong style="color:var(--ink); display:block; margin-bottom:2px;">Line Bot 即時問答</strong>隨時詢問「這筆匯款安全嗎？」</div>
+      </div>
+      <div style="display:flex; gap:12px; align-items:flex-start;">
+        <span style="font-size:20px; min-width:28px;">📄</span>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;"><strong style="color:var(--ink); display:block; margin-bottom:2px;">申訴文件輔助產生</strong>AI 協助你撰寫警示戶申訴書</div>
+      </div>
+      <div style="display:flex; gap:12px; align-items:flex-start;">
+        <span style="font-size:20px; min-width:28px;">⚠️</span>
+        <div style="font-size:13px; color:var(--ink-soft); line-height:1.8;"><strong style="color:var(--ink); display:block; margin-bottom:2px;">帳戶風險即時評估</strong>輸入情況，AI 給出建議行動</div>
+      </div>
+    </div>
+
+    <a href="https://forms.gle/UfedbmiqrwaBj27i7" target="_blank" style="
+      display:block; width:100%; padding:16px; margin-bottom:12px;
+      background:#6c4fb5; color:white; text-align:center;
+      font-family:'Noto Sans TC',sans-serif; font-size:15px; font-weight:500;
+      letter-spacing:1px; text-decoration:none; transition:all 0.2s;">
+      前往登記早鳥名單 →
+    </a>
+    <p style="font-size:11px; color:var(--ink-soft); text-align:center; line-height:1.8;">
+      點擊後將開啟 Google Forms 填寫頁面<br>
+      不會收到廣告信，僅於 Beta 開放時通知你
+    </p>
+  </div>
+</div>
+
+<!-- 合作洽談 Modal -->
+<div class="modal-overlay" id="partnerModal" onclick="closeModalOutside(event,'partnerModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('partnerModal')">×</button>
+    <div class="modal-title">🏦 金融機構合作洽談</div>
+    <p class="modal-sub">我們希望與銀行、電子支付平台及金融科技業者，共同探索收款人入帳同意機制（PCIT）的技術實作可能性。</p>
+
+    <div style="background:var(--paper-warm); border:1px solid var(--border); border-left:4px solid var(--teal); padding:20px; margin-bottom:20px;">
+      <div style="font-size:13px; color:var(--ink); font-weight:600; margin-bottom:10px;">合作方向包括：</div>
+      <div style="font-size:13px; color:var(--ink-soft); line-height:2.2;">
+        🏛️ 金融沙盒共同申請<br>
+        🔌 技術 API 串接評估<br>
+        📊 政策研究合作<br>
+        🤝 學術或公益贊助
+      </div>
+    </div>
+
+    <div style="background:rgba(26,107,107,0.05); border:1px solid rgba(26,107,107,0.15); padding:16px; margin-bottom:20px; font-size:13px; color:var(--ink-soft); line-height:1.9;">
+      收到申請後，我們將於 <strong style="color:var(--teal);">3 個工作天內</strong> 以 Email 與你聯繫，安排進一步說明或視訊會議。
+    </div>
+
+    <a href="https://forms.gle/qpBGJqZdcrKEgT2p8" target="_blank" style="
+      display:block; width:100%; padding:16px; margin-bottom:12px;
+      background:var(--teal); color:white; text-align:center;
+      font-family:'Noto Sans TC',sans-serif; font-size:15px; font-weight:500;
+      letter-spacing:1px; text-decoration:none; transition:all 0.2s;">
+      前往填寫合作洽談申請 →
+    </a>
+    <p style="font-size:11px; color:var(--ink-soft); text-align:center; line-height:1.8;">
+      點擊後將開啟 Google Forms 填寫頁面<br>
+      或直接來信：pcit.tw@gmail.com
+    </p>
+  </div>
+</div>
+
+<!-- 分享 Modal -->
+<div class="modal-overlay" id="shareModal" onclick="closeModalOutside(event,'shareModal')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('shareModal')">×</button>
+    <div class="modal-title">📢 分享這個工具</div>
+    <p class="modal-sub">一次分享可能防止一場災難。選擇你習慣的方式，把這個工具傳給家人或朋友。</p>
+
+    <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
+
+      <button onclick="copyLink()" id="copyBtn" style="
+        display:flex; align-items:center; gap:14px;
+        background:var(--paper-warm); border:1.5px solid var(--border);
+        padding:14px 18px; cursor:pointer; font-family:'Noto Sans TC',sans-serif;
+        font-size:14px; color:var(--ink); text-align:left; transition:all 0.2s;">
+        <span style="font-size:22px;">🔗</span>
+        <span><strong style="display:block; margin-bottom:2px;">複製連結</strong><span style="font-size:12px; color:var(--ink-soft);">貼到任何地方都能用</span></span>
+      </button>
+
+      <a href="https://line.me/R/msg/text/?%E6%88%91%E6%9C%80%E8%BF%91%E7%9C%8B%E5%88%B0%E4%B8%80%E5%80%8B%E5%B8%B3%E6%88%B6%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%B8%AC%E8%A9%A6%E8%87%AA%E5%B7%B1%E7%9A%84%E5%B8%B3%E6%88%B6%E5%AE%89%E5%85%A8%E7%9F%A5%E8%AD%98%E3%80%82%E8%B2%B7%E5%B9%B4%E5%8F%B0%E7%81%A3%E6%9C%89%E6%95%B8%E8%90%AC%E4%BA%BA%E5%9B%A0%E7%84%A1%E8%BE%9C%E6%94%B6%E5%88%B0%E8%A9%90%E9%A8%99%E6%AC%BE%E9%A0%85%E8%80%8C%E9%81%AD%E5%87%8D%E7%B5%90%E5%B8%B3%E6%88%B6%EF%BC%8C%E5%88%86%E4%BA%AB%E7%B5%A6%E5%AE%B6%E4%BA%BA%E7%9C%8B%E7%9C%8B%E5%90%A7%EF%BC%81" target="_blank" style="
+        display:flex; align-items:center; gap:14px;
+        background:#06C755; border:none;
+        padding:14px 18px; cursor:pointer; font-family:'Noto Sans TC',sans-serif;
+        font-size:14px; color:white; text-decoration:none; transition:all 0.2s;">
+        <span style="font-size:22px; filter:brightness(10);">💬</span>
+        <span><strong style="display:block; margin-bottom:2px;">用 LINE 分享</strong><span style="font-size:12px; opacity:0.85;">傳給家人、朋友或群組</span></span>
+      </a>
+
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpayee-protection.tw" target="_blank" style="
+        display:flex; align-items:center; gap:14px;
+        background:#1877F2; border:none;
+        padding:14px 18px; cursor:pointer; font-family:'Noto Sans TC',sans-serif;
+        font-size:14px; color:white; text-decoration:none; transition:all 0.2s;">
+        <span style="font-size:22px;">📘</span>
+        <span><strong style="display:block; margin-bottom:2px;">分享到 Facebook</strong><span style="font-size:12px; opacity:0.85;">擴大倡議觸及範圍</span></span>
+      </a>
+
+      <a href="https://twitter.com/intent/tweet?text=%E5%8F%B0%E7%81%A3%E6%AF%8F%E5%B9%B4%E6%9C%89%E6%95%B8%E8%90%AC%E4%BA%BA%E5%9B%A0%E7%84%A1%E8%BE%9C%E6%94%B6%E5%88%B0%E8%A9%90%E9%A8%99%E6%AC%BE%E9%A0%85%E8%80%8C%E9%81%AD%E5%87%8D%E7%B5%90%E5%B8%B3%E6%88%B6%EF%BC%8C%E7%8F%BE%E8%A1%8C%E6%B3%95%E8%A6%8F%E5%8D%BB%E7%84%A1%E4%BB%BB%E4%BD%95%E4%BF%9D%E8%AD%B7%E3%80%82%E6%B8%AC%E8%A9%A6%E4%BD%A0%E7%9A%84%E5%B8%B3%E6%88%B6%E5%AE%89%E5%85%A8%E7%9F%A5%E8%AD%98%EF%BC%81%20%23%E8%AD%A6%E7%A4%BA%E6%88%B6%20%23%E5%8F%B0%E7%81%A3%E9%87%91%E8%9E%8D%E6%94%B9%E9%9D%A9" target="_blank" style="
+        display:flex; align-items:center; gap:14px;
+        background:#000; border:none;
+        padding:14px 18px; cursor:pointer; font-family:'Noto Sans TC',sans-serif;
+        font-size:14px; color:white; text-decoration:none; transition:all 0.2s;">
+        <span style="font-size:22px;">𝕏</span>
+        <span><strong style="display:block; margin-bottom:2px;">分享到 X（Twitter）</strong><span style="font-size:12px; opacity:0.85;">讓更多人看見這個議題</span></span>
+      </a>
+
+    </div>
+
+    <div id="copyConfirm" style="display:none; background:rgba(26,107,107,0.08); border-left:4px solid var(--teal); padding:12px 16px; font-size:13px; color:var(--teal); font-weight:500; animation: fadeDown 0.3s ease;">
+      ✓ 連結已複製！請貼上分享給需要的人。
+    </div>
+
+    <p style="font-size:11px; color:var(--ink-soft); margin-top:16px; line-height:1.8; text-align:center;">
+      分享時建議加上一句話：<br>
+      「台灣每年有數萬人因無辜收到詐騙款項而遭凍結帳戶，你也可能是下一個。」
+    </p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">收款人帳戶安全守護站</div>
+  <p>本工具由警示戶制度改革推動小組製作，資料依據《收款人帳戶安全保護機制建立之倡議》政策白皮書。</p>
+  <p style="margin-top: 8px;">本工具僅供教育與倡議用途，不構成法律建議。如有緊急需求請聯繫銀行或撥打 165 反詐騙專線。</p>
+  <p style="margin-top: 8px;">聯絡信箱：<a href="mailto:pcit.tw@gmail.com">pcit.tw@gmail.com</a></p>
+  <p style="margin-top: 12px; opacity: 0.5;">最後更新：<script>document.write(new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }))</script></p>
+</footer>
+
+<script>
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e, id) {
+    if (e.target === document.getElementById(id)) closeModal(id);
+  }
+  function submitForm(formId, successId) {
+    document.getElementById(formId).style.display = 'none';
+    document.getElementById(successId).classList.add('show');
+  }
+  function onSignClick() {}
+
+  function copyLink() {
+    var url = window.location.origin + '/';
+    var confirm = document.getElementById('copyConfirm');
+    var btn = document.getElementById('copyBtn');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function() {
+        confirm.style.display = 'block';
+        btn.style.borderColor = 'var(--teal)';
+      }).catch(function() { fallbackCopy(url, confirm, btn); });
+    } else {
+      fallbackCopy(url, confirm, btn);
+    }
+  }
+  function fallbackCopy(url, confirm, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand('copy'); confirm.style.display = 'block'; if(btn) btn.style.borderColor = 'var(--teal)'; }
+    catch(e) { confirm.textContent = '請手動複製此連結：' + url; confirm.style.display = 'block'; }
+    document.body.removeChild(ta);
+  }
+
+  // 附議數（signModal 內的計數顯示）
+  fetch('data/count.json?_=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var n = data.signatures || 0;
+      document.querySelectorAll('.petition-count').forEach(function(el) {
+        el.textContent = n.toLocaleString();
+      });
+    })
+    .catch(function() {});
+</script>
+</body>
+</html>
