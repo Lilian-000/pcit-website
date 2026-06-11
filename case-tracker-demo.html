@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="color-scheme" content="light only">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>警示帳戶案件進度查詢（民間示範版）｜PCIT 倡議</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light only;
+  --ink: #1a1a2e;
+  --paper: #f7f4ef;
+  --gold: #b8860b;
+  --teal: #1a6b6b;
+  --red: #c0392b;
+  --line: rgba(26,26,46,0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.8;
+  min-height: 100vh;
+}
+
+/* ── 示範聲明橫幅 ── */
+.demo-banner {
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+.demo-banner strong { color: var(--gold); font-weight: 700; }
+
+/* ── 頁首 ── */
+header {
+  border-bottom: 1px solid var(--line);
+  background: white;
+}
+.header-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 28px 24px 24px;
+}
+.gov-mark {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+.header-sub {
+  font-size: 14px;
+  color: rgba(26,26,46,0.55);
+  margin-top: 4px;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+/* ── 查詢卡片 ── */
+.query-card {
+  background: white;
+  border: 1px solid var(--line);
+  padding: 36px 32px;
+}
+.query-card h2 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.query-hint {
+  font-size: 13.5px;
+  color: rgba(26,26,46,0.55);
+  margin-bottom: 28px;
+}
+.field { margin-bottom: 22px; }
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.field input {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 16px;
+  font-family: 'Noto Sans TC', sans-serif;
+  border: 1px solid rgba(26,26,46,0.25);
+  background: var(--paper);
+  letter-spacing: 1px;
+}
+.field input:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.field .eg {
+  font-size: 12px;
+  color: rgba(26,26,46,0.4);
+  margin-top: 6px;
+}
+.auth-note {
+  margin-top: 18px;
+  font-size: 13px;
+  color: rgba(26,26,46,0.55);
+  line-height: 1.9;
+  text-align: center;
+}
+.demo-note {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+  font-size: 12.5px;
+  color: var(--gold);
+  text-align: center;
+  letter-spacing: 1px;
+}
+.btn-query {
+  width: 100%;
+  padding: 15px;
+  background: var(--ink);
+  color: white;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.15s;
+}
+.btn-query:hover { background: #2d2d4a; }
+.error-msg {
+  display: none;
+  color: var(--red);
+  font-size: 13.5px;
+  margin-top: 14px;
+  text-align: center;
+}
+
+/* ── 結果頁 ── */
+#result-view { display: none; }
+.role-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 28px;
+  border: 1px solid var(--ink);
+}
+.role-tab {
+  flex: 1;
+  padding: 13px 8px;
+  background: white;
+  border: none;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14.5px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  color: rgba(26,26,46,0.55);
+}
+.role-tab.active {
+  background: var(--ink);
+  color: white;
+  font-weight: 500;
+}
+.role-tab + .role-tab { border-left: 1px solid var(--ink); }
+.login-as {
+  font-size: 13.5px;
+  color: var(--teal);
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+.login-as strong { font-size: 16px; }
+.case-meta {
+  background: white;
+  border: 1px solid var(--line);
+  padding: 24px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 40px;
+  margin-bottom: 28px;
+}
+.case-meta div { font-size: 14px; }
+.case-meta .k { color: rgba(26,26,46,0.5); font-size: 12px; letter-spacing: 1px; display: block; }
+.case-meta .v { font-weight: 700; letter-spacing: 1px; font-size: 15px; }
+
+.status-now {
+  background: var(--teal);
+  color: white;
+  padding: 26px 32px;
+  margin-bottom: 36px;
+}
+.status-now .label { font-size: 12px; letter-spacing: 3px; opacity: 0.75; margin-bottom: 4px; }
+.status-now .stage {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.status-now .since { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+
+/* ── 時間軸：包裹追蹤式 ── */
+.timeline { position: relative; padding-left: 36px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 11px; top: 8px; bottom: 8px;
+  width: 2px;
+  background: var(--line);
+}
+.step { position: relative; padding-bottom: 34px; }
+.step:last-child { padding-bottom: 0; }
+.step .dot {
+  position: absolute;
+  left: -36px; top: 4px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid rgba(26,26,46,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+.step.done .dot {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: white;
+}
+.step.current .dot {
+  background: white;
+  border-color: var(--gold);
+  border-width: 3px;
+}
+.step.current .dot::after {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+@media (prefers-reduced-motion: reduce) { .step.current .dot::after { animation: none; } }
+.step .s-title {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+.step.pending .s-title { color: rgba(26,26,46,0.4); font-weight: 400; }
+.step .s-date {
+  font-size: 13px;
+  color: var(--teal);
+  font-weight: 500;
+  margin-top: 1px;
+}
+.step .s-desc {
+  font-size: 13.5px;
+  color: rgba(26,26,46,0.6);
+  margin-top: 4px;
+  max-width: 480px;
+}
+.step .s-org {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(26,26,46,0.45);
+  border: 1px solid var(--line);
+  padding: 1px 8px;
+  margin-top: 8px;
+}
+
+/* ── 自主補件區 ── */
+.upload-box {
+  margin-top: 40px;
+  background: white;
+  border: 1px dashed rgba(26,26,46,0.3);
+  padding: 26px 32px;
+}
+.upload-box h3 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.upload-box p { font-size: 13.5px; color: rgba(26,26,46,0.6); margin-bottom: 16px; }
+.btn-upload {
+  background: white;
+  border: 1px solid var(--ink);
+  padding: 10px 28px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+.btn-upload:hover { background: var(--paper); }
+
+.back-link {
+  display: inline-block;
+  margin-top: 36px;
+  font-size: 14px;
+  color: var(--teal);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ── 提案進度條（政治訴求區） ── */
+.meta-progress {
+  margin-top: 64px;
+  border-top: 2px solid var(--ink);
+  padding-top: 32px;
+}
+.meta-progress h3 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+.meta-progress .sub {
+  font-size: 13.5px;
+  color: rgba(26,26,46,0.55);
+  margin-bottom: 24px;
+}
+.mp-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+.mp-row .mark {
+  width: 26px; height: 26px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+.mp-row.done .mark { background: var(--teal); color: white; }
+.mp-row.wait .mark { background: white; border: 1.5px dashed rgba(26,26,46,0.3); color: transparent; }
+.mp-row .t { font-size: 15px; font-weight: 500; }
+.mp-row.wait .t { color: rgba(26,26,46,0.45); font-weight: 400; }
+.mp-row .d { font-size: 12.5px; color: rgba(26,26,46,0.5); }
+.mp-note {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 2;
+}
+.mp-note strong { color: var(--red); }
+
+/* ── 頁尾 ── */
+footer {
+  border-top: 1px solid var(--line);
+  background: white;
+  margin-top: 0;
+}
+.footer-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  font-size: 12.5px;
+  color: rgba(26,26,46,0.5);
+  line-height: 2;
+}
+.footer-inner a { color: var(--teal); }
+
+@media (max-width: 540px) {
+  h1 { font-size: 21px; }
+  .query-card, .case-meta, .status-now, .upload-box { padding-left: 20px; padding-right: 20px; }
+  .case-meta { gap: 8px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  ⚠ 本網站為 <strong>民間示範版</strong>，非官方系統。介面為示範，案件時程取自發起人真實案件。製作時間：2 天。
+</div>
+
+<header>
+  <div class="header-inner">
+    <div class="gov-mark">Civic Demo · PCIT Taiwan</div>
+    <h1>警示帳戶案件進度查詢</h1>
+    <div class="header-sub">如果政府願意做，受害民眾應該看到的樣子</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ═══ 登入頁 ═══ -->
+  <div id="query-view">
+    <div class="query-card">
+      <h2>查詢您名下的案件進度</h2>
+      <div class="query-hint">免撥打電話、免到場詢問、不需要知道案號。登入後即可查看名下所有相關案件——無論您是報案被害人，或帳戶遭警示的當事人。</div>
+
+      <button class="btn-query" onclick="doQuery()">
+        <span style="display:inline-block;margin-right:8px;">📱</span>使用行動自然人憑證登入
+      </button>
+
+      <div class="auth-note">
+        採用與綜合所得稅申報、健保快易通相同的身分驗證機制（TW FidO）。<br>
+        僅本人可查詢本人案件，無法查詢他人資料。
+      </div>
+
+      <div class="demo-note">▶ 本示範版：點擊登入按鈕即模擬登入成功</div>
+    </div>
+  </div>
+
+  <!-- ═══ 結果頁 ═══ -->
+  <div id="result-view">
+
+    <div class="login-as">✓ 已登入 · 本示範提供兩種當事人視角，點擊切換：</div>
+
+    <div class="role-tabs">
+      <button class="role-tab active" id="tab-holder" onclick="switchRole('holder')">警示帳戶當事人</button>
+      <button class="role-tab" id="tab-victim" onclick="switchRole('victim')">報案被害人（匯款方）</button>
+    </div>
+
+    <div id="view-holder">
+    <div class="case-meta">
+      <div><span class="k">案件類別</span><span class="v">警示帳戶</span></div>
+      <div><span class="k">當事人身分</span><span class="v">無辜收款人</span></div>
+      <div><span class="k">受理日期</span><span class="v">2026.03.24</span></div>
+    </div>
+
+    <div class="status-now">
+      <div class="label">目前狀態</div>
+      <div class="stage">檢察官偵辦中</div>
+      <div class="since">距報案已 78 天 · 資料最後更新：今日 06:00</div>
+    </div>
+
+    <div class="timeline">
+      <div class="step done">
+        <div class="dot">✓</div>
+        <div class="s-title">受理報案</div>
+        <div class="s-date">2026.03.24</div>
+        <div class="s-desc">案件成立，帳戶列為警示，所有金融功能暫停。</div>
+        <span class="s-org">警察機關</span>
+      </div>
+
+      <div class="step done">
+        <div class="dot">✓</div>
+        <div class="s-title">當事人主動報案（報案者身分）</div>
+        <div class="s-date">2026.04.07</div>
+        <div class="s-desc">當事人主動向警方報案，說明帳戶遭詐騙集團騙取使用，本人亦為被害人。距帳戶警示 14 天。</div>
+        <span class="s-org">警察機關</span>
+      </div>
+
+      <div class="step done">
+        <div class="dot">✓</div>
+        <div class="s-title">嫌疑人筆錄完成</div>
+        <div class="s-date">2026.04.23</div>
+        <div class="s-desc">由戶籍地偵查隊承辦警官通知，當事人以嫌疑人身分接受筆錄，並表示同意返還款項。距主動報案 16 天。</div>
+        <span class="s-org">警察局偵查隊</span>
+      </div>
+
+      <div class="step done">
+        <div class="dot">✓</div>
+        <div class="s-title">發函銀行辦理款項返還・移送地檢署</div>
+        <div class="s-date">2026.05.12</div>
+        <div class="s-desc">警局發函警示銀行，由銀行聯繫匯款人領取返還款項並簽署和解同意書。全案卷證移送地方檢察署。距筆錄 19 天。</div>
+        <span class="s-org">警察局偵查隊 → 警示銀行・地方檢察署</span>
+      </div>
+
+      <div class="step done">
+        <div class="dot">✓</div>
+        <div class="s-title">分案至檢察官</div>
+        <div class="s-date">2026.06.10</div>
+        <div class="s-desc">案件分派至承辦檢察官。距移送 29 天。</div>
+        <span class="s-org">地方檢察署</span>
+      </div>
+
+      <div class="step current">
+        <div class="dot"></div>
+        <div class="s-title">檢察官偵辦中</div>
+        <div class="s-date">2026.06.10 起</div>
+        <div class="s-desc">偵辦期間如需補充說明或文件，可由下方「自主補件」提供，不需等候通知。</div>
+        <span class="s-org">地方檢察署</span>
+      </div>
+
+      <div class="step pending">
+        <div class="dot"></div>
+        <div class="s-title">偵查終結</div>
+        <div class="s-desc">不起訴處分書或起訴書送達。</div>
+      </div>
+
+      <div class="step pending">
+        <div class="dot"></div>
+        <div class="s-title">帳戶解除警示</div>
+        <div class="s-desc">銀行依檢方處分結果解除帳戶警示，恢復金融服務。</div>
+      </div>
+    </div>
+
+    <div class="upload-box">
+      <h3>自主補件</h3>
+      <p>已與匯款人完成和解？上傳和解同意書，直接歸入案件卷宗加速審理——不需要打電話詢問該交給誰。</p>
+      <button class="btn-upload" onclick="alert('此為示範功能。\n\n真實系統中，當事人可在此上傳和解同意書、款項返還證明等佐證，直接歸入案件卷宗，加速檢察官審理。')">上傳文件</button>
+    </div>
+
+    </div><!-- /view-holder -->
+
+    <!-- ═══ 被害人視角 ═══ -->
+    <div id="view-victim" style="display:none;">
+
+    <div class="case-meta">
+      <div><span class="k">案件類別</span><span class="v">詐欺案件</span></div>
+      <div><span class="k">當事人身分</span><span class="v">報案被害人</span></div>
+      <div><span class="k">受理日期</span><span class="v">2026.03.21</span></div>
+    </div>
+
+    <div class="status-now">
+      <div class="label">目前狀態</div>
+      <div class="stage">檢察官偵辦中</div>
+      <div class="since">距報案已 81 天 · 資料最後更新：今日 06:00</div>
+    </div>
+
+    <div class="timeline">
+      <div class="step done">
+        <div class="dot">✓</div>
+        <div class="s-title">受理報案</div>
+        <div class="s-date">2026.03.21</div>
+        <div class="s-desc">報案成立，受款帳戶通報警示，剩餘款項圈存保全。</div>
+        <span class="s-org">警察機關</span>
+      </div>
+
+      <div class="step done">
+        <div class="dot">✓</div>
+        <div class="s-title">資金流向調閱完成</div>
+        <div class="s-date">2026.04.15</div>
+        <div class="s-desc">金融機構回覆交易明細，資金流向已建檔。</div>
+        <span class="s-org">警察局偵查隊</span>
+      </div>
+
+      <div class="step done">
+        <div class="dot">✓</div>
+        <div class="s-title">領取返還款項・簽署和解同意書</div>
+        <div class="s-date">2026.04 月間</div>
+        <div class="s-desc">收款帳戶當事人同意返還，警局發函銀行後，由銀行通知前往領取，並簽署和解同意書。</div>
+        <span class="s-org">警示銀行</span>
+      </div>
+
+      <div class="step done">
+        <div class="dot">✓</div>
+        <div class="s-title">移送地檢署</div>
+        <div class="s-date">2026.05.12</div>
+        <div class="s-desc">全案卷證移送地方檢察署偵辦。</div>
+        <span class="s-org">地方檢察署</span>
+      </div>
+
+      <div class="step current">
+        <div class="dot"></div>
+        <div class="s-title">檢察官偵辦中</div>
+        <div class="s-date">2026.06.10 起</div>
+        <div class="s-desc">如有新事證（對話紀錄、交易截圖），可由下方「自主補件」提供。</div>
+        <span class="s-org">地方檢察署</span>
+      </div>
+
+      <div class="step pending">
+        <div class="dot"></div>
+        <div class="s-title">偵查終結</div>
+        <div class="s-desc">起訴、不起訴或緩起訴處分送達。</div>
+      </div>
+
+      <div class="step pending">
+        <div class="dot"></div>
+        <div class="s-title">圈存款項發還</div>
+        <div class="s-desc">依檢方處分或判決結果，辦理被害人款項發還程序。</div>
+      </div>
+    </div>
+
+    <div class="upload-box">
+      <h3>自主補件</h3>
+      <p>有新的對話紀錄、轉帳截圖或其他事證？直接上傳歸入案件卷宗，不需要打電話詢問該交給誰。</p>
+      <button class="btn-upload" onclick="alert('此為示範功能。\n\n真實系統中，被害人可在此上傳對話紀錄、匯款證明等事證，直接歸入案件卷宗。')">上傳文件</button>
+    </div>
+
+    </div><!-- /view-victim -->
+
+    <span class="back-link" onclick="backToQuery()">← 登出</span>
+  </div>
+
+  <!-- ═══ 提案進度（政治訴求） ═══ -->
+  <div class="meta-progress">
+    <h3>那麼，這個系統什麼時候會是真的？</h3>
+    <div class="sub">現行最進步的做法：向地檢署遞交聲請狀，等 5 至 7 個工作天收 email 回覆。<br>這個示範網站證明介面不難做，身分驗證機制（TW FidO）政府也早已建好。難的部分在下面三格空白裡。</div>
+
+    <div class="mp-row done">
+      <div class="mark">✓</div>
+      <div>
+        <div class="t">民間示範網站完成</div>
+        <div class="d">製作時間 2 天 · 0 元預算 · PCIT 倡議團隊</div>
+      </div>
+    </div>
+    <div class="mp-row wait">
+      <div class="mark"></div>
+      <div>
+        <div class="t">行政機關正式回應</div>
+        <div class="d">等待中</div>
+      </div>
+    </div>
+    <div class="mp-row wait">
+      <div class="mark"></div>
+      <div>
+        <div class="t">跨機關資料介接評估（警政署 × 法務部 × 金管會）</div>
+        <div class="d">等待中</div>
+      </div>
+    </div>
+    <div class="mp-row wait">
+      <div class="mark"></div>
+      <div>
+        <div class="t">正式系統上線</div>
+        <div class="d">等待中</div>
+      </div>
+    </div>
+
+    <div class="mp-note">
+      案件資料早已存在於警政署與地檢署的系統中。健保快易通查得到就醫紀錄，報稅系統串得起七個機關的所得資料——<strong>查一個案件進度，不會比報稅難。</strong>缺的不是技術，是一個決定。
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    本示範網站由 PCIT 收款人帳戶保護倡議製作，所有資料皆為模擬，不涉及任何真實案件或個人資料。<br>
+    了解完整倡議：<a href="https://pcit-tw.pages.dev">pcit-tw.pages.dev</a> · 附議支持：<a href="https://reurl.cc/R2moVe">join.gov.tw 提案連結</a>
+  </div>
+</footer>
+
+<script>
+function doQuery() {
+  document.getElementById('query-view').style.display = 'none';
+  document.getElementById('result-view').style.display = 'block';
+  window.scrollTo({ top: 0 });
+}
+function switchRole(role) {
+  document.getElementById('view-holder').style.display = role === 'holder' ? 'block' : 'none';
+  document.getElementById('view-victim').style.display = role === 'victim' ? 'block' : 'none';
+  document.getElementById('tab-holder').classList.toggle('active', role === 'holder');
+  document.getElementById('tab-victim').classList.toggle('active', role === 'victim');
+}
+function backToQuery() {
+  document.getElementById('result-view').style.display = 'none';
+  document.getElementById('query-view').style.display = 'block';
+  window.scrollTo({ top: 0 });
+}
+</script>
+
+</body>
+</html>
