@@ -2,7 +2,12 @@ name: Update Petition Count
 
 on:
   schedule:
-    - cron: '0 0 * * *'   # 每天 UTC 00:00 = 台灣時間 08:00
+    # 避開 UTC 00:00 整點（GitHub 最壅塞時段，常延遲 3-4 小時）。
+    # 提前到 UTC 22:40（台灣 06:40）下單，加上 GitHub 慣性延遲，約落在台灣早上 7-9 點。
+    - cron: '40 22 * * *'
+    # 備援：UTC 23:50（台灣 07:50），萬一前一個時段被丟棄仍能補跑。
+    # 兩次都跑也無妨——數字無變化時 workflow 不會重複 commit。
+    - cron: '50 23 * * *'
   workflow_dispatch:        # 允許手動觸發
 
 jobs:
