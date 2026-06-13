@@ -2,7 +2,7 @@
  * Cloudflare Pages Function: /signatures
  *
  * 即時抓取 join.gov.tw 的附議人數，回傳 JSON。
- * 部署後可透過 GET https://pcit-tw.pages.dev/signatures 呼叫。
+ * 部署後可透過 GET https://pcit-taiwan.com/signatures 呼叫。
  *
  * Cloudflare 會在 Edge 快取 5 分鐘，避免頻繁請求來源站。
  */

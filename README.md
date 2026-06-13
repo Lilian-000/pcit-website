@@ -4,7 +4,7 @@
 >
 > 讓民眾在 30 秒內理解「什麼是警示帳戶、為什麼會發生在我身上、我現在能做什麼」。
 
-🌐 線上網址：[pcit-tw.pages.dev](https://pcit-tw.pages.dev)
+🌐 線上網址：[pcit-taiwan.com](https://pcit-taiwan.com)
 📋 政策提案（附議中）：[reurl.cc/R2moVe](https://reurl.cc/R2moVe)
 📧 聯絡：pcit.tw@gmail.com
 
@@ -44,7 +44,7 @@
 |------|------|
 | **前端** | 純靜態 HTML / CSS / Vanilla JS，無框架依賴 |
 | **部署** | Cloudflare Pages（自動從 GitHub main branch 部署） |
-| **網域** | pcit-tw.pages.dev |
+| **網域** | pcit-taiwan.com（Cloudflare Pages 部署，原 pcit-tw.pages.dev 仍可連） |
 | **字型** | Google Fonts：Noto Serif TC / Noto Sans TC |
 | **Analytics** | GoatCounter（[pcit-tw.goatcounter.com](https://pcit-tw.goatcounter.com)）+ Google Analytics |
 
@@ -110,7 +110,7 @@ PCIT 主張只需在現有清算架構上疊加一層通知層，技術難度低
 
 國際先例：**加拿大 Interac e-Transfer**，運行逾 20 年，88% 加拿大人使用，從根本上消除了台灣式「無辜警示戶」問題。
 
-政策白皮書 → [pcit-tw.pages.dev](https://pcit-tw.pages.dev)
+政策白皮書 → [pcit-taiwan.com](https://pcit-taiwan.com)
 join.gov.tw 提案 → [reurl.cc/R2moVe](https://reurl.cc/R2moVe)
 
 ---
