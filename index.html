@@ -539,20 +539,22 @@
       });
   }
 
-  // 瀏覽人次：先用 count.json/備用值顯示，再用 GoatCounter 即時數字覆蓋
+  // 瀏覽人次：GoatCounter 即時 API 為準（自動累積），抓取失敗才退回備援值
   function showVisitors(fromJson) {
     var visEl = document.getElementById('visitorCount');
     if (!visEl) return;
+    // 先顯示備援值當 placeholder（count.json 或 PCIT_CONFIG）
     var base = Math.max(fromJson, PCIT_CONFIG.manualVisitorCount);
     animateNumber(visEl, base, 1500);
 
     // GoatCounter 公開計數 API（免 token，瀏覽器可直接呼叫）
+    // 抓取成功就「一律」採用即時數字——這才是真實累積值，不再被 floor 擋住
     fetch('https://pcit-tw.goatcounter.com/counter/TOTAL.json')
       .then(function(r) { return r.json(); })
       .then(function(gc) {
         if (gc && gc.count) {
           var live = parseInt(String(gc.count).replace(/[^0-9]/g, ''), 10);
-          if (live > base) visEl.textContent = live.toLocaleString();
+          if (live > 0) visEl.textContent = live.toLocaleString();
         }
       })
       .catch(function() { /* 即時抓取失敗就維持 base，不報錯 */ });
