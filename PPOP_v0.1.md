@@ -1,3 +1,36 @@
+## English Summary
+
+**PPOP (Payee Protection Open Protocol)** is an open technical specification for a payee-side protection mechanism in interbank transfers — modeled on Canada's Interac e-Transfer system.
+
+### The Problem
+
+In Taiwan, over 150,000 bank accounts are frozen every year because fraudulent funds are routed into them without the account holder's knowledge. Under the current system, there is no notification, no right to reject, and no way to intervene before the damage is done.
+
+### The Solution
+
+PPOP proposes a simple middleware overlay on existing clearing infrastructure:
+
+1. When an unknown inbound transfer is initiated, the system holds the funds before crediting the account
+2. The payee receives a push notification: "You have a pending transfer of $X from [account]. Accept or decline?"
+3. If accepted → funds credited normally
+4. If declined → funds returned to sender, payee account unaffected
+5. If no response within 24 hours → configurable default rule applies
+
+### Why Interac
+
+Canada's Interac e-Transfer has operated this exact mechanism for over 20 years. 88% of Canadians have used it. Taiwan does not need to reinvent the wheel — it needs the political will to require it.
+
+### Status
+
+- Policy white paper: v1.1 (complete)
+- This open protocol: v0.1 draft (this document)
+- Public petition: join.gov.tw (surpassed 5,000-signature threshold)
+- Advocacy site: [pcit-taiwan.com](https://pcit-taiwan.com)
+
+*The rest of this document is in Traditional Chinese, intended for Taiwan's financial regulators and banking industry. For questions in English, contact pcit.tw@gmail.com*
+
+---
+
 # PPOP — Payee Protection Open Protocol
 ## 收款人保護開放協議
 
