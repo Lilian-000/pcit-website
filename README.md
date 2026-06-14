@@ -52,9 +52,10 @@
 
 ```
 pcit-website/
-├── payee-protection.html     # 主網站（風險評估、政策說明、CTA）
+├── payee-protection.html         # 主網站（風險評估、政策說明、CTA）
 ├── pcit-advocacy-materials.html  # 倡議素材（投影片、影片腳本）
 ├── pcit-social-graphics.html     # 社群圖卡產生器
+├── PPOP_v0.1.md                  # 收款人保護開放協議（技術規格草案）
 └── README.md
 ```
 
@@ -120,6 +121,7 @@ join.gov.tw 提案 → [reurl.cc/R2moVe](https://reurl.cc/R2moVe)
 | 專案 | 說明 | Repo |
 |------|------|------|
 | pcit-linebot | LINE Bot 帳戶安全諮詢助理 | [Lilian-000/pcit-linebot](https://github.com/Lilian-000/pcit-linebot) |
+| PPOP v0.1 | 收款人保護開放協議技術規格草案 | [PPOP_v0.1.md](./PPOP_v0.1.md) |
 
 ---
 
