@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCIT 模擬體驗：AI 怎麼守護你的帳戶</title>
+<meta name="description" content="互動模擬：當陌生匯款進來，AI 如何在入帳前通知你、讓你選擇接受或拒絕，從源頭避免成為警示帳戶。">
+
+<!-- Open Graph（Facebook、LINE、Discord 等） -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://pcit-taiwan.com/demo.html">
+<meta property="og:title"       content="PCIT 模擬體驗：AI 怎麼守護你的帳戶">
+<meta property="og:description" content="互動模擬：當陌生匯款進來，AI 如何在入帳前通知你、讓你選擇接受或拒絕，從源頭避免成為警示帳戶。">
+<meta property="og:image"       content="https://pcit-taiwan.com/og-image.png">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale"      content="zh_TW">
+<meta property="og:site_name"   content="PCIT 收款人帳戶安全守護站">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="PCIT 模擬體驗：AI 怎麼守護你的帳戶">
+<meta name="twitter:description" content="互動模擬：當陌生匯款進來，AI 如何在入帳前通知你、讓你選擇接受或拒絕。">
+<meta name="twitter:image"       content="https://pcit-taiwan.com/og-image.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #1a1a2e;
+  --gold: #d4a017;
+  --gold-light: #f5e6b8;
+  --safe-green: #22c55e;
+  --warn-amber: #f59e0b;
+  --danger-red: #ef4444;
+  --bg: #f8f7f4;
+  --text: #2d2d3a;
+  --text-light: #6b6b7b;
+  --card-bg: #ffffff;
+  --border: #e5e5e5;
+}
+
+body {
+  font-family: 'Noto Sans TC', 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === HERO === */
+.hero {
+  background: var(--navy);
+  color: #fff;
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--safe-green), var(--gold));
+}
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.hero h1 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.7);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* === MAIN === */
+.main {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* === CONTEXT CARD === */
+.context-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.context-card h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--navy);
+}
+
+.context-card p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.65;
+}
+
+.context-card .highlight {
+  background: var(--gold-light);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  color: var(--navy);
+}
+
+/* === YOUR ACCOUNT === */
+.your-account {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.your-account h3 {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-light);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.account-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.account-avatar {
+  width: 44px; height: 44px;
+  background: var(--navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.account-details {
+  flex: 1;
+}
+
+.account-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.account-meta {
+  font-size: 0.78rem;
+  color: var(--text-light);
+}
+
+/* === SIMULATOR === */
+.simulator {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.3s;
+}
+
+.simulator.active {
+  border-color: var(--gold);
+}
+
+.sim-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: var(--navy);
+}
+
+.sim-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-bottom: 1.25rem;
+}
+
+.field-group {
+  margin-bottom: 1rem;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-light);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.field-input {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'DM Sans', 'Noto Sans TC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.field-input:focus {
+  border-color: var(--gold);
+}
+
+.field-input::placeholder {
+  color: #b0b0b0;
+}
+
+.preset-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.preset-btn {
+  padding: 0.45rem 0.85rem;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg);
+  font-size: 0.78rem;
+  font-family: 'Noto Sans TC', sans-serif;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.preset-btn:hover {
+  border-color: var(--gold);
+  background: var(--gold-light);
+}
+
+.preset-btn.active {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.analyze-btn {
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Noto Sans TC', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.analyze-btn:hover {
+  background: #2a2a4e;
+}
+
+.analyze-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* === RESULT === */
+.result {
+  display: none;
+  margin-top: 1.5rem;
+  animation: fadeUp 0.5s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scanning animation */
+.scanning {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.scan-ring {
+  width: 64px; height: 64px;
+  border: 3px solid var(--border);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.scan-text {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+/* Risk meter */
+.risk-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.risk-header {
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.risk-icon {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.risk-icon.safe { background: #dcfce7; }
+.risk-icon.warn { background: #fef3c7; }
+.risk-icon.danger { background: #fee2e2; }
+
+.risk-level {
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.risk-level.safe { color: var(--safe-green); }
+.risk-level.warn { color: var(--warn-amber); }
+.risk-level.danger { color: var(--danger-red); }
+
+.risk-action {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* Score bar */
+.score-bar-wrap {
+  padding: 0 1.25rem 1rem;
+}
+
+.score-bar-bg {
+  height: 8px;
+  background: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.score-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.8s ease;
+  width: 0;
+}
+
+.score-bar-fill.safe { background: var(--safe-green); }
+.score-bar-fill.warn { background: var(--warn-amber); }
+.score-bar-fill.danger { background: var(--danger-red); }
+
+.score-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--text-light);
+  margin-top: 0.35rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Signals */
+.signals {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.signals-title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-light);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+
+.signal-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.signal-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.signal-dot.safe { background: var(--safe-green); }
+.signal-dot.warn { background: var(--warn-amber); }
+.signal-dot.danger { background: var(--danger-red); }
+
+/* PCIT action */
+.pcit-action {
+  margin: 1.25rem 1.25rem 1.25rem;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.pcit-action.safe {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+.pcit-action.warn {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+}
+
+.pcit-action.danger {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.pcit-action strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+/* Mock phone notification */
+.phone-notif {
+  display: none;
+  margin-top: 1.25rem;
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+
+.phone-frame {
+  background: #1c1c1e;
+  border-radius: 20px;
+  padding: 0.75rem;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.notif-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.5);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.notif-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 14px;
+  padding: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.notif-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.notif-app-icon {
+  width: 24px; height: 24px;
+  background: var(--navy);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.notif-app-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+
+.notif-time {
+  font-size: 0.65rem;
+  color: #999;
+}
+
+.notif-body {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+.notif-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+.notif-btn {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: 'Noto Sans TC', sans-serif;
+  cursor: pointer;
+}
+
+.notif-btn.accept {
+  background: var(--safe-green);
+  color: #fff;
+}
+
+.notif-btn.reject {
+  background: var(--danger-red);
+  color: #fff;
+}
+
+/* === COMPARISON === */
+.comparison {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.comparison h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+}
+
+.compare-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.compare-item {
+  flex: 1;
+  padding: 0.85rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.compare-item.now {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.compare-item.pcit {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.compare-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.compare-item.now .compare-label { color: var(--danger-red); }
+.compare-item.pcit .compare-label { color: var(--safe-green); }
+
+.compare-text {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* === FOOTER CTA === */
+.footer-cta {
+  background: var(--navy);
+  color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.footer-cta p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: rgba(255,255,255,0.85);
+}
+
+.footer-cta a {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background: var(--gold);
+  color: var(--navy);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+
+.footer-cta a:hover { opacity: 0.9; }
+
+.footer-note {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-light);
+  padding: 0 1.5rem 2rem;
+  line-height: 1.6;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scan-ring { animation: none; }
+  .result, .phone-notif { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">PCIT 互動體驗</div>
+  <h1>如果銀行有 <em>AI 守門員</em><br>你的帳戶會怎樣？</h1>
+  <p class="hero-sub">模擬一筆匯款進入你的帳戶，看 AI 風險分級如何在不影響正常交易的前提下，攔住可疑金流。</p>
+</section>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- Context -->
+  <div class="context-card">
+    <h2>這個體驗在模擬什麼？</h2>
+    <p>現在有人要匯錢到你的帳戶。在現行制度下，不管是誰匯的、金額多少，錢都會<span class="highlight">直接入帳</span>，你完全沒有選擇權。</p>
+    <p style="margin-top:0.5rem;">但如果銀行有 AI 風險分級呢？它會在<span class="highlight">毫秒之內</span>判斷這筆匯款正不正常——正常的照樣秒到帳，可疑的才會先通知你。</p>
+  </div>
+
+  <!-- Your account -->
+  <div class="your-account">
+    <h3>你的帳戶</h3>
+    <div class="account-info">
+      <div class="account-avatar">陳</div>
+      <div class="account-details">
+        <div class="account-name">陳小安</div>
+        <div class="account-meta">台灣銀行 ****-3827 ｜ 開戶 6 年 ｜ 月均入帳 3.2 萬</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simulator -->
+  <div class="simulator" id="simulator">
+    <div class="sim-title">模擬一筆入帳</div>
+    <div class="sim-subtitle">選擇情境，或自己輸入金額</div>
+
+    <!-- Presets -->
+    <div class="preset-buttons" id="presets">
+      <button class="preset-btn" data-amount="800" data-sender="朋友" data-known="true" data-time="normal" data-freq="single">朋友還 800 元</button>
+      <button class="preset-btn" data-amount="32000" data-sender="公司" data-known="true" data-time="normal" data-freq="single">公司發薪 3.2 萬</button>
+      <button class="preset-btn" data-amount="49999" data-sender="陌生人" data-known="false" data-time="late" data-freq="single">陌生人匯 5 萬</button>
+      <button class="preset-btn" data-amount="3000" data-sender="陌生人" data-known="false" data-time="late" data-freq="multi">凌晨連續 3 筆小額</button>
+    </div>
+
+    <!-- Manual input -->
+    <div class="field-group">
+      <label class="field-label">匯款金額（新台幣）</label>
+      <input type="text" class="field-input" id="amountInput" placeholder="例如：50000" inputmode="numeric">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">匯款人是誰？</label>
+      <div style="display:flex;gap:0.5rem;">
+        <button class="preset-btn sender-btn" data-val="known" id="knownBtn">認識的人</button>
+        <button class="preset-btn sender-btn" data-val="unknown" id="unknownBtn">陌生帳號</button>
+      </div>
+    </div>
+
+    <button class="analyze-btn" id="analyzeBtn" disabled>AI 開始分析</button>
+
+    <!-- Scanning -->
+    <div id="scanningArea" style="display:none;">
+      <div class="scanning">
+        <div class="scan-ring"></div>
+        <div class="scan-text" id="scanText">比對帳戶歷史紀錄中⋯</div>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div class="result" id="resultArea">
+      <div class="risk-card">
+        <div class="risk-header">
+          <div class="risk-icon" id="riskIcon"></div>
+          <div>
+            <div class="risk-level" id="riskLevel"></div>
+            <div class="risk-action" id="riskAction"></div>
+          </div>
+        </div>
+
+        <div class="score-bar-wrap">
+          <div class="score-bar-bg">
+            <div class="score-bar-fill" id="scoreBar"></div>
+          </div>
+          <div class="score-labels">
+            <span>低風險</span>
+            <span>高風險</span>
+          </div>
+        </div>
+
+        <div class="signals" id="signals"></div>
+
+        <div class="pcit-action" id="pcitAction"></div>
+      </div>
+
+      <!-- Phone notification (only for warn/danger) -->
+      <div class="phone-notif" id="phoneNotif">
+        <div class="phone-frame">
+          <div class="notif-bar">
+            <span>22:47</span>
+            <span>⚡ 📶</span>
+          </div>
+          <div class="notif-card">
+            <div class="notif-header">
+              <div class="notif-app-icon">🏦</div>
+              <div class="notif-app-name">台灣銀行</div>
+              <div class="notif-time">現在</div>
+            </div>
+            <div class="notif-body" id="notifBody"></div>
+            <div class="notif-actions">
+              <button class="notif-btn accept" onclick="handleNotifAction('accept')">接受入帳</button>
+              <button class="notif-btn reject" onclick="handleNotifAction('reject')">拒絕退回</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action result -->
+      <div id="actionResult" style="display:none; margin-top:1rem; animation: fadeUp 0.4s ease;"></div>
+    </div>
+  </div>
+
+  <!-- Comparison -->
+  <div class="comparison">
+    <h3>同一筆可疑匯款，兩種制度的結果</h3>
+    <div class="compare-row">
+      <div class="compare-item now">
+        <div class="compare-label">現行制度</div>
+        <div class="compare-text">錢直接入帳 → 被害人報案 → 你的帳戶變警示戶 → 所有金融服務歸零 → 申訴 6～24 個月</div>
+      </div>
+      <div class="compare-item pcit">
+        <div class="compare-label">有 PCIT</div>
+        <div class="compare-text">AI 判定可疑 → 推播通知你 → 你按「拒絕」→ 錢原路退回 → 帳戶完全不受影響</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="footer-cta">
+    <p>這不是未來的技術，是現在就能做到的事。<br>加拿大已經這樣做了超過 20 年。</p>
+    <a href="https://join.gov.tw/idea/detail/ba071237-01f4-40c4-a322-b1c0b16111dd" target="_blank" rel="noopener">連署支持 PCIT →</a>
+  </div>
+
+  <div class="footer-note">
+    本頁面為 PCIT 倡議的教育示範工具，模擬 AI 風險分級的概念原理。<br>
+    實際系統設計將由金管會與金融機構根據專業標準制定。<br><br>
+    PCIT Taiwan ｜ <a href="https://pcit-taiwan.com" style="color:var(--gold);">pcit-taiwan.com</a>
+  </div>
+
+</div>
+
+<script>
+// State
+let state = {
+  amount: null,
+  isKnown: null,
+  isLateNight: false,
+  isMulti: false,
+  senderLabel: ''
+};
+
+// Presets
+document.getElementById('presets').addEventListener('click', e => {
+  const btn = e.target.closest('.preset-btn');
+  if (!btn || btn.classList.contains('sender-btn')) return;
+
+  // Clear other preset selections
+  document.querySelectorAll('#presets .preset-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  state.amount = parseInt(btn.dataset.amount);
+  state.isKnown = btn.dataset.known === 'true';
+  state.isLateNight = btn.dataset.time === 'late';
+  state.isMulti = btn.dataset.freq === 'multi';
+  state.senderLabel = btn.dataset.sender;
+
+  document.getElementById('amountInput').value = state.amount.toLocaleString();
+
+  // Update sender buttons
+  document.querySelectorAll('.sender-btn').forEach(b => b.classList.remove('active'));
+  if (state.isKnown) {
+    document.getElementById('knownBtn').classList.add('active');
+  } else {
+    document.getElementById('unknownBtn').classList.add('active');
+  }
+
+  updateAnalyzeBtn();
+  resetResult();
+});
+
+// Amount input
+document.getElementById('amountInput').addEventListener('input', e => {
+  const raw = e.target.value.replace(/[^0-9]/g, '');
+  state.amount = raw ? parseInt(raw) : null;
+  if (raw) e.target.value = parseInt(raw).toLocaleString();
+
+  // Clear preset selection
+  document.querySelectorAll('#presets .preset-btn').forEach(b => b.classList.remove('active'));
+  updateAnalyzeBtn();
+  resetResult();
+});
+
+// Sender buttons
+document.querySelectorAll('.sender-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sender-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.isKnown = btn.dataset.val === 'known';
+    state.senderLabel = state.isKnown ? '認識的人' : '陌生人';
+
+    // Clear preset if manual
+    document.querySelectorAll('#presets .preset-btn').forEach(b => b.classList.remove('active'));
+    updateAnalyzeBtn();
+    resetResult();
+  });
+});
+
+function updateAnalyzeBtn() {
+  const btn = document.getElementById('analyzeBtn');
+  btn.disabled = !(state.amount > 0 && state.isKnown !== null);
+}
+
+function resetResult() {
+  document.getElementById('resultArea').style.display = 'none';
+  document.getElementById('scanningArea').style.display = 'none';
+  document.getElementById('phoneNotif').style.display = 'none';
+  document.getElementById('actionResult').style.display = 'none';
+}
+
+// Analyze
+document.getElementById('analyzeBtn').addEventListener('click', () => {
+  resetResult();
+  document.getElementById('simulator').classList.add('active');
+
+  // Show scanning
+  const scanArea = document.getElementById('scanningArea');
+  scanArea.style.display = 'block';
+
+  const scanSteps = [
+    '比對帳戶歷史紀錄中⋯',
+    '分析匯款金額模式⋯',
+    '檢查匯款時段與頻率⋯',
+    '計算風險分數中⋯'
+  ];
+
+  let step = 0;
+  const scanInterval = setInterval(() => {
+    step++;
+    if (step < scanSteps.length) {
+      document.getElementById('scanText').textContent = scanSteps[step];
+    } else {
+      clearInterval(scanInterval);
+      scanArea.style.display = 'none';
+      showResult();
+    }
+  }, 600);
+});
+
+function calculateRisk() {
+  let score = 0;
+  let signals = [];
+
+  // Signal 1: Known vs unknown
+  if (state.isKnown) {
+    signals.push({ level: 'safe', text: '匯款帳號曾有交易紀錄，屬於已知聯絡人' });
+  } else {
+    score += 35;
+    signals.push({ level: 'warn', text: '此帳號從未匯款至本帳戶（陌生首次）' });
+  }
+
+  // Signal 2: Amount
+  if (state.amount <= 3000) {
+    signals.push({ level: 'safe', text: '金額 $' + state.amount.toLocaleString() + ' 在日常範圍內' });
+  } else if (state.amount <= 30000) {
+    if (!state.isKnown) score += 15;
+    signals.push({ level: state.isKnown ? 'safe' : 'warn', text: '金額 $' + state.amount.toLocaleString() + (state.isKnown ? ' 符合常見薪資入帳' : ' 高於日常小額轉帳') });
+  } else {
+    score += 25;
+    signals.push({ level: 'warn', text: '金額 $' + state.amount.toLocaleString() + ' 顯著高於帳戶月均入帳 $32,000' });
+  }
+
+  // Signal 3: Time
+  if (state.isLateNight) {
+    score += 20;
+    signals.push({ level: 'danger', text: '匯款時間為凌晨時段（非營業時間高風險區間）' });
+  } else {
+    signals.push({ level: 'safe', text: '匯款時間在正常營業時段' });
+  }
+
+  // Signal 4: Frequency
+  if (state.isMulti) {
+    score += 25;
+    signals.push({ level: 'danger', text: '短時間內收到多筆來自不同陌生帳號的匯款（分散匯入模式）' });
+  }
+
+  // Clamp
+  score = Math.min(score, 100);
+
+  let level, levelText, action, icon, pcitText;
+
+  if (score <= 20) {
+    level = 'safe';
+    levelText = '低風險';
+    action = '即時入帳，與現在完全一樣';
+    icon = '✓';
+    pcitText = '<strong>✓ 正常入帳</strong>這筆匯款來自已知帳號，金額與時段都正常。AI 判定無需通知，款項即時入帳——你完全無感，跟現在一模一樣。';
+  } else if (score <= 55) {
+    level = 'warn';
+    levelText = '中風險';
+    action = '暫緩入帳，推播通知你確認';
+    icon = '⚠';
+    pcitText = '<strong>⚠ 通知確認</strong>這筆匯款有一些不尋常的訊號。AI 建議先暫緩入帳，推播通知你——你可以選擇接受（錢入帳）或拒絕（錢退回），帳戶完全不受影響。';
+  } else {
+    level = 'danger';
+    levelText = '高風險';
+    action = '暫緩入帳，強烈建議拒絕';
+    icon = '✕';
+    pcitText = '<strong>✕ 高度警示</strong>多項風險訊號同時觸發。AI 強烈建議暫緩入帳並通知你。在現行制度下，這筆錢會直接進帳，然後你可能變成警示戶。有 PCIT，你可以一鍵拒收。';
+  }
+
+  return { score, level, levelText, action, icon, signals, pcitText };
+}
+
+function showResult() {
+  const r = calculateRisk();
+  const resultArea = document.getElementById('resultArea');
+
+  // Icon
+  const iconEl = document.getElementById('riskIcon');
+  iconEl.className = 'risk-icon ' + r.level;
+  iconEl.textContent = r.icon;
+
+  // Level
+  const levelEl = document.getElementById('riskLevel');
+  levelEl.className = 'risk-level ' + r.level;
+  levelEl.textContent = r.levelText + '（' + r.score + ' / 100）';
+
+  // Action
+  document.getElementById('riskAction').textContent = r.action;
+
+  // Score bar
+  const bar = document.getElementById('scoreBar');
+  bar.className = 'score-bar-fill ' + r.level;
+  setTimeout(() => { bar.style.width = r.score + '%'; }, 100);
+
+  // Signals
+  const signalsEl = document.getElementById('signals');
+  signalsEl.innerHTML = '<div class="signals-title">AI 分析了這些訊號</div>' +
+    r.signals.map(s =>
+      '<div class="signal-item"><div class="signal-dot ' + s.level + '"></div><div>' + s.text + '</div></div>'
+    ).join('');
+
+  // PCIT action
+  const pcitEl = document.getElementById('pcitAction');
+  pcitEl.className = 'pcit-action ' + r.level;
+  pcitEl.innerHTML = r.pcitText;
+
+  resultArea.style.display = 'block';
+
+  // Show phone notification for warn/danger
+  if (r.level !== 'safe') {
+    const phoneNotif = document.getElementById('phoneNotif');
+    const notifBody = document.getElementById('notifBody');
+    notifBody.innerHTML = '【入帳確認】有一筆來自' +
+      (state.isKnown ? '已知帳號' : '陌生帳號') +
+      '的 <strong>$' + state.amount.toLocaleString() + '</strong> 元匯款。' +
+      '<br>請確認是否接受入帳。';
+    phoneNotif.style.display = 'block';
+  }
+
+  document.getElementById('simulator').classList.remove('active');
+}
+
+function handleNotifAction(action) {
+  const resultDiv = document.getElementById('actionResult');
+  if (action === 'accept') {
+    resultDiv.innerHTML = '<div class="pcit-action safe"><strong>✓ 已接受</strong>款項已入帳。這是你自己的決定——不是系統替你決定的。</div>';
+  } else {
+    resultDiv.innerHTML = '<div class="pcit-action safe"><strong>✓ 已拒絕退回</strong>款項原路退回匯款人，你的帳戶完全不受影響。如果這筆錢是詐騙金流，你剛剛阻止了自己變成警示戶。</div>';
+  }
+  resultDiv.style.display = 'block';
+  resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+</body>
+</html>
