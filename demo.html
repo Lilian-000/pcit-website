@@ -11,7 +11,7 @@
 <meta property="og:url"         content="https://pcit-taiwan.com/demo.html">
 <meta property="og:title"       content="PCIT 模擬體驗：AI 怎麼守護你的帳戶">
 <meta property="og:description" content="互動模擬：當陌生匯款進來，AI 如何在入帳前通知你、讓你選擇接受或拒絕，從源頭避免成為警示帳戶。">
-<meta property="og:image"       content="https://pcit-taiwan.com/og-image.png">
+<meta property="og:image"       content="https://pcit-taiwan.com/demo-og.png">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale"      content="zh_TW">
@@ -21,7 +21,7 @@
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="PCIT 模擬體驗：AI 怎麼守護你的帳戶">
 <meta name="twitter:description" content="互動模擬：當陌生匯款進來，AI 如何在入帳前通知你、讓你選擇接受或拒絕。">
-<meta name="twitter:image"       content="https://pcit-taiwan.com/og-image.png">
+<meta name="twitter:image"       content="https://pcit-taiwan.com/demo-og.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -701,10 +701,10 @@ body {
   <div class="your-account">
     <h3>你的帳戶</h3>
     <div class="account-info">
-      <div class="account-avatar">陳</div>
+      <div class="account-avatar">周</div>
       <div class="account-details">
-        <div class="account-name">陳小安</div>
-        <div class="account-meta">台灣銀行 ****-3827 ｜ 開戶 6 年 ｜ 月均入帳 3.2 萬</div>
+        <div class="account-name">周小傑</div>
+        <div class="account-meta">前馬子狗樂團主唱 ｜ 目前經濟狀況：一言難盡</div>
       </div>
     </div>
   </div>
@@ -717,7 +717,7 @@ body {
     <!-- Presets -->
     <div class="preset-buttons" id="presets">
       <button class="preset-btn" data-amount="800" data-sender="朋友" data-known="true" data-time="normal" data-freq="single">朋友還 800 元</button>
-      <button class="preset-btn" data-amount="32000" data-sender="公司" data-known="true" data-time="normal" data-freq="single">公司發薪 3.2 萬</button>
+      <button class="preset-btn" data-amount="32000" data-sender="公司" data-known="true" data-time="normal" data-freq="single">版稅入帳 3.2 萬</button>
       <button class="preset-btn" data-amount="49999" data-sender="陌生人" data-known="false" data-time="late" data-freq="single">陌生人匯 5 萬</button>
       <button class="preset-btn" data-amount="3000" data-sender="陌生人" data-known="false" data-time="late" data-freq="multi">凌晨連續 3 筆小額</button>
     </div>
@@ -955,7 +955,7 @@ function calculateRisk() {
     signals.push({ level: state.isKnown ? 'safe' : 'warn', text: '金額 $' + state.amount.toLocaleString() + (state.isKnown ? ' 符合常見薪資入帳' : ' 高於日常小額轉帳') });
   } else {
     score += 25;
-    signals.push({ level: 'warn', text: '金額 $' + state.amount.toLocaleString() + ' 顯著高於帳戶月均入帳 $32,000' });
+    signals.push({ level: 'warn', text: '金額 $' + state.amount.toLocaleString() + ' 顯著高於帳戶近期月均入帳' });
   }
 
   // Signal 3: Time
